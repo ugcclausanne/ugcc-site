@@ -1,0 +1,23 @@
+{
+		"common": {
+							"page_hero": true,
+							"hero_image": "/assets/images/church-bg.jpg",
+							"icon":  "<svg viewBox='0 0 24 24' focusable='false' role='img'><path d='M4 8H20V21H4z'/><path d='M7 3V8M17 3V8'/><path d='M4 8H20'/></svg>"
+						},
+    "uk":  {
+               "title":  "Розклад",
+               "content":  "Розклад богослужінь та інших подій.",
+							 "no-events": "Поки немає подій."
+           },
+    "en":  {
+               "title":  "Schedule",
+               "content":  "Service schedule.",
+							 "no-events": "No events at the moment."
+
+           },
+    "fr":  {
+               "title":  "Horaire",
+               "content":  "Horaire des offices.",
+							 "no-events": "Aucun événement pour l’instant."
+           }
+}

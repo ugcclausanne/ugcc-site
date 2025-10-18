@@ -1,0 +1,65 @@
+{
+  "default_lang": "uk",
+  "default_hero_image": "/assets/images/church-bg.jpg",
+  "default_page_hero": true,
+
+  "common": {
+    "email": "info@ugcc-lausanne.ch",
+    "phone": "+41 77 279 07 13",
+    "address": "Chem. de Beau-Rivage 3, 1006 Lausanne",
+    "social_list": [
+      { "title": "Facebook", "url": "https://www.facebook.com/ugcc.lausanne" },
+      { "title": "YouTube", "url": "https://www.youtube.com/@ugcc-lausanne" },
+      { "title": "Instagram", "url": "#" },
+      { "title": "WhatsApp", "url": "#" }
+    ],
+    "bank_iban": "CH12 3456 7890 1234 5678 9",
+    "bank_name": "UBS Lausanne",
+    "bank_reference_value": "UGCC Lausanne",
+    "map_src": "https://www.google.com/maps?q=Chem.+de+Beau-Rivage+3+1006+Lausanne&output=embed",
+    "map_link": "https://maps.google.com/?q=Chem.+de+Beau-Rivage+3+1006+Lausanne",
+    "footer_note": "© UGCC Lausanne, {{year}}"
+  },
+
+  "uk": {
+    "site_name": "Парафія УГКЦ у Лозанні",
+    "meta": {
+      "title": "Українська Греко‑Католицька Церква в Лозанні",
+      "description": "Офіційний сайт громади УГКЦ в Лозанні. Літургії, духовне життя, новини та події.",
+      "keywords": "УГКЦ, Лозанна, церква, греко‑католицька, українці у Швейцарії"
+    },
+    "announcements_title": "Оголошення",
+    "liturgy_section_title": "Літургії",
+    "announcements_section_title": "Оголошення",
+    "before_label": "Перед службою",
+    "after_label": "Після служби"
+  },
+
+  "fr": {
+    "site_name": "Paroisse UGCC Lausanne",
+    "meta": {
+      "title": "Église gréco‑catholique ukrainienne à Lausanne",
+      "description": "Site officiel de la communauté UGCC à Lausanne. Liturgies, vie spirituelle et actualités.",
+      "keywords": "UGCC, Lausanne, église, catholique grecque, ukrainiens en Suisse"
+    },
+    "announcements_title": "Annonces",
+    "liturgy_section_title": "Liturgies",
+    "announcements_section_title": "Annonces",
+    "before_label": "Avant la liturgie",
+    "after_label": "Après la liturgie"
+  },
+
+  "en": {
+    "site_name": "Ukrainian Greek Catholic Church Lausanne",
+    "meta": {
+      "title": "Ukrainian Greek Catholic Church in Lausanne",
+      "description": "Official website of the UGCC community in Lausanne. Liturgies, spiritual life, news and events.",
+      "keywords": "UGCC, Lausanne, Greek Catholic, church, Ukrainians in Switzerland"
+    },
+    "announcements_title": "Announcements",
+    "liturgy_section_title": "Liturgies",
+    "announcements_section_title": "Announcements",
+    "before_label": "Before the service",
+    "after_label": "After the service"
+  }
+}

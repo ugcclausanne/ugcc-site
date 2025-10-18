@@ -1,0 +1,19 @@
+{
+		"common": {
+							"page_hero": true,
+							"hero_image": "/assets/images/church-bg.jpg",
+               "icon":  "<svg viewBox='0 0 24 24' focusable='false' role='img'><path d='M4 6H20V20H4z'/><path d='M6 8H10V12H6z'/><path d='M12 8H18M12 12H18M6 14H18M6 16H18'/></svg>"
+						},	
+    "uk":  {
+               "title":  "Новини",
+               "content":  "Останні парафіяльні новини"
+           },
+    "en":  {
+               "title":  "News",
+               "content":  "Latest parish news."
+           },
+    "fr":  {
+               "title":  "Nouvelles",
+               "content":  "DerniГЁres nouvelles de la paroisse."
+           }
+}

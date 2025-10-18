@@ -1,0 +1,55 @@
+{
+  "common": {
+		"page_hero": true,
+    "hero_image": "/assets/images/church-bg.jpg",
+		"icon": "<svg viewBox='0 0 24 24' focusable='false' role='img'><circle cx='12' cy='8' r='3'/><circle cx='5' cy='11' r='2.5'/><circle cx='19' cy='11' r='2.5'/><path d='M4 19c1.5-3 4-4 8-4s6.5 1 8 4'/></svg>"
+  },
+  "uk": {
+    "title": "Контакти",
+    "getThere": "Як дістатися",
+    "how_to_get": "Автобус №2, зупинка Ouchy, далі 5 хв пішки до Chem. de Beau-Rivage 3.",
+    "formTitle": "Зворотний зв’язок",
+    "successText": "Дякуємо! Ваше повідомлення надіслано.",
+    "nameRequired": "Вкажіть ім’я та прізвище (мінімум 2 символи)",
+    "emailRequired": "Вкажіть email",
+    "emailInvalid": "Невірний формат email",
+    "messageRequired": "Введіть повідомлення",
+    "messageMin": "Повідомлення має містити щонайменше 10 символів",
+    "nameLabel": "Ім’я та прізвище",
+    "subjectLabel": "Тема",
+    "messageLabel": "Повідомлення",
+    "sendLabel": "Надіслати"
+  },
+  "en": {
+    "title": "Contacts",
+    "getThere": "How to get there",
+    "how_to_get": "Bus No. 2 to Ouchy stop, then 5 min walk to Chem. de Beau-Rivage 3.",
+    "formTitle": "Contact",
+    "successText": "Thank you! Your message has been sent.",
+    "nameRequired": "Enter your full name (min 2 characters)",
+    "emailRequired": "Enter your email",
+    "emailInvalid": "Invalid email format",
+    "messageRequired": "Enter a message",
+    "messageMin": "Message must be at least 10 characters",
+    "nameLabel": "Full name",
+    "subjectLabel": "Subject",
+    "messageLabel": "Message",
+    "sendLabel": "Send"
+  },
+  "fr": {
+    "title": "Contacts",
+    "getThere": "Comment s’y rendre",
+    "how_to_get": "Bus n°2, arrêt Ouchy, puis 5 min à pied jusqu’à Chem. de Beau-Rivage 3.",
+    "formTitle": "Contact",
+    "successText": "Merci ! Votre message a été envoyé.",
+    "nameRequired": "Indiquez nom et prénom (min 2 caractères)",
+    "emailRequired": "Indiquez votre e‑mail",
+    "emailInvalid": "Format e‑mail invalide",
+    "messageRequired": "Renseignez le message",
+    "messageMin": "Le message doit contenir au moins 10 caractères",
+    "nameLabel": "Nom et prénom",
+    "subjectLabel": "Sujet",
+    "messageLabel": "Message",
+    "sendLabel": "Envoyer"
+  }
+}

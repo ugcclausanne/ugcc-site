@@ -2,6 +2,8 @@
 // BASE STYLES
 // ======================================
 
+@use 'variables' as *;
+
 *,
 *::before,
 *::after {
@@ -19,6 +21,12 @@ body {
   color: $ink;
   background: $bg;
   margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-headline;
 }
 
 a {

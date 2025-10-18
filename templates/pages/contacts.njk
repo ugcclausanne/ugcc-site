@@ -1,5 +1,6 @@
 {# Contacts page content #}
-{% if page == 'contacts' %}
+{% set _current = (page_key or (page and page.fileSlug)) %}
+{% if _current == 'contacts' %}
 <section class="contacts">
   <div class="container">
     <div class="grid cols-2 contacts-grid">

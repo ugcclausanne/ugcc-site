@@ -1,4 +1,5 @@
-{% if page == 'news' %}
+{% set _current = (page_key or (page and page.fileSlug)) %}
+{% if _current == 'news' %}
 <section class="section-list">
   <div class="container">
     <div class="grid cols-3">

@@ -1,0 +1,42 @@
+{
+  "uk": {
+    "contacts_title": "Контакти",
+    "map_label": "Відкрити у Google Maps",
+    "eparchy_title": "Єпархія",
+    "eparchy_site_label": "Єпархія УГКЦ у Франції",
+    "sections_title": "Розділи",
+    "partners_title": "Партнери",
+    "partners": [
+      { "title": "Українська школа в Лозанні", "url": "#" },
+      { "title": "Українська громада Лозанни", "url": "#" }
+    ],
+    "copyright": "© 2025 УГКЦ Лозанна"
+  },
+  "en": {
+    "contacts_title": "Contacts",
+    "map_label": "Open in Google Maps",
+    "eparchy_title": "Eparchy",
+    "eparchy_site_label": "UGCC Eparchy in France",
+    "sections_title": "Sections",
+    "partners_title": "Our Partners",
+    "partners": [
+      { "title": "Ukrainian School in Lausanne", "url": "#" },
+      { "title": "Ukrainian Community of Lausanne", "url": "#" }
+    ],
+    "copyright": "© 2025 UGCC Lausanne Parish"
+  },
+  "fr": {
+    "contacts_title": "Contacts",
+    "map_label": "Ouvrir dans Google Maps",
+    "eparchy_title": "Éparchie",
+    "eparchy_site_label": "Éparchie UGCC en France",
+    "sections_title": "Rubriques",
+    "partners_title": "Nos partenaires",
+    "partners": [
+      { "title": "École ukrainienne à Lausanne", "url": "#" },
+      { "title": "Communauté ukrainienne de Lausanne", "url": "#" }
+    ],
+    "copyright": "© 2025 Paroisse UGCC Lausanne"
+  }
+}
+

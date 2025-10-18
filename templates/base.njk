@@ -44,6 +44,7 @@
 </head>
 
 <body>
+  {% set page_key = page_key or (page and page.fileSlug) %}
   {% include "header.njk" %}
 
   {# === Герой сторінки === #}
@@ -55,12 +56,12 @@
     {% block content %}{% endblock %}
 
     {# === Вставка шаблону сторінки === #}
-    {% set page_template = "pages/" + page + ".njk" %}
+    {% set page_template = "pages/" + page_key + ".njk" %}
     {% include page_template ignore missing %}
   </main>
 
   {% include "footer.njk" %}
 
-  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/main.js defer"></script>
 </body>
 </html>

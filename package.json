@@ -1,19 +1,41 @@
 {
   "name": "ugcc-lausanne",
   "version": "1.0.0",
-  "description": "UGCC Lausanne parish trilingual website (static, built with Eleventy and SCSS)",
-  "scripts": {
-    "dev": "npm-run-all --parallel serve watch:sass",
-    "build": "eleventy && npm run build:sass",
-    "serve": "eleventy --serve",
-    "watch:sass": "sass --watch assets/scss:assets/css",
-    "build:sass": "sass assets/scss:assets/css --no-source-map --style=compressed"
+  "description": "Multilingual static site for UGCC Lausanne, generated with Nunjucks and Node.js.",
+  "main": "scripts/render-pages2.js",
+  "author": "khpankiv",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^11.0.3",
+    "nunjucks": "^3.2.4"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0",
-    "npm-run-all": "^4.1.5",
-    "sass": "^1.79.0"
+    "concurrently": "^9.2.1",
+    "eslint": "^9.37.0",
+    "htmlhint": "^1.7.1",
+    "http-server": "^14.1.1",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "sass": "^1.93.2",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1"
   },
-  "author": "UGCC Lausanne",
-  "license": "MIT"
+  "scripts": {
+		"scss:build": "sass src/scss/main.scss:assets/css/main.css --style=compressed",
+  	"scss:watch": "sass --watch src/scss/main.scss:assets/css/main.css",
+    "load": "node scripts/data/fetch-sheets.js",
+    "render": "node scripts/render-pages.js",
+    "serve": "http-server . -p 8080 -c -1",
+    "dev": "npx concurrently \"nodemon --watch pages --watch templates --watch assets/css --exec node scripts/render-pages.js\" \"http-server . -p 8080 -c-1\"",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "lint:js": "eslint assets/js --ext .js",
+    "lint:css": "stylelint \"assets/css/**/*.css\"",
+    "lint:html": "htmlhint \"**/*.html\"",
+    "format": "npm run format:js && npm run format:css",
+    "format:js": "prettier --write \"assets/js/**/*.js\"",
+    "format:css": "prettier --write \"assets/css/**/*.css\"",
+    "lint:js:fix": "eslint assets/js --ext .js --fix",
+    "lint:css:fix": "stylelint \"assets/css/**/*.css\" --fix",
+    "lint:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run format"
+  }
 }

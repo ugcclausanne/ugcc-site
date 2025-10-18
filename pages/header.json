@@ -1,0 +1,57 @@
+{
+  "uk": {
+    "menu": [
+      { "title": "Головна", "url": "/" },
+      { "title": "Про нас", "url": "/about/" },
+      { "title": "Розклад", "url": "/schedule/" },
+      { "title": "Новини", "url": "/news/" },
+      { "title": "Духовне", "url": "/spiritual/" },
+      { "title": "Громада", "url": "/community/" },
+      { "title": "Контакти", "url": "/contacts/" },
+      { "title": "Пожертви", "url": "/donate/" }
+    ],
+    "siteName": "Парафія УГКЦ у Лозанні",
+    "siteSubtitle": "Українська греко‑католицька церква",
+    "searchPlaceholder": "Пошук",
+    "donateCta": "Зробити пожертву",
+    "langTitle": "Мова",
+    "currentLangLabel": "Українська"
+  },
+  "en": {
+    "menu": [
+      { "title": "Home", "url": "/en/" },
+      { "title": "About", "url": "/en/about/" },
+      { "title": "Schedule", "url": "/en/schedule/" },
+      { "title": "News", "url": "/en/news/" },
+      { "title": "Spiritual", "url": "/en/spiritual/" },
+      { "title": "Community", "url": "/en/community/" },
+      { "title": "Contacts", "url": "/en/contacts/" },
+      { "title": "Donate", "url": "/en/donate/" }
+    ],
+    "siteName": "UGCC Lausanne Parish",
+    "siteSubtitle": "Ukrainian Greek‑Catholic Church",
+    "searchPlaceholder": "Search",
+    "donateCta": "Donate",
+    "langTitle": "Language",
+    "currentLangLabel": "English"
+  },
+  "fr": {
+    "menu": [
+      { "title": "Accueil", "url": "/fr/" },
+      { "title": "À propos", "url": "/fr/about/" },
+      { "title": "Horaire", "url": "/fr/schedule/" },
+      { "title": "Nouvelles", "url": "/fr/news/" },
+      { "title": "Spirituel", "url": "/fr/spiritual/" },
+      { "title": "Сommunauté", "url": "/fr/community/" },
+      { "title": "Contacts", "url": "/fr/contacts/" },
+      { "title": "Faire un don", "url": "/fr/donate/" }
+    ],
+    "siteName": "Paroisse UGCC Lausanne",
+    "siteSubtitle": "Église gréco‑catholique ukrainienne",
+    "searchPlaceholder": "Recherche",
+    "donateCta": "Faire un don",
+    "langTitle": "Langue",
+    "currentLangLabel": "Français"
+  }
+}
+

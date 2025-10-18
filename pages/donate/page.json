@@ -1,0 +1,51 @@
+{
+  "common": {
+    "page_hero": true,
+    "hero_image": "/assets/images/church-bg.jpg",
+    "icon": "<svg viewBox='0 0 24 24' focusable='false' role='img'><path d='M12 21s-8-5.5-8-11a5 5 0 0 1 8-3a5 5 0 0 1 8 3c0 5.5-8 11-8 11z'/></svg>",
+    "donate_url": "https://ugcc.fr/don/",
+    "bank_iban": "CH12 3456 7890 1234 5678 9",
+    "bank_name": "UBS Lausanne",
+    "bank_reference_value": "UGCC Lausanne"
+  },
+  "uk": {
+    "title": "Пожертви",
+    "content": "Як підтримати парафію.",
+    "donateIntro": "Підтримайте нашу парафію. Пожертва онлайн або банківським переказом.",
+    "donateCta": "Зробити пожертву онлайн",
+    "bankTitle": "Банківський переказ",
+    "bankLabel": "Банк",
+    "bankRefLabel": "Призначення платежу",
+    "questionsTitle": "Питання",
+    "twintCountry": "Швейцарія",
+    "twintInstruction": "Скануйте QR TWINT, щоб зробити пожертву у CHF.",
+    "chfNote": "Усі пожертви обробляються у швейцарських франках (CHF)."
+  },
+  "en": {
+    "title": "Donate",
+    "content": "How to support the parish.",
+    "donateIntro": "Support our parish. Donate online or via bank transfer.",
+    "donateCta": "Donate Online",
+    "bankTitle": "Bank transfer",
+    "bankLabel": "Bank",
+    "bankRefLabel": "Reference",
+    "questionsTitle": "Questions",
+    "twintCountry": "Switzerland",
+    "twintInstruction": "Scan the TWINT QR to donate in CHF.",
+    "chfNote": "All donations are processed in Swiss francs (CHF)."
+  },
+  "fr": {
+    "title": "Faire un don",
+    "content": "Comment soutenir la paroisse.",
+    "donateIntro": "Soutenez notre paroisse. Faites un don en ligne ou par virement.",
+    "donateCta": "Faire un don en ligne",
+    "bankTitle": "Virement bancaire",
+    "bankLabel": "Banque",
+    "bankRefLabel": "Référence",
+    "questionsTitle": "Questions",
+    "twintCountry": "Suisse",
+    "twintInstruction": "Scannez le QR TWINT pour faire un don en CHF.",
+    "chfNote": "Toutes les donations sont traitées en francs suisses (CHF)."
+  }
+}
+

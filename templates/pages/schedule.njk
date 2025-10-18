@@ -1,4 +1,5 @@
-{% if page == 'schedule' %}
+{% set _current = (page_key or (page and page.fileSlug)) %}
+{% if _current == 'schedule' %}
 <section class="schedule-page container">
   {% if sections.schedule and sections.schedule.length %}
     {% set liturgies = sections.schedule | where('category','liturgy') | upcoming %}

@@ -1,4 +1,5 @@
-{% if page == 'about' %}
+{% set _current = (page_key or (page and page.fileSlug)) %}
+{% if _current == 'about' %}
 <section class="about rich ">
 <div class="container card-static">
   <h2>{{ heading }}</h2>

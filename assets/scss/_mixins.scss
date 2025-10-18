@@ -2,6 +2,8 @@
 // MIXINS
 // ======================================
 
+@use 'variables' as *;
+
 // Responsive mixins
 @mixin respond($breakpoint) {
   @if $breakpoint == sm {

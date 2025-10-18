@@ -1,0 +1,83 @@
+{
+  "common": {
+    "page_hero": true,
+    "hero_image": "/assets/images/church-bg.jpg",
+    "images": {
+      "history1": "/assets/images/history1.png",
+      "history2": "/assets/images/history2.jpg",
+      "history3": "/assets/images/history3.jpg",
+      "history4": "/assets/images/history4.png",
+      "priest1": "/assets/images/priste1.jpg",
+      "priest2": "/assets/images/priste2.jpg"
+    }
+  },
+
+  "uk": {
+		"title": "Про нас",
+    "heading": "Історія українського душпастирства у Швейцарії",
+
+    "p1": "Українське церковне життя у Швейцарії тісно пов’язане з історією еміграції з України, що активізувалась після Першої світової війни. Саме тоді перші українці почали знаходити прихисток у цій країні. Серед них був і визначний діяч визвольного руху — Євген Коновалець, який тимчасово проживав у Швейцарії.",
+    "cap1": "Українська громада у Швейцарії, архівне фото",
+    "cap2": "Світлина з парафіяльного життя",
+
+    "p2": "Після завершення Другої світової війни українська громада в Швейцарії зросла, що викликало потребу в постійній духовній опіці. 4 лютого 1951 року в катедрі міста Фрібург диякон Данило Дзвоник був висвячений на священика єпископом Іваном Бучком — екзархом для українців за межами України. Протягом кількох років о. Данило душпастирював у Швейцарії, беручи активну участь також у діяльності Українського товариства Швайцарії.",
+    "cap3": "Богослужіння української громади",
+
+    "p3": "У 1960-х роках духовну опіку перейняв о. Мирослав Марусин. Згодом створено апостольський екзархат у Франції, який опікувався українцями також у Швейцарії. У 2016 році до Швейцарії прибув о. Володимир Горошко, а згодом долучилися інші священники, які послужили розвитку парафіяльного життя у містах країни.",
+    "cap4": "Світлина з парафіяльного архіву",
+
+    "p4": "Сьогодні українське душпастирство в Швейцарії об’єднує громади в різних кантонах. Завдяки спільним зусиллям формується живе церковне середовище, що допомагає зберігати віру та культурну спадщину.",
+
+    "priests_title": "Наші священники",
+    "priests": [
+      { "name": "Єрей Святослав ГОРЕЦЬКИЙ", "desc": "Душпастирське служіння, літургії та духовний супровід.", "img": "priest1" },
+      { "name": "Єрей Тарас Овсяник",       "desc": "Душпастирське служіння, літургії та духовний супровід.", "img": "priest2" }
+    ]
+  },
+
+  "en": {
+		"title": "About us",
+    "heading": "History of Ukrainian Pastoral Care in Switzerland",
+
+    "p1": "Ukrainian church life in Switzerland is closely linked to the history of emigration from Ukraine, which intensified after the First World War. Among those who found refuge here was Yevhen Konovalets, a prominent figure of the liberation movement.",
+    "cap1": "Ukrainian community in Switzerland, archival photo",
+    "cap2": "A scene from parish life",
+
+    "p2": "After World War II, the Ukrainian community in Switzerland grew, creating a need for permanent pastoral care. On February 4, 1951, Deacon Danylo Dzvonyk was ordained priest in the cathedral of Fribourg by Bishop Ivan Buchko, Exarch for Ukrainians abroad. For several years Fr. Danylo ministered across Switzerland and was active in the Ukrainian Society of Switzerland.",
+    "cap3": "Divine worship of the Ukrainian community",
+
+    "p3": "In the 1960s, Fr. Myroslav Marusin continued the pastoral mission. Later the Apostolic Exarchate in France was established, caring also for Ukrainians in Switzerland. In 2016 Fr. Volodymyr Horoshko arrived in Switzerland, followed by other priests who fostered parish life in various cities.",
+    "cap4": "Photo from the parish archive",
+
+    "p4": "Today, Ukrainian pastoral care in Switzerland unites communities across the cantons, forming a living church environment that helps preserve faith and cultural heritage.",
+
+    "priests_title": "Our Priests",
+    "priests": [
+      { "name": "Fr. Sviatoslav HORETSKYI", "desc": "Pastoral service, liturgies and spiritual guidance.", "img": "priest1" },
+      { "name": "Fr. Taras Ovsiannyk",      "desc": "Pastoral service, liturgies and spiritual guidance.", "img": "priest2" }
+    ]
+  },
+
+  "fr": {
+		"title": "À propos",
+    "heading": "Histoire du pastorat ukrainien en Suisse",
+
+    "p1": "La vie ecclésiale ukrainienne en Suisse est liée à l’histoire de l’émigration d’Ukraine, intensifiée après la Première Guerre mondiale. Parmi les exilés se trouvait Yevhen Konovalets, figure éminente du mouvement de libération.",
+    "cap1": "Communauté ukrainienne en Suisse, photo d’archives",
+    "cap2": "Scène de la vie paroissiale",
+
+    "p2": "Après la Seconde Guerre mondiale, la communauté ukrainienne s’est agrandie, nécessitant un accompagnement spirituel permanent. Le 4 février 1951, le diacre Danylo Dzvonyk a été ordonné prêtre à la cathédrale de Fribourg par l’évêque Ivan Buchko, exarque pour les Ukrainiens à l’étranger. Pendant plusieurs années, le père Danylo a servi en Suisse et a été actif dans la Société ukrainienne de Suisse.",
+    "cap3": "Célébration liturgique de la communauté ukrainienne",
+
+    "p3": "Dans les années 1960, le père Myroslav Marusin a poursuivi la mission pastorale. Plus tard, l’Exarchat apostolique en France a été créé, s’occupant également des Ukrainiens en Suisse. En 2016, le père Volodymyr Horoshko est arrivé en Suisse, rejoint ensuite par d’autres prêtres qui ont favorisé la vie paroissiale.",
+    "cap4": "Photo des archives paroissiales",
+
+    "p4": "Aujourd’hui, le pastorat ukrainien en Suisse unit des communautés dans différents cantons, formant un milieu ecclésial vivant qui aide à préserver la foi et le patrimoine culturel.",
+
+    "priests_title": "Nos prêtres",
+    "priests": [
+      { "name": "P. Sviatoslav HORETSKYI", "desc": "Service pastoral, liturgies et accompagnement spirituel.", "img": "priest1" },
+      { "name": "P. Taras Ovsiannyk",      "desc": "Service pastoral, liturgies et accompagnement spirituel.", "img": "priest2" }
+    ]
+  }
+}

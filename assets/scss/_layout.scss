@@ -2,6 +2,9 @@
 // LAYOUT: HEADER / FOOTER / HERO
 // ======================================
 
+@use 'variables' as *;
+@use 'mixins' as *;
+
 .header {
   background: $bg;
   padding-top: $space-md;
