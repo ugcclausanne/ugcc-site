@@ -1,0 +1,243 @@
+﻿/* === Basic styles for UGCC Lausanne === */
+@import url('layout.css');
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: var(--font-size-main);
+  color: var(--text-main);
+  background: var(--bgsoft);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-accent);
+  color: var(--burgundy);
+  margin-block: var(--space-md);
+  font-weight: 700;
+}
+
+/* Uppercase main headings */
+h1,
+h2,
+h3 { text-transform: uppercase; }
+
+
+a {
+  color: var(--burgundy);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+button,
+.btn {
+  font-family: var(--font-main);
+	font-weight: 600;
+  font-size: var(--font-size-main);
+  background: var(--burgundy);
+  color: var(--white);
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+button:hover,
+.btn:hover {
+  background: var(--gold);
+  color: var(--burgundy);
+}
+
+section {
+  margin-block: var(--section-block-padding);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (width <= 900px) {
+  .container {
+    max-width: 100%;
+    padding-inline: var(--space-sm);
+  }
+
+  section {
+    padding-block: var(--space-md);
+  }
+}
+
+/* Rich text helpers */
+.rich p { margin-bottom: var(--space-sm); 
+					text-align: justify; 
+					text-justify: inter-word; 
+					hyphens: auto; }
+.rich figure { margin: var(--space-md) 0; }
+.rich figcaption { font-size: var(--font-size-small); color: var(--muted); font-style: italic; }
+.about .gallery { display: grid; gap: var(--space-md); }
+.about .gallery.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.about .gallery.cols-1 { grid-template-columns: 1fr; }
+
+@media (width <= 800px){ .about .gallery.cols-2 { grid-template-columns: 1fr; } }
+
+/* Cards grid uses the unified .grid rules from layout.css */
+.list-card { background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.list-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.list-card .thumb { width: 100%; height: var(--card-thumb-height); object-fit: cover; display: block; }
+.list-card .body { padding: var(--space-md); }
+.list-card .meta { display: flex; gap: var(--space-sm); align-items: baseline; margin-bottom: var(--space-sm); }
+.list-card .meta-date { color: var(--burgundy); font-weight: 600; }
+.list-card .meta-author { color: var(--muted); font-style: italic; }
+
+/* Detail text font (dates, authors, badges, small meta) */
+.meta, .card-meta, .list-card .meta, .badge, small, time { font-family: var(--font-detail); }
+
+/* Socials: unified spacing/colors; modifiers per area */
+.socials { display: inline-flex; align-items: center; gap: var(--space-sm); }
+.socials a { color: inherit; transition: color var(--transition-fast); }
+.socials-contacts { color: var(--black); font-size: var(--socials-font-size); }
+
+/* Contacts page coloring: black text, gold on hover for links */
+.contacts .contact-details { color: var(--black); }
+.contacts .contact-details a { color: var(--black); }
+.contacts .contact-details a:hover { color: var(--gold); }
+.contacts .contact-details a:hover i { color: var(--gold); }
+.contacts .contact-details i { color: var(--black); }
+
+/* Increase vertical spacing between rows on contacts page */
+.contacts .contact-details > * + * { margin-top: var(--space-md); }
+
+/* Equal height columns: map matches contact text height */
+.contacts .contacts-grid { align-items: stretch; }
+.contacts .map-wrap iframe { height: 100%; min-height: 360px; display: block; }
+
+/* Contact form */
+.contact-form { background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow); padding: var(--space-md); display: grid; gap: var(--space-md); }
+.contact-form .form-row { display: grid; gap: var(--space-md); }
+.contact-form .form-row.two { grid-template-columns: 1fr 1fr; }
+
+@media (width <= 800px) { .contact-form .form-row.two { grid-template-columns: 1fr; } }
+.contact-form label { display: grid; gap: var(--space-xs); color: var(--text-soft); }
+.contact-form input, .contact-form textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--burgundy); outline: none; border-radius: 0; font-family: var(--font-main); font-size: 1rem; }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 2px var(--burgundy-light); }
+.contact-form .form-actions { display: flex; justify-content: flex-end; }
+
+/* Form success notice */
+.form-success { background: #eafaf1; border-left: 4px solid #2ecc71; color: #1a7f4b; padding: 12px 14px; margin-bottom: var(--space-md); }
+
+/* Larger gap between icon and text on contacts page */
+.contacts .contact-details .contact-line a{ display:inline-flex; align-items:center; gap: var(--space-sm); }
+.contacts .contact-details .contact-line i{ margin-right: var(--space-xs); }
+
+/* Contact form errors */
+.contact-form .error-msg { color: #b00020; font-size: 0.875rem; line-height: 1.3; }
+
+.contact-form .field-error input,
+.contact-form .field-error textarea { border-color: #b00020; box-shadow: none; }
+
+/* Home: next liturgy highlight */
+/* .next-liturgy {background: var(--bg-section); } */
+.next-liturgy .next-grid { gap: var(--space-lg); align-items: center; }
+.next-liturgy .next-media img { width: 100%; height: auto; display: block; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.next-liturgy .next-info h2 { margin-bottom: var(--space-sm); }
+.next-liturgy .next-info h3 { margin-bottom: var(--space-sm); color: var(--burgundy); }
+.next-liturgy .next-info .meta { color: var(--text-soft); }
+.next-liturgy .next-info .lead { margin-top: var(--space-sm); }
+
+@media (width <= 900px){ /* grid columns handled by .grid rules */ }
+
+/* Home: brief announcements */
+.home-announcements .brief-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.home-announcements .brief-list li { display: flex; justify-content: space-between; gap: var(--space-sm); background: var(--white); border: 1px solid var(--border); padding: 10px 12px; box-shadow: var(--shadow); }
+.home-announcements .brief-list .title { color: var(--ink); }
+.home-announcements .brief-list .date { color: var(--muted); white-space: nowrap; }
+
+/* Home: narrow announcements strip under next-liturgy */
+.home-announce-strip { padding-block: var(--space-sm); background: var(--bg-section); }
+.home-announce-strip .announce-grid,
+.home-section .announce-grid { align-items: stretch; }
+.home-announce-strip h2 { margin-bottom: var(--space-sm); }
+.home-announce-strip .announce,
+.home-section .announce-grid .announce { position: relative; display: grid; gap: 6px; padding: 10px 12px; background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow); min-height: 44px; transition: transform var(--transition-fast), box-shadow var(--transition-fast); outline: none; }
+.home-announce-strip .announce:hover, .home-announce-strip .announce:focus-visible,
+.home-section .announce-grid .announce:hover, .home-section .announce-grid .announce:focus-visible { transform: scale(1.035); box-shadow: var(--shadow-hover); z-index: 2; }
+.home-announce-strip .announce .date,
+.home-section .announce-grid .announce .date { color: var(--muted); font-family: var(--font-detail); white-space: nowrap; }
+.home-announce-strip .announce .title,
+.home-section .announce-grid .announce .title { color: var(--ink); font-weight: 700; }
+.home-announce-strip .announce .extra,
+.home-section .announce-grid .announce .extra {
+  color: var(--text-soft);
+  font-size: var(--font-size-small);
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-hover);
+  padding: 10px 12px;
+  z-index: 50;
+}
+.home-announce-strip .announce:hover .extra, .home-announce-strip .announce:focus-visible .extra,
+.home-section .announce-grid .announce:hover .extra, .home-section .announce-grid .announce:focus-visible .extra { display: block; }
+.home-announce-strip .announce .extra .line,
+.home-section .announce-grid .announce .extra .line { display: flex; align-items: baseline; gap: 6px; }
+.home-announce-strip .announce .extra .details,
+.home-section .announce-grid .announce .extra .details { color: var(--ink); }
+
+@media (width <= 900px) {
+  .home-announce-strip .announce-grid,
+  .home-section .announce-grid { grid-template-columns: 1fr !important; }
+}
+
+/* About: priest cards — keep full image, no crop */
+.priest-card .thumb { height: auto; object-fit: contain; }
+
+/* Article page meta block */
+.article-page .meta { color: var(--text-soft); margin: var(--space-sm) 0 var(--space-md); display: grid; gap: 4px; }
+.article-page .meta .meta-line { display: inline-flex; align-items: baseline; gap: 8px; }
+.article-page .meta i { color: var(--burgundy); }
+
+/* Simple slider (used for article gallery) */
+.slider { position: relative; overflow: hidden; margin: var(--space-md) 0; border: 1px solid var(--border); background: var(--white); box-shadow: var(--shadow); }
+.slider-track { display: flex; overflow: hidden; scroll-behavior: smooth; }
+.slider .slide { min-width: 100%; }
+.slider .slide img { width: 100%; height: auto; display: block; }
+.slider .nav { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; pointer-events: none; padding: 0 var(--space-sm); }
+.slider .nav button { pointer-events: auto; background: rgb(0 0 0 / 35%); color: #fff; border: 0; width: var(--layout-controls-size); height: var(--layout-controls-size); border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
+.slider .nav button:hover { background: rgb(0 0 0 / 55%); }
+.slider .dots { position: absolute; bottom: var(--space-xs); left: 0; right: 0; display: flex; gap: var(--layout-dots-gap); justify-content: center; }
+.slider .dots button { width: var(--layout-dots-size); height: var(--layout-dots-size); border-radius: 50%; border: 0; background: rgb(255 255 255 / 60%); cursor: pointer; }
+.slider .dots button.active { background: var(--gold); }
+
+/* Donate page spacing tweaks */
+.donate p { margin: 0 0 var(--space-sm); }
+.donate .btn { display: inline-block; margin-top: var(--space-xs); }
+.donate .grid { margin-top: var(--space-md); }

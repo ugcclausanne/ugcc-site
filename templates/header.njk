@@ -16,8 +16,8 @@
               <span class="lang-label">
                 <i class="fa-solid fa-globe"></i>
                 {{ header.currentLangLabel }}</span>
-              </button>
-            {% set currentPage = (page_key or (page and page.fileSlug)) %}
+            </button>
+            {% set currentPage = page %}
 {% set urlUk = '/' if currentPage == 'index' else '/' + currentPage + '/' %}
 {% set urlFr = '/fr/' if currentPage == 'index' else '/fr/' + currentPage + '/' %}
 {% set urlEn = '/en/' if currentPage == 'index' else '/en/' + currentPage + '/' %}
@@ -57,3 +57,4 @@
     </div>
   </nav>
 </header>
+

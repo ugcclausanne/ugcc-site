@@ -1,0 +1,50 @@
+/* Layout styles for UGCC Lausanne (adaptive grid, flex, grid, breakpoints) */
+@import url('variables.css');
+
+/* Grid for sections (cards-grid aliases to grid to avoid duplication) */
+.grid,
+.cards-grid {
+  display: grid;
+  gap: var(--layout-gap);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.grid.cols-2,
+.cards-grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.cols-3,
+.cards-grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (width <= 900px) {
+  .grid.cols-2,
+  .grid.cols-3,
+  .cards-grid.cols-2,
+  .cards-grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Flex row for horizontal sliders */
+.flex-row {
+  display: flex;
+  gap: var(--layout-gap);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* Utility helpers (no !important to avoid overrides) */
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.hidden { display: none; }
+.border-0 { border: 0; }
+.max-w-220 { max-width: 220px; height: auto; }

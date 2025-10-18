@@ -35,8 +35,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Основні стилі -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/header.css">
+  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="/assets/css/cards.css">  {# новий файл для карток і сторінок #}
+	
+	<!-- Стилі героя -->
+	{% if page_hero %}
+  <link rel="stylesheet" href="/assets/css/page-hero.css">
+	{% endif %}
 
   <!-- Іконки -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -44,7 +52,6 @@
 </head>
 
 <body>
-  {% set page_key = page_key or (page and page.fileSlug) %}
   {% include "header.njk" %}
 
   {# === Герой сторінки === #}
@@ -56,12 +63,12 @@
     {% block content %}{% endblock %}
 
     {# === Вставка шаблону сторінки === #}
-    {% set page_template = "pages/" + page_key + ".njk" %}
+    {% set page_template = "pages/" + page + ".njk" %}
     {% include page_template ignore missing %}
   </main>
 
   {% include "footer.njk" %}
 
-  <script src="/assets/js/main.js defer"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>

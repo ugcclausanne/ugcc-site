@@ -1,0 +1,84 @@
+/* Layout: 3 equal columns on desktop; stacked on small screens.           */
+
+/* Colors/spacing use variables from variables.css                          */
+
+.footer {
+  background: var(--burgundy);
+  color: var(--white);
+  padding-block: var(--footer-block-padding);
+  position: relative;
+}
+
+/* Soft top shadow/gradient separator */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -12px; left: 0; right: 0; height: 12px;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 10%), transparent);
+}
+
+/* Grid columns aligned to a baseline rhythm */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  align-items: start; /* top-aligned */
+  justify-content: center; /* center the 3 columns block in container */
+}
+
+/* Ensure each column stacks its content vertically with consistent rhythm */
+.footer .footer-col { display: grid; gap: 16px; align-content: start; }
+
+/* Column horizontal alignment: 1st left, 2nd center, 3rd right */
+.footer .footer-col:nth-child(1) { justify-self: start; text-align: left; }
+.footer .footer-col:nth-child(2) { justify-self: center; text-align: left; }
+.footer .footer-col:nth-child(3) { justify-self: end; text-align: left; }
+
+/* Headings: uppercase with gold underline accent */
+.footer h3 {
+  color: var(--white);
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin: 0 0 var(--space-sm);
+  padding-bottom: 6px;
+  position: relative;
+}
+
+.footer h3::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 44px; height: 3px;
+  background: var(--gold);
+}
+
+/* Links and icons evenly spaced */
+.footer a { color: var(--white); text-decoration: none; transition: color var(--transition-fast); }
+.footer a:hover { color: var(--gold); }
+.footer .links, .footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+
+/* Contact lines */
+.footer .contact-line { margin: 0; }
+.footer .contact-line a { display: inline-flex; align-items: center; gap: 8px; color: var(--white); }
+.footer .contact-line i { color: var(--white); }
+
+/* Keep icons (phone/mail/socials) white on hover */
+.footer .contact-line a:hover,
+.footer .socials a:hover { color: var(--gold); }
+
+/* Ensure icons inside links follow hover color */
+.footer a:hover i { color: var(--gold); }
+
+/* Footer columns stack on small screens */
+@media (width < 800px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer .footer-col { justify-self: stretch; }
+}
+
+/* Divider and copyright */
+.footer-divider { height: 1px; background: rgb(255 255 255 / 20%); margin-block: var(--space-md); }
+.footer-copyright { text-align: left; opacity: .9; }
+
+/* Footer socials: match header spacing */
+.footer .socials { display: inline-flex; align-items: center; gap: var(--space-sm); font-size: var(--socials-font-size); }

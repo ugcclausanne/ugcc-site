@@ -1,5 +1,4 @@
-{% set _current = (page_key or (page and page.fileSlug)) %}
-{% if _current == 'donate' %}
+{% if page == 'donate' %}
 <section class="donate meta">
   <div class="container">
     <p>{{ donateIntro }}</p>

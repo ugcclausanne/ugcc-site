@@ -1,5 +1,4 @@
-{% set _current = (page_key or (page and page.fileSlug)) %}
-{% if _current == 'article' and article %}
+{% if page == 'article' and article %}
 <section class="container article-page">
   <h1>{{ article.title }}</h1>
   <div class="meta">

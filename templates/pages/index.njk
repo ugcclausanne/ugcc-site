@@ -1,6 +1,5 @@
 {# templates/pages/index.njk #}
-{% set _current = (page_key or (page and page.fileSlug)) %}
-{% if _current == 'index' %}
+{% if page == 'index' %}
 
   {# 1) Next liturgy highlight #}
   {% set arr = sections.schedule | upcoming %}
