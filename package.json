@@ -1,0 +1,19 @@
+{
+  "name": "ugcc-lausanne",
+  "version": "1.0.0",
+  "description": "UGCC Lausanne parish trilingual website (static, built with Eleventy and SCSS)",
+  "scripts": {
+    "dev": "npm-run-all --parallel serve watch:sass",
+    "build": "eleventy && npm run build:sass",
+    "serve": "eleventy --serve",
+    "watch:sass": "sass --watch assets/scss:assets/css",
+    "build:sass": "sass assets/scss:assets/css --no-source-map --style=compressed"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.79.0"
+  },
+  "author": "UGCC Lausanne",
+  "license": "MIT"
+}

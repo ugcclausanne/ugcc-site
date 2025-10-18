@@ -1,0 +1,33 @@
+{% if page == 'schedule' %}
+<section class="schedule-page container">
+  {% if sections.schedule and sections.schedule.length %}
+    {% set liturgies = sections.schedule | where('category','liturgy') | upcoming %}
+    {% set ann = sections.schedule | where('category','announcement') | upcoming %}
+    <div class="grid cols-2">
+      <div>
+        <h2>{{ liturgy_section_title or title }}</h2>
+        <div class="liturgy-grid">
+          {% for item in liturgies %}
+            {% include "partials/card-liturgy.njk" %}
+          {% else %}
+            <p class="no-events">{{ no_events }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        <h2>{{ announcements_section_title or announcements_title }}</h2>
+        <div class="liturgy-grid">
+          {% for item in ann %}
+            {% include "partials/card-liturgy.njk" %}
+          {% else %}
+            <p class="no-events">{{ no_events }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p class="no-events">{{ no_events }}</p>
+  {% endif %}
+
+</section>
+{% endif %}

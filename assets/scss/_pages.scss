@@ -1,0 +1,40 @@
+/* ----------------------------------------------------
+   Page-specific styles: schedule, articles, news
+   ---------------------------------------------------- */
+
+/* Schedule page */
+.liturgy-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.liturgy-date {
+  background: var(--burgundy);
+  color: var(--white);
+  text-align: center;
+  padding: var(--space-sm);
+}
+
+.liturgy-details {
+  margin-left: calc(80px + var(--space-md));
+}
+
+.liturgy-details .title {
+  color: var(--burgundy);
+  font-weight: 700;
+}
+
+/* Articles page */
+.article-list {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.article-card {
+  @extend .card;
+}
+
+.article-card img {
+  height: 200px;
+  object-fit: cover;
+}

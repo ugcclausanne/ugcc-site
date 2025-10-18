@@ -1,0 +1,121 @@
+{# templates/pages/index.njk #}
+{% if page == 'index' %}
+
+  {# 1) Next liturgy highlight #}
+  {% set arr = sections.schedule | upcoming %}
+  {% set next = arr and arr[0] %}
+  {% if next %}
+  <section class="next-liturgy home-section ">
+    <div class="container">
+      <div class="grid cols-2 next-grid list-card" itemscope itemtype="https://schema.org/Event">
+        <div class="next-media">
+          <img src="/assets/images/prayer.png" alt="Prayer">
+        </div>
+        <div class="next-info">
+          <h2 itemprop="name">{{ next.title }}</h2>
+					{% if next.details %}<h4 class="lead" itemprop="description">{{ next.details }}</h4>{% endif %}
+          <p class="meta"><i class="fa-regular fa-calendar-days"></i> <time>{{ (next.timestamp or next.date) | format_date(lang) }}</time>{% if next.time %} • <i class="fa-regular fa-clock"></i> {{ next.time }}{% endif %}</p>
+          {% if next.location %}<p class="meta"><i class="fa-solid fa-location-dot"></i> <span itemprop="location">{{ next.location }}</span></p>{% endif %}
+
+          {% if next.before_details %}
+          <div class="event-section before">
+            <div class="section-label">{{ before_label }}</div>
+            <div class="before-event">
+              <i class="fa-solid fa-cross"></i>
+              {% if next.before_time %}
+                <time datetime="{{ next.date }}T{{ next.before_time }}">{{ next.before_time }}</time> —
+              {% endif %}
+              {{ next.before_details }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if next.after_details %}
+          <div class="event-section after">
+            <div class="section-label">{{ after_label }}</div>
+            <div class="after-event">
+              <i class="fa-solid fa-mug-hot"></i>
+              {% if next.after_time %}
+                <time datetime="{{ next.date }}T{{ next.after_time }}">{{ next.after_time }}</time> —
+              {% endif %}
+              {{ next.after_details }}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {# 2) Announcements strip from schedule (category == 'announcement', next 3 future) #}
+  {% set ann = sections.schedule | where('category', 'announcement') | upcoming | take(0,3) %}
+  {% if ann and ann.length %}
+  <section class="home-announce-strip home-section">
+    <div class="container">
+      <h2>{{ announcements_title }}</h2>
+      <div class="grid cols-3 announce-grid">
+        {% for item in ann %}
+          <div class="announce" tabindex="0" itemscope itemtype="https://schema.org/Event">
+            {% if item.timestamp or item.date %}
+              <time class="date" itemprop="startDate" datetime="{{ (item.timestamp or item.date) }}{% if item.time %}T{{ item.time }}{% endif %}">{{ (item.timestamp or item.date) | format_date_num }}</time>
+            {% endif %}
+            <span class="title" itemprop="name">{{ item.title }}</span>
+            <div class="extra" itemprop="description">
+              {% if item.time %}
+                <div class="line"><i class="fa-regular fa-clock"></i> {{ item.time }}</div>
+              {% endif %}
+              {% if item.location %}
+                <div class="line"><i class="fa-solid fa-location-dot"></i> <span itemprop="location">{{ item.location }}</span></div>
+              {% endif %}
+              {% if item.details %}
+                <div class="line details">{{ item.details }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+{% endif %}
+
+  <!-- News (3 cards) -->
+  {% set title = latest_news_title %}
+  <section class="home-section">
+    <div class="container">
+      <h2>{{ title }}</h2>
+      <div class="grid cols-3">
+        {% for item in sections.news | take(0,3) %}
+          {% include "partials/card-article.njk" %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Spiritual (3 cards) -->
+  {% set title = spiritual_title %}
+  <section class="home-section">
+    <div class="container">
+      <h2>{{ title }}</h2>
+      <div class="grid cols-3">
+        {% for item in sections.spiritual | take(0,3) %}
+          {% include "partials/card-article.njk" %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Community (3 cards) -->
+  {% set title = community_title %}
+  <section class="home-section">
+    <div class="container">
+      <h2>{{ title }}</h2>
+      <div class="grid cols-3">
+        {% for item in sections.community | take(0,3) %}
+          {% include "partials/card-article.njk" %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>

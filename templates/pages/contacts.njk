@@ -1,0 +1,94 @@
+{# Contacts page content #}
+{% if page == 'contacts' %}
+<section class="contacts">
+  <div class="container">
+    <div class="grid cols-2 contacts-grid">
+      <div class="map-wrap">
+        <iframe
+          src="{{ map_src }}"
+          width="100%"
+          height="540"
+          class="border-0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          aria-label="Map"></iframe>
+      </div>
+      <div class="contact-details">
+
+        {% if social_list %}
+          <p class="socials socials-contacts">
+            {% for social in social_list %}
+              <a href="{{ social.url }}" title="{{ social.title }}"><i class="fa-brands fa-{{ social.title | lower }}"></i></a>
+            {% endfor %}
+          </p>
+        {% endif %}
+
+        {% if email %}
+          <p class="contact-line"><a class="email" href="mailto:{{ email }}"><i class="fa-solid fa-envelope"></i><span>{{ email }}</span></a></p>
+        {% endif %}
+
+        {% if phone %}
+          <p class="contact-line"><a class="phone" href="tel:{{ phone }}"><i class="fa-solid fa-phone"></i><span>{{ phone }}</span></a></p>
+        {% endif %}
+
+        <p class="contact-line"><a class="address" href="{{ map_link }}" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i><span>{{ address }}</span></a></p>
+
+        {% if how_to_get %}
+          <p><strong>{{ getThere }}:</strong> {{ how_to_get }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Contact form section #}
+<section class="container">
+	<h2>{{ formTitle }}</h2>
+	{# Success notice shown after redirect ?sent=1 #}
+	<div id="form-success" class="form-success" hidden>{{ successText }}</div>
+	{# Localized validation messages supplied via data-* attributes #}
+	<form class="contact-form" method="post" accept-charset="UTF-8" novalidate
+		data-name-required="{{ nameRequired }}"
+		data-email-required="{{ emailRequired }}"
+		data-email-invalid="{{ emailInvalid }}"
+		data-message-required="{{ messageRequired }}"
+		data-message-min="{{ messageMin }}"
+      action="https://formsubmit.co/{{ email }}">
+		<div class="form-row two">
+			<label>
+				<span>{{ nameLabel }}</span>
+				<input type="text" name="name" required minlength="2" pattern="[\p{L} .'-]{2,}" title="{{ nameRequired }}">
+				<small class="error-msg" data-error-for="name" hidden></small>
+			</label>
+			<label>
+				<span>Email</span>
+				<input type="email" name="email" required inputmode="email" autocomplete="email" title="{{ emailInvalid }}">
+				<small class="error-msg" data-error-for="email" hidden></small>
+			</label>
+		</div>
+		<div class="form-row">
+			<label>
+				<span>{{ subjectLabel }}</span>
+				<input type="text" name="subject">
+				<small class="error-msg" data-error-for="subject" hidden></small>
+			</label>
+		</div>
+		<div class="form-row">
+			<label>
+				<span>{{ messageLabel }}</span>
+				<textarea name="message" rows="6" required minlength="10" title="{{ messageMin }}"></textarea>
+				<small class="error-msg" data-error-for="message" hidden></small>
+			</label>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn">{{ sendLabel }}</button>
+		</div>
+		{# FormSubmit configuration and spam prevention #}
+		<input type="hidden" name="_subject" value="Website contact form" />
+		<input type="hidden" name="_template" value="table" />
+		<input type="hidden" name="_captcha" value="false" />
+		<input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+		<input type="hidden" name="_next" value="/contacts/?sent=1" />
+	</form>
+</section>
+{% endif %}

@@ -1,0 +1,40 @@
+{% if page == 'article' and article %}
+<section class="container article-page">
+  <h1>{{ article.title }}</h1>
+  <div class="meta">
+    {% if article.author %}
+      <div class="meta-line"><i class="fa-regular fa-user"></i> <span class="author">{{ article.author }}</span></div>
+    {% endif %}
+    {% if article.timestamp or article.date %}
+      <div class="meta-line"><i class="fa-regular fa-calendar-days"></i> <time>{{ (article.timestamp or article.date) | format_date(lang) }}</time></div>
+    {% endif %}
+  </div>
+
+  {% set imgs = article.images or (article.image and [article.image]) or [] %}
+  {% if imgs and imgs.length > 1 %}
+    <div class="article-gallery slider">
+      <div class="slider-track" data-interval="7000">
+        {% for src in imgs %}
+        <div class="slide"><img src="{{ src }}" alt="{{ article.title }}"></div>
+        {% endfor %}
+      </div>
+      <div class="nav" aria-hidden="false">
+        <button class="prev" aria-label="Previous">&#10094;</button>
+        <button class="next" aria-label="Next">&#10095;</button>
+      </div>
+      <div class="dots">
+        {% for _ in imgs %}<button aria-label="Go to slide {{ loop.index }}"></button>{% endfor %}
+      </div>
+    </div>
+  {% elif imgs and imgs.length == 1 %}
+    <figure class="article-cover">
+      <img src="{{ imgs[0] }}" alt="{{ article.title }}">
+    </figure>
+  {% endif %}
+
+  <div class="rich">
+    <p>{{ article.excerpt }}</p>
+    <p>{{ article.content }}</p>
+  </div>
+</section>
+{% endif %}

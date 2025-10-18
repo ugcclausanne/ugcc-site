@@ -1,0 +1,11 @@
+{% if page == 'spiritual' %}
+<section class="section-list">
+  <div class="container">
+    <div class="grid cols-3">
+      {% for item in sections.spiritual %}
+        {% include "partials/card-article.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

@@ -1,0 +1,47 @@
+// ======================================
+// VARIABLES
+// ======================================
+
+// Colors
+$burgundy: #6a1b2e;
+$gold: #e6b800;
+$white: #ffffff;
+$ink: #333333;
+$muted: #777777;
+$border: #dddddd;
+$bg: #f8f8f8;
+$bgsoft: #f2f2f2;
+
+// Shadows
+$shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+$shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.12);
+
+// Spacing
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 32px;
+
+// Typography
+$font-main: "Open Sans", sans-serif;
+$font-headline: "Merriweather", serif;
+$font-size-small: clamp(0.8rem, 0.7vw + 0.6rem, 0.9rem);
+$font-size-base: clamp(1rem, 0.8vw + 0.7rem, 1.1rem);
+$font-size-title: clamp(1.4rem, 1.2vw + 1rem, 2rem);
+$font-size-menu: clamp(0.9rem, 0.8vw + 0.6rem, 1rem);
+
+// Layout vars
+$container-width: 1200px;
+$container-padding: 16px;
+
+// Transition & animation
+$transition-fast: 0.2s ease-in-out;
+
+// Z-indexes
+$z-header: 10;
+$z-overlay: 20;
+
+// Liturgy
+$liturgy-ribbon-width: 52px;
+$liturgy-ribbon-offset: 8px;
+$card-thumb-height: 220px;

@@ -1,0 +1,105 @@
+// ======================================
+// LAYOUT: HEADER / FOOTER / HERO
+// ======================================
+
+.header {
+  background: $bg;
+  padding-top: $space-md;
+  z-index: $z-header;
+
+  .header-top-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: $space-md;
+  }
+
+  .header-menu-row {
+    background: $burgundy;
+    margin-top: $space-sm;
+
+    ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      li {
+        flex: 1;
+        text-align: center;
+
+        a {
+          display: block;
+          color: $white;
+          padding: $space-sm;
+          text-transform: uppercase;
+          font-weight: 700;
+          transition: background $transition-fast;
+
+          &:hover {
+            background: $gold;
+            color: $burgundy;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  background: $burgundy;
+  color: $white;
+  padding-block: $space-lg;
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $space-lg;
+  }
+
+  h3 {
+    font-size: 1.1em;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: $space-sm;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 44px;
+      height: 3px;
+      background: $gold;
+    }
+  }
+
+  a {
+    color: $white;
+
+    &:hover {
+      color: $gold;
+    }
+  }
+}
+
+.page-hero {
+  position: relative;
+  height: 300px;
+  background: url('/assets/images/church-bg.jpg') center/cover no-repeat;
+  color: $white;
+  @include flex-center;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  h1 {
+    font-family: $font-headline;
+    font-size: clamp(2rem, 3vw + 1rem, 3rem);
+    color: $gold;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+}

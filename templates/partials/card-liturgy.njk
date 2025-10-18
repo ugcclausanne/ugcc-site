@@ -1,0 +1,66 @@
+<div class="card-liturgy" itemscope itemtype="https://schema.org/Event">
+  <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+  <div class="liturgy-date">
+    <span class="day">{{ item.date | substr(8, 2) }}</span>
+    <span class="month">{{ item.date | substr(5, 2) | monthname(lang) | substr(0,3) }}</span>
+  </div>
+  <div class="liturgy-details">
+    {% set categoryIcon = 'fa-regular fa-calendar' %}
+    {% if item.category == 'liturgy' %}{% set categoryIcon = 'fa-solid fa-church' %}{% endif %}
+    {% if item.category == 'announcement' %}{% set categoryIcon = 'fa-regular fa-bell' %}{% endif %}
+
+    <div class="title-row">
+      <i class="card-icon {{ categoryIcon }}" aria-hidden="true"></i>
+      <h3 class="title" itemprop="name">{{ item.title }}</h3>
+    </div>
+
+    {% if item.details %}
+      <h4 class="service-subtitle" itemprop="description">{{ item.details }}</h4>
+    {% endif %}
+
+    <p class="subtitle">
+      <span class="meta-line time">
+        <i class="fa-regular fa-clock"></i>
+        <time itemprop="startDate" datetime="{{ item.date }}T{{ item.time }}">{{ item.time }}</time>
+      </span>
+      {% if item.location %}
+      <span class="meta-line place">
+        <i class="fa-solid fa-location-dot"></i>
+        <span itemprop="location" itemscope itemtype="https://schema.org/Place">
+          <a href="https://maps.google.com/?q={{ item.location | enc }}" target="_blank" rel="noopener">
+            <span itemprop="name">{{ item.location }}</span>
+          </a>
+          <meta itemprop="address" content="{{ item.location }}">
+        </span>
+      </span>
+      {% endif %}
+    </p>
+
+    {% if item.before_details %}
+      <div class="event-section before">
+        <div class="section-label">{{ before_label }}</div>
+        <div class="before-event meta-line">
+          <i class="fa-solid fa-cross"></i>
+          {% if item.before_time %}
+            <time datetime="{{ item.date }}T{{ item.before_time }}">{{ item.before_time }}</time> —
+          {% endif %}
+          {{ item.before_details }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if item.after_details %}
+      <div class="event-section after">
+        <div class="section-label">{{ after_label }}</div>
+        <div class="after-event meta-line">
+          <i class="fa-solid fa-mug-hot"></i>
+          {% if item.after_time %}
+            <time datetime="{{ item.date }}T{{ item.after_time }}">{{ item.after_time }}</time> —
+          {% endif %}
+          {{ item.after_details }}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</div>

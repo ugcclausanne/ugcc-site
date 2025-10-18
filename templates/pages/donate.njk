@@ -1,0 +1,36 @@
+{% if page == 'donate' %}
+<section class="donate meta">
+  <div class="container">
+    <p>{{ donateIntro }}</p>
+
+    <p>
+      <a class="btn" href="{{ donate_url }}" target="_blank" rel="noopener">{{ donateCta }}</a>
+    </p>
+
+    <div class="grid cols-2 mt-md">
+      <div class="list-card">
+        <h3>{{ bankTitle }}</h3>
+        <p>IBAN: {{ bank_iban }}</p>
+        <p>{{ bankLabel }}: {{ bank_name }}</p>
+        <p>{{ bankRefLabel }}: {{ bank_reference_value }}</p>
+      </div>
+      <div class="list-card">
+        <h3>{{ questionsTitle }}</h3>
+        <p>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
+      </div>
+    </div>
+
+    <div class="grid cols-2 mt-md">
+      <div class="list-card">
+        <h3>TWINT ({{ twintCountry }})</h3>
+        <p>{{ twintInstruction }}</p>
+        <img src="/assets/images/twint-qr.png" alt="TWINT QR" class="max-w-220">
+      </div>
+      <div class="list-card">
+        <h3>CHF</h3>
+        <p>{{ chfNote }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

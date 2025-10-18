@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {# === Заголовок сторінки === #}
+  {% if meta and meta.title %}
+    <title>{{ meta.title }}</title>
+  {% else %}
+    <title>{{ site_name or 'UGCC Lausanne' }}</title>
+  {% endif %}
+
+  {# === SEO метадані === #}
+  {% if meta and meta.description %}
+    <meta name="description" content="{{ meta.description }}">
+  {% endif %}
+  {% if meta and meta.keywords %}
+    <meta name="keywords" content="{{ meta.keywords }}">
+  {% endif %}
+  {% if meta and meta.author %}
+    <meta name="author" content="{{ meta.author }}">
+  {% endif %}
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts: headline/body/detail -->
+  <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <!-- Іконки -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+  {% include "header.njk" %}
+
+  {# === Герой сторінки === #}
+		{% if page_hero %}
+  		{% include "partials/hero-page.njk" %}
+		{% endif %}
+
+  <main>
+    {% block content %}{% endblock %}
+
+    {# === Вставка шаблону сторінки === #}
+    {% set page_template = "pages/" + page + ".njk" %}
+    {% include page_template ignore missing %}
+  </main>
+
+  {% include "footer.njk" %}
+
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

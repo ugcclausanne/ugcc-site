@@ -1,0 +1,60 @@
+<header class="header">
+  <div class="container">
+    <div class="header-top-row grid">
+      <a class="header-logo-titles header-home-link" href="{{ header.menu[0].url }}">
+        <img src="https://ugcc.fr/wp-content/uploads/2022/02/logo-5.png" alt="UGCC Logo" class="header-logo-full">
+        <div class="header-titles">
+          <div class="header-title-small">{{ header.siteSubtitle }}</div>
+          <h1 class="header-title">{{ header.siteName }}</h1>
+        </div>
+      </a>
+      <div class="header-actions-right">
+        <div class="header-actions-grid">
+          <div class="lang-circle">
+            <!-- Accessible language toggle button: JS expects .lang-btn and toggles .lang-list -->
+            <button class="lang-btn" aria-expanded="false" aria-controls="lang-menu" title="{{ header.langTitle }}">
+              <span class="lang-label">
+                <i class="fa-solid fa-globe"></i>
+                {{ header.currentLangLabel }}</span>
+            </button>
+            {% set currentPage = page %}
+{% set urlUk = '/' if currentPage == 'index' else '/' + currentPage + '/' %}
+{% set urlFr = '/fr/' if currentPage == 'index' else '/fr/' + currentPage + '/' %}
+{% set urlEn = '/en/' if currentPage == 'index' else '/en/' + currentPage + '/' %}
+<ul id="lang-menu" class="lang-list" role="menu" hidden>
+  <li role="menuitem"><a href="{{ urlUk }}">Українська</a></li>
+  <li role="menuitem"><a href="{{ urlFr }}">Français</a></li>
+  <li role="menuitem"><a href="{{ urlEn }}">English</a></li>
+</ul>
+          </div>
+          <div class="socials-row">
+            <span class="socials socials-header">
+              {% set socials = social_list or footer.social %}
+              {% for social in socials %}
+                <a href="{{ social.url }}" title="{{ social.title }}"><i class="fa-brands fa-{{ social.title | lower }}"></i></a>
+              {% endfor %}
+            </span>
+            <button class="icon-btn search-toggle" aria-expanded="false" title="{{ header.searchPlaceholder }}">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div><a class="btn" href="{{ header.menu[7].url }}">{{ header.donateCta }}</a>
+          <form class="header-search" action="#" method="get">
+            <input type="text" placeholder="{{ header.searchPlaceholder }}" name="q">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="header-menu-row">
+    <div class="container">
+      <ul>
+        {% for item in header.menu %}
+          {% if item.url != '/' and item.url != '/en/' and item.url != '/fr/' and ('/donate/' not in item.url) %}
+            <li><a href="{{ item.url }}"{% if item.cta %} class="cta"{% endif %}>{{ item.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+</header>
+

@@ -1,0 +1,15 @@
+{# Resolve hero image path (no overlay vars here) #}
+{% set _hero_src = hero_image or default_hero_image or '/assets/images/church-bg.jpg' %}
+{% if (_hero_src | substr(0,4)) != 'http' and (_hero_src | substr(0,1)) != '/' %}
+  {% set _hero_src = '/' + _hero_src %}
+{% endif %}
+
+<section class="page-hero" style="--hero-bg: url('{{ _hero_src }}')">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1 class="page-hero-title">{{ title }}</h1>
+    {% if page_subtitle %}
+      <p>{{ page_subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
