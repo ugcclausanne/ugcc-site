@@ -1,49 +1,40 @@
-// ======================================
-// VARIABLES
-// ======================================
+/* ----------------------------------------------------
+   Variables: colors, fonts, spacing, breakpoints
+   ---------------------------------------------------- */
 
+:root {
+  /* Colors */
+  --burgundy: #6b1d27;
+  --gold: #e6b800;
+  --white: #ffffff;
+  --ink: #222;
+  --muted: #666;
+  --border: #ddd;
+  --bg: #fafafa;
+  --bgsoft: #f5f5f5;
 
+  /* Shadows */
+  --shadow: 0 2px 4px rgb(0 0 0 / 8%);
+  --shadow-hover: 0 4px 10px rgb(0 0 0 / 12%);
 
-// Colors
-$burgundy: #6a1b2e;
-$gold: #e6b800;
-$white: #ffffff;
-$ink: #333333;
-$muted: #777777;
-$border: #dddddd;
-$bg: #f8f8f8;
-$bgsoft: #f2f2f2;
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
 
-// Shadows
-$shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-$shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.12);
+  /* Fonts */
+  --font-main: 'Lora', serif;
+  --font-headline: 'Forum', serif;
+  --font-size-small: 0.9rem;
+  --font-size-menu: 1rem;
+  --font-size-title: clamp(1.5rem, 3vw, 2rem);
 
-// Spacing
-$space-xs: 4px;
-$space-sm: 8px;
-$space-md: 16px;
-$space-lg: 32px;
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}
 
-// Typography
-$font-main: "Open Sans", sans-serif;
-$font-headline: "Merriweather", serif;
-$font-size-small: clamp(0.8rem, 0.7vw + 0.6rem, 0.9rem);
-$font-size-base: clamp(1rem, 0.8vw + 0.7rem, 1.1rem);
-$font-size-title: clamp(1.4rem, 1.2vw + 1rem, 2rem);
-$font-size-menu: clamp(0.9rem, 0.8vw + 0.6rem, 1rem);
-
-// Layout vars
-$container-width: 1200px;
-$container-padding: 16px;
-
-// Transition & animation
-$transition-fast: 0.2s ease-in-out;
-
-// Z-indexes
-$z-header: 10;
-$z-overlay: 20;
-
-// Liturgy
-$liturgy-ribbon-width: 52px;
-$liturgy-ribbon-offset: 8px;
-$card-thumb-height: 220px;
+/* Breakpoints */
+$bp-sm: 600px;
+$bp-md: 900px;
+$bp-lg: 1200px;

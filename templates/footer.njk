@@ -1,27 +1,19 @@
-﻿<footer class="footer">
+<footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <!-- Contacts column -->
-      <div class="footer-col contact-line ">
+      <div class="footer-col ">
         <h3>{{ footer.contacts_title }}</h3>
-        <p class="contact-line"><a href="{{ map_link }}" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i><span>{{ address }}</span></a></p>
+        <p class="contact-line"><a class="address" href="{{ map_link }}" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i><span>{{ address }}</span></a></p>
         {% if phone %}
           <p class="contact-line"><a class="phone" href="tel:{{ phone }}"><i class="fa-solid fa-phone"></i><span>{{ phone }}</span></a></p>
         {% endif %}
         {% if email %}
           <p class="contact-line"><a class="email" href="mailto:{{ email }}"><i class="fa-solid fa-envelope"></i><span>{{ email }}</span></a></p>
         {% endif %}
-        {% set socials = social_list %}
-        {% if socials %}
-          <p class="socials socials-footer">
-            {% for social in socials %}
-              <a href="{{ social.url }}" title="{{ social.title }}"><i class="fa-brands fa-{{ social.title | lower }}"></i></a>
-            {% endfor %}
-          </p>
-        {% endif %}
       </div>
 
-      <!-- Friends + Eparchy column (two headings in one column) -->
+      <!-- Friends -->
       <div class="footer-col">
         <h3>{{ footer.partners_title }}</h3>
         <ul class="footer-links">
@@ -31,23 +23,16 @@
             {% endfor %}
           {% endif %}
         </ul>
-        <h3 class="mt-md">{{ footer.eparchy_title }}</h3>
+			</div>
+
+			<!-- Eparchy column-->
+			<div class="footer-col">
+        <h3 >{{ footer.eparchy_title }}</h3>
         <ul class="footer-links">
           <li><a href="https://ugcc.fr/" target="_blank" rel="noopener">{{ footer.eparchy_site_label }}</a></li>
         </ul>
       </div>
 
-      <!-- Sections column -->
-      <div class="footer-col">
-        <h3>{{ footer.sections_title }}</h3>
-        <ul class="footer-links">
-          {% for item in header.menu %}
-            {% if item.url != '/' and item.url != '/en/' and item.url != '/fr/' and ('/donate/' not in item.url) %}
-              <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
     </div>
     <p class="footer-copyright"><small class="dim">{{ footer.copyright }}</small></p>
   </div>

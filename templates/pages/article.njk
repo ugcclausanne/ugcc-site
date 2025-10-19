@@ -15,7 +15,15 @@
     <div class="article-gallery slider">
       <div class="slider-track" data-interval="7000">
         {% for src in imgs %}
-        <div class="slide"><img src="{{ src }}" alt="{{ article.title }}"></div>
+        {% set _src = src %}
+        {% if (_src | substr(0,4)) != 'http' %}
+          {% if (_src | substr(0,1)) == '/' %}
+            {% set _src = base + _src %}
+          {% else %}
+            {% set _src = base + '/' + _src %}
+          {% endif %}
+        {% endif %}
+        <div class="slide"><img src="{{ _src }}" alt="{{ article.title }}"></div>
         {% endfor %}
       </div>
       <div class="nav" aria-hidden="false">
@@ -28,7 +36,15 @@
     </div>
   {% elif imgs and imgs.length == 1 %}
     <figure class="article-cover">
-      <img src="{{ imgs[0] }}" alt="{{ article.title }}">
+      {% set _src = imgs[0] %}
+      {% if (_src | substr(0,4)) != 'http' %}
+        {% if (_src | substr(0,1)) == '/' %}
+          {% set _src = base + _src %}
+        {% else %}
+          {% set _src = base + '/' + _src %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _src }}" alt="{{ article.title }}">
     </figure>
   {% endif %}
 
@@ -38,3 +54,5 @@
   </div>
 </section>
 {% endif %}
+
+

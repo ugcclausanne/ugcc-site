@@ -1,10 +1,12 @@
 {
   "default_lang": "uk",
+  "base_path": "/UGCC-Lausanne/",
+  "site_url": "https://khpankiv.github.io/UGCC-Lausanne",
   "default_hero_image": "/assets/images/church-bg.jpg",
   "default_page_hero": true,
 
   "common": {
-    "email": "info@ugcc-lausanne.ch",
+    "email": "ugcc.lausanne@gmail.com",
     "phone": "+41 77 279 07 13",
     "address": "Chem. de Beau-Rivage 3, 1006 Lausanne",
     "social_list": [

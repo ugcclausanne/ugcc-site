@@ -15,16 +15,16 @@
         <p>{{ bankRefLabel }}: {{ bank_reference_value }}</p>
       </div>
       <div class="list-card">
-        <h3>{{ questionsTitle }}</h3>
-        <p>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
+        <h3>TWINT ({{ twintCountry }})</h3>
+        <p>{{ twintInstruction }}</p>
+        <img src="{{ base }}/assets/images/twint-qr.png" alt="TWINT QR" class="max-w-220">
       </div>
     </div>
 
     <div class="grid cols-2 mt-md">
       <div class="list-card">
-        <h3>TWINT ({{ twintCountry }})</h3>
-        <p>{{ twintInstruction }}</p>
-        <img src="/assets/images/twint-qr.png" alt="TWINT QR" class="max-w-220">
+        <h3>{{ questionsTitle }}</h3>
+        <p>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
       </div>
       <div class="list-card">
         <h3>CHF</h3>

@@ -1,10 +1,15 @@
-{# Resolve hero image path (no overlay vars here) #}
+{# Resolve hero image path and prefix with base for GitHub Pages #}
 {% set _hero_src = hero_image or default_hero_image or '/assets/images/church-bg.jpg' %}
-{% if (_hero_src | substr(0,4)) != 'http' and (_hero_src | substr(0,1)) != '/' %}
-  {% set _hero_src = '/' + _hero_src %}
+{% if (_hero_src | substr(0,4)) != 'http' %}
+  {% if (_hero_src | substr(0,1)) == '/' %}
+    {% set _hero_src = base + _hero_src %}
+  {% else %}
+    {% set _hero_src = base + '/' + _hero_src %}
+  {% endif %}
 {% endif %}
 
-<section class="page-hero" style="--hero-bg: url('{{ _hero_src }}')">
+{% set _hero_pos = hero_position or default_hero_position or 'center' %}
+<section class="page-hero" style="--hero-bg: url('{{ _hero_src }}'); --hero-pos: {{ _hero_pos }}">
   <div class="overlay"></div>
   <div class="hero-content">
     <h1 class="page-hero-title">{{ title }}</h1>

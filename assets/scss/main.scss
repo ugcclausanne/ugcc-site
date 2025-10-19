@@ -1,10 +1,16 @@
-// ======================================
-// MAIN SCSS ENTRY
-// ======================================
+// =======================
+// MAIN STYLES ENTRY POINT
+// =======================
 
-@use 'variables' as *;
-@use 'mixins' as *;
+// 1. Variables & Mixins
+@use 'variables';
+@use 'mixins';
+
+// 2. Base reset & typography
 @use 'base';
-@use 'layout';
-@use 'components';
 
+// 3. Layout: header, footer, grid
+@use 'layout';
+
+// 4. Components: cards, hero, etc.
+@use 'components';

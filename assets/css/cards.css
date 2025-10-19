@@ -13,9 +13,13 @@
 
 .list-card:hover,
 .card-article:hover,
-.card-liturgy:hover {
+.card-liturgy:hover,
+.list-card:focus-visible,
+.card-article:focus-visible,
+.card-liturgy:focus-visible {
   transform: translateY(calc(-1 * var(--raise-xs)));
   box-shadow: var(--shadow-hover);
+  outline: none;
 }
 
 /* Normalize inner paddings (keep existing section-specific spacing reasonable) */
@@ -38,8 +42,9 @@
 
 .card-img img {
   width: 100%;
-  height: var(--card-thumb-height);
-  object-fit: cover;
+  height: auto; /* keep original aspect without cropping */
+  object-fit: contain;
+  background: #fff; /* keep neutral background around images if aspect ratios differ */
 }
 
 /* Optional dark overlay on images when requested */
@@ -56,6 +61,8 @@
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0 var(--space-xs);
+  overflow-wrap: anywhere; /* wrap very long words when needed */
+  hyphens: auto;
 }
 .card-date { font-size: var(--font-size-small); color: var(--burgundy); display: block; margin-bottom: 0.25rem; }
 
@@ -118,6 +125,13 @@
 .liturgy-grid {
   display: grid;
   gap: var(--space-md);
+}
+
+/* Remove black focus outline on address links inside schedule cards; keep underline */
+.schedule-page .card-liturgy a:focus-visible {
+  outline: none;
+  box-shadow: none;
+  text-decoration: underline;
 }
 
 /* Month heading and top nav */

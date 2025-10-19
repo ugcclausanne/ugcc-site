@@ -42,7 +42,7 @@
         <div class="before-event meta-line">
           <i class="fa-solid fa-cross"></i>
           {% if item.before_time %}
-            <time datetime="{{ item.date }}T{{ item.before_time }}">{{ item.before_time }}</time> —
+            <time datetime="{{ item.date }}T{{ item.before_time }}">{{ item.before_time }}</time>
           {% endif %}
           {{ item.before_details }}
         </div>
@@ -55,7 +55,7 @@
         <div class="after-event meta-line">
           <i class="fa-solid fa-mug-hot"></i>
           {% if item.after_time %}
-            <time datetime="{{ item.date }}T{{ item.after_time }}">{{ item.after_time }}</time> —
+            <time datetime="{{ item.date }}T{{ item.after_time }}">{{ item.after_time }}</time>
           {% endif %}
           {{ item.after_details }}
         </div>
@@ -64,3 +64,5 @@
 
   </div>
 </div>
+
+

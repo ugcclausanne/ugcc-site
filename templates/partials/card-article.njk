@@ -1,7 +1,15 @@
-<a class="card-article" href="{{ item.url }}" itemscope itemtype="https://schema.org/Article">
+<a class="card-article" href="{{ base }}{{ item.url }}" itemscope itemtype="https://schema.org/Article">
   {% if item.image %}
     <div class="card-img">
-      <img src="{{ item.image }}" alt="{{ item.title }}" itemprop="image">
+      {% set _img = item.image %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _img }}" alt="{{ item.title }}" itemprop="image">
     </div>
   {% endif %}
   <div class="card-body">

@@ -4,7 +4,7 @@
   background-image: var(--hero-bg, url('/assets/images/church-bg.jpg'));
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: var(--hero-pos, center);
   display: flex;
   align-items: center;
   justify-content: center;

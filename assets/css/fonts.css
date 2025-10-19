@@ -1,0 +1,40 @@
+/* Optional self-hosted fonts. Place .woff2 files in assets/fonts/.
+   Browser will try local() and self-hosted first; if unavailable, Google Fonts links in base.njk take over. */
+
+@font-face {
+  font-family: 'Forum';
+  src: local('Forum'), url('../fonts/Forum/Forum-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora'), url('../fonts/Lora/Lora-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora Italic'), url('../fonts/Lora/Lora-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('../fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter Italic'), url('../fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}

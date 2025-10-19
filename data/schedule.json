@@ -238,5 +238,53 @@
     "after_time": "",
     "image": "https://example.com/img/taize.jpg",
     "link": "https://example.com/taize"
+  },
+  {
+    "timestamp": "2025-10-30 18:30:00",
+    "date": "2025-10-30",
+    "time": "18:30",
+    "category": "announcement",
+    "title": "Вечір молитви",
+    "details": "Молитва за мир",
+    "location": "Каплиця св. Йосифа",
+    "language": "uk",
+    "before_time": "",
+    "before_details": "",
+    "after_details": "",
+    "after_time": "",
+    "image": "/assets/images/article.png",
+    "link": ""
+  },
+  {
+    "timestamp": "2025-10-30 18:30:00",
+    "date": "2025-10-30",
+    "time": "18:30",
+    "category": "announcement",
+    "title": "Prayer Evening",
+    "details": "Prayer for peace",
+    "location": "Chapel of St. Joseph",
+    "language": "en",
+    "before_time": "",
+    "before_details": "",
+    "after_details": "",
+    "after_time": "",
+    "image": "/assets/images/article.png",
+    "link": ""
+  },
+  {
+    "timestamp": "2025-10-30 18:30:00",
+    "date": "2025-10-30",
+    "time": "18:30",
+    "category": "announcement",
+    "title": "Soirée de prière",
+    "details": "Prière por le paix",
+    "location": "Chapelle Saint-Joseph",
+    "language": "fr",
+    "before_time": "",
+    "before_details": "",
+    "after_details": "",
+    "after_time": "",
+    "image": "/assets/images/article.png",
+    "link": ""
   }
 ]

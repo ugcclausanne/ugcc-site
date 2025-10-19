@@ -67,6 +67,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Mobile burger menu toggle
+  const menuBtn = qs('.menu-toggle');
+  const menu = qs('.header-menu-row');
+  if (menuBtn && menu) {
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = menu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('menu-open', open);
+      menuBtn.classList.toggle('open', open);
+    });
+    document.addEventListener('click', (e) => {
+      if (!menu.classList.contains('open')) return;
+      const within = menu.contains(e.target) || menuBtn.contains(e.target);
+      if (!within) {
+        menu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  }
 });
 
 function heroSlider() {

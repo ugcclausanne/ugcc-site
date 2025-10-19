@@ -62,11 +62,12 @@
   /* Header */
   --header-gap: var(--space-md);
   --header-block-padding: var(--space-md);
-  --header-logo-width: 120px;
-  --header-logo-mobile-max-width: 80px;
+  --header-logo-width: 80px;
+  --header-logo-mobile-max-width: 40px;
   --header-search-width: 180px;
   --lang-circle-size: 44px;
   --socials-font-size: 1.35rem;
+  --donate-btn-width: 200px;
   --menu-height: 56px;
   --menu-padding-y: 8px;
   --section-block-padding: var(--space-lg);
@@ -80,7 +81,7 @@
 
   /* === Base styles for UGCC Lausanne === */
   --container-width: 1200px;
-  /* --container-padding: var(--space-md); */
+  --container-padding: var(--space-md);
 
   /* Layout specific variables */
   --layout-gap: var(--space-md);

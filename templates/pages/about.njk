@@ -7,11 +7,27 @@
 
   <div class="gallery cols-2">
     <figure>
-      <img src="{{ images.history1 }}" alt="{{ cap1 }}">
+      {% set _img = images.history1 %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _img }}" alt="{{ cap1 }}">
       <figcaption>{{ cap1 }}</figcaption>
     </figure>
     <figure>
-      <img src="{{ images.history2 }}" alt="{{ cap2 }}">
+      {% set _img = images.history2 %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _img }}" alt="{{ cap2 }}">
       <figcaption>{{ cap2 }}</figcaption>
     </figure>
   </div>
@@ -20,7 +36,15 @@
 
   <div class="gallery cols-1">
     <figure>
-      <img src="{{ images.history3 }}" alt="{{ cap3 }}">
+      {% set _img = images.history3 %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _img }}" alt="{{ cap3 }}">
       <figcaption>{{ cap3 }}</figcaption>
     </figure>
   </div>
@@ -29,7 +53,15 @@
 
   <div class="gallery cols-2">
     <figure>
-      <img src="{{ images.history4 }}" alt="{{ cap4 }}">
+      {% set _img = images.history4 %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _img }}" alt="{{ cap4 }}">
       <figcaption>{{ cap4 }}</figcaption>
     </figure>
   </div>
@@ -43,7 +75,15 @@
   <div class="grid cols-2">
     {% for pr in priests %}
     <article class="list-card priest-card" itemscope itemtype="https://schema.org/Person">
-      <img class="thumb" src="{{ images[pr.img] }}" alt="{{ pr.name }}" itemprop="image">
+      {% set _img = images[pr.img] %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img class="thumb" src="{{ _img }}" alt="{{ pr.name }}" itemprop="image">
       <div class="body">
         <h3 class="title" itemprop="name">{{ pr.name }}</h3>
         <p class="text" itemprop="description">{{ pr.desc }}</p>

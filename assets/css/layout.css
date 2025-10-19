@@ -3,30 +3,28 @@
 
 /* Grid for sections (cards-grid aliases to grid to avoid duplication) */
 .grid,
+.grid-header,
 .cards-grid {
   display: grid;
-  gap: var(--layout-gap);
+  gap: var(--layout-gap); 
   width: 100%;
   box-sizing: border-box;
 }
 
+.grid-header { gap: 0}
+
 .grid.cols-2,
-.cards-grid.cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
+.cards-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+
 
 .grid.cols-3,
-.cards-grid.cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+.cards-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(var(--layout-card-min-width), 1fr)); }
 
-@media (width <= 900px) {
+@media (width <= 700px) {
   .grid.cols-2,
   .grid.cols-3,
   .cards-grid.cols-2,
-  .cards-grid.cols-3 {
-    grid-template-columns: 1fr;
-  }
+  .cards-grid.cols-3 { grid-template-columns: 1fr; }
 }
 
 /* Flex row for horizontal sliders */

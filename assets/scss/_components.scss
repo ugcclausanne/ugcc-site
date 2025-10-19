@@ -1,109 +1,60 @@
-// ======================================
-// COMPONENTS: CARDS / BADGES / GRIDS
-// ======================================
+/* ----------------------------------------------------
+   Components: cards, buttons, badges, hero blocks
+   ---------------------------------------------------- */
 
-@use 'variables' as *;
-@use 'mixins' as *;
+/* Cards */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: var(--space-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 
-.card,
-.card-article,
-.card-liturgy,
-.list-card,
-.card-static {
-  background: $white;
-  border: 1px solid $border;
-  box-shadow: $shadow;
-  padding: $space-md;
-  @include hover-raise;
-}
-
-// ----- Article Cards -----
-.card-article {
-  display: flex;
-  flex-direction: column;
-
-  .card-img {
-    height: $card-thumb-height;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .card-title {
-    font-weight: 700;
-    color: $burgundy;
-    margin-top: $space-sm;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
   }
 }
 
-// ----- Liturgy Cards -----
-.card-liturgy {
+.card-title {
+  color: var(--burgundy);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.card-text {
+  color: var(--ink);
+  font-size: var(--font-size-small);
+}
+
+/* Hero section */
+.page-hero {
   position: relative;
-  padding: $space-md;
-
-  .liturgy-date {
-    position: absolute;
-    left: $liturgy-ribbon-offset;
-    top: $liturgy-ribbon-offset;
-    width: $liturgy-ribbon-width;
-    background: $burgundy;
-    color: $white;
-    text-align: center;
-    box-shadow: $shadow;
-
-    .day {
-      display: block;
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    .month {
-      font-size: $font-size-small;
-      text-transform: uppercase;
-    }
-  }
-
-  .liturgy-details {
-    margin-left: calc($liturgy-ribbon-width + $space-md);
-
-    .title {
-      color: $burgundy;
-      font-weight: 700;
-      margin-bottom: $space-xs;
-    }
-
-    .details {
-      color: $ink;
-    }
-  }
+  height: 300px;
+  background: var(--burgundy) url('/assets/images/church-bg.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-align: center;
 }
 
-// ----- Badges -----
+.page-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--gold);
+}
+
+/* Badges */
 .badge {
   display: inline-block;
   padding: 2px 6px;
-  border: 1px solid $burgundy;
-  color: $burgundy;
+  border: 1px solid var(--burgundy);
+  color: var(--burgundy);
   font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+}
 
-  &.badge-announcement {
-    border-color: #888;
-    color: #555;
-  }
-
-  &.badge-event {
-    border-color: #b07a00;
-    color: #8a5c00;
-  }
-
-  &.badge-confession {
-    border-color: #135d2b;
-    color: #135d2b;
-  }
+.badge-announcement {
+  border-color: #8a8a8a;
+  color: #555;
 }

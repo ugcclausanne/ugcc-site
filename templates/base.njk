@@ -11,6 +11,31 @@
     <title>{{ site_name or 'UGCC Lausanne' }}</title>
   {% endif %}
 
+  {# Open Graph/Twitter metadata for better sharing #}
+  {% set _title = (meta and meta.title) or site_name or 'UGCC Lausanne' %}
+  {% set _desc = (meta and meta.description) or '' %}
+  {% set _image = (meta and meta.image) or default_hero_image %}
+  {% if _image %}
+    {% if (_image | substr(0,4)) != 'http' %}
+      {% if (_image | substr(0,1)) == '/' %}
+        {% set _image = base + _image %}
+      {% else %}
+        {% set _image = base + '/' + _image %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+  <meta property="og:title" content="{{ _title }}">
+  {% if _desc %}<meta property="og:description" content="{{ _desc }}">{% endif %}
+  {% if _image %}<meta property="og:image" content="{{ _image }}">{% endif %}
+  <meta property="og:type" content="website">
+  {% set _locale = 'uk_UA' %}
+  {% if lang == 'fr' %}{% set _locale = 'fr_FR' %}{% elif lang == 'en' %}{% set _locale = 'en_GB' %}{% endif %}
+  <meta property="og:locale" content="{{ _locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ _title }}">
+  {% if _desc %}<meta name="twitter:description" content="{{ _desc }}">{% endif %}
+  {% if _image %}<meta name="twitter:image" content="{{ _image }}">{% endif %}
+
   {# === SEO метадані === #}
   {% if meta and meta.description %}
     <meta name="description" content="{{ meta.description }}">
@@ -23,27 +48,24 @@
   {% endif %}
 
   <!-- Favicon -->
-  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="{{ base }}/assets/images/favicon.svg" type="image/svg+xml">
 
-  <!-- Fonts: headline/body/detail -->
-  <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts: headline/body/detail (no preload to avoid console warnings) -->
+  <link rel="stylesheet" href="{{ base }}/assets/css/fonts.css">
+  {# If web-hosted fonts are desired as fallback, re-enable the links below. Now using self-hosted faces. #}
 
-  <!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  {# Dropped hero preload to silence "preloaded but not used" warnings in Chrome. #}
 
   <!-- Основні стилі -->
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/header.css">
-  <link rel="stylesheet" href="/assets/css/footer.css">
-  <link rel="stylesheet" href="/assets/css/cards.css">  {# новий файл для карток і сторінок #}
+  <link rel="stylesheet" href="{{ base }}/assets/css/styles.css">
+  <link rel="stylesheet" href="{{ base }}/assets/css/header.css">
+  <link rel="stylesheet" href="{{ base }}/assets/css/footer.css">
+  <link rel="stylesheet" href="{{ base }}/assets/css/cards.css">  {# новий файл для карток і сторінок #}
+  <link rel="stylesheet" href="{{ base }}/assets/css/overrides.css">
 	
 	<!-- Стилі героя -->
 	{% if page_hero %}
-  <link rel="stylesheet" href="/assets/css/page-hero.css">
+  <link rel="stylesheet" href="{{ base }}/assets/css/page-hero.css">
 	{% endif %}
 
   <!-- Іконки -->
@@ -69,6 +91,6 @@
 
   {% include "footer.njk" %}
 
-  <script src="/assets/js/main.js"></script>
+  <script src="{{ base }}/assets/js/main.js"></script>
 </body>
 </html>
