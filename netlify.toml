@@ -1,8 +1,33 @@
-[build]
-  publish = "_site"
-  command = "npx eleventy"
+# ─── NETLIFY CONFIGURATION ───────────────────────────────
+#  Це конфігурація для статичного сайту UGCC Lausanne
+#  без Eleventy чи build runtime — деплой миттєвий і без кредитів.
 
+[build]
+  command = "echo 'No build needed'"
+  publish = "."
+
+# ─── OVERRIDE DEFAULT BUILD SETTINGS ─────────────────────
+#  Не запускай автодеплой із GitHub (тільки вручну)
+[build.environment]
+  NETLIFY_NEXT_BUILDER_SKIP = "true"
+  CI = "false"
+
+# ─── HEADERS (захист для /admin) ─────────────────────────
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "same-origin"
+
+# ─── REDIRECTS ───────────────────────────────────────────
+#  /admin → CMS інтерфейс
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+  force = true
+
+# ─── OPTIONAL: PLANNED SCHEDULED DEPLOY ONCE A DAY ───────
+#  Це не активується автоматично, поки не попросиш.
+#  Можемо увімкнути функцію, щоб rebuild був 1 раз/день.
