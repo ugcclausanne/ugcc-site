@@ -1,6 +1,6 @@
 {
   "default_lang": "uk",
-  "base_path": "/UGCC-Lausanne/",
+  "base_path": "/ugcc-site/",
   "site_url": "https://khpankiv.github.io/UGCC-Lausanne",
   "default_hero_image": "/assets/images/church-bg.jpg",
   "default_page_hero": true,
