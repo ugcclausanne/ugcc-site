@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: ugcclausanne/ugcc-site   # заміни, якщо інший репозиторій
+  repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: https://decapcms-oauth.netlify.app  # проксі для авторизації GitHub
+  base_url: https://decapcms-oauth.vercel.app
   auth_endpoint: auth
 
 publish_mode: editorial_workflow
