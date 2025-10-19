@@ -1,0 +1,47 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  # 📰 ARTICLES (news, spiritual, community)
+  - name: "articles"
+    label: "Статті / Articles"
+    file: "data/articles.json"
+    format: "json"
+    fields:
+      - { label: "Дата", name: "date", widget: "datetime" }
+      - { label: "Час", name: "time", widget: "string", required: false }
+      - { label: "Категорія", name: "category", widget: "select", options: ["news", "spiritual", "community"] }
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Деталі / Опис", name: "details", widget: "text" }
+      - { label: "Місце", name: "location", widget: "string", required: false }
+      - { label: "Мова", name: "language", widget: "select", options: ["uk", "en", "fr"] }
+      - { label: "Фото", name: "image", widget: "image", required: false }
+      - { label: "Посилання", name: "link", widget: "string", required: false }
+      - { label: "before_time", name: "before_time", widget: "string", required: false }
+      - { label: "before_details", name: "before_details", widget: "text", required: false }
+      - { label: "after_details", name: "after_details", widget: "text", required: false }
+      - { label: "after_time", name: "after_time", widget: "string", required: false }
+
+  # ⛪ SCHEDULE (liturgy & announcement)
+  - name: "schedule"
+    label: "Розклад / Schedule"
+    file: "data/schedule.json"
+    format: "json"
+    fields:
+      - { label: "Дата", name: "date", widget: "datetime" }
+      - { label: "Час", name: "time", widget: "string" }
+      - { label: "Категорія", name: "category", widget: "select", options: ["liturgy", "announcement"] }
+      - { label: "Назва", name: "title", widget: "string" }
+      - { label: "Деталі", name: "details", widget: "text" }
+      - { label: "Місце", name: "location", widget: "string", required: false }
+      - { label: "Мова", name: "language", widget: "select", options: ["uk", "en", "fr"] }
+      - { label: "Фото", name: "image", widget: "image", required: false }
+      - { label: "Посилання", name: "link", widget: "string", required: false }
+      - { label: "before_time", name: "before_time", widget: "string", required: false }
+      - { label: "before_details", name: "before_details", widget: "text", required: false }
+      - { label: "after_details", name: "after_details", widget: "text", required: false }
+      - { label: "after_time", name: "after_time", widget: "string", required: false }
