@@ -6,6 +6,10 @@
   command = "echo 'No build needed'"
   publish = "."
 
+# Safety net: cancel any automatic builds
+[build.processing]
+  skip_processing = true
+
 # ─── OVERRIDE DEFAULT BUILD SETTINGS ─────────────────────
 #  Не запускай автодеплой із GitHub (тільки вручну)
 [build.environment]
