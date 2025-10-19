@@ -1,9 +1,9 @@
 ﻿backend:
   name: github
-  repo: ugcclausanne/ugcc-site   # заміни, якщо інший репозиторій
+  repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: https://decapcms-oauth.netlify.app  # проксі для авторизації GitHub
-  auth_endpoint: auth
+  auth_type: implicit
+  app_id: 75654
 
 publish_mode: editorial_workflow
 
