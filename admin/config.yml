@@ -2,8 +2,8 @@
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  auth_type: implicit
-  app_id: 75654
+  base_url: https://ugcc-site.vercel.app/
+  auth_endpoint: auth
 
 publish_mode: editorial_workflow
 
