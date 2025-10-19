@@ -34,6 +34,17 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
 
 // Render all pages
 (async function renderAll() {
+  // Normalize base path for GitHub Pages (project sites)
+  const normalizeBase = (s) => {
+    if (!s) return '';
+    let b = String(s).trim();
+    if (b.endsWith('/')) b = b.slice(0, -1);
+    if (b && !b.startsWith('/')) b = '/' + b;
+    return b;
+  };
+  const basePath = normalizeBase(process.env.BASE_PATH || globalConfig.base_path || '');
+  const siteUrl = (process.env.SITE_URL || globalConfig.site_url || '').replace(/\/$/, '');
+  const collectedRoutes = new Set();
   const pageJsonFiles = glob.sync(pagesDir.replace(/\\/g, '/') + '/*/page.json');
   console.log('Found pages:', pageJsonFiles.map(p => path.relative(path.join(__dirname, '..'), p)));
 
@@ -68,7 +79,8 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
         page: pageName,
         header,
         footer,
-        sections
+        sections,
+        base: basePath
       };
 
       let outDir, outPath;
@@ -89,6 +101,12 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
         const html = nunjucks.render('base.njk', pageData);
         fs.writeFileSync(outPath, html, 'utf-8');
         console.log(`Rendered: ${outPath}`);
+        // Collect route for sitemap
+        let route;
+        if (pageName === 'index' && lang.dir === '.') route = '/';
+        else if (pageName === 'index') route = `/${lang.dir}/`;
+        else route = lang.dir === '.' ? `/${pageName}/` : `/${lang.dir}/${pageName}/`;
+        collectedRoutes.add(route);
       } catch (e) {
         console.error(`Render error for ${pageName} (${langKey}):`, e.message);
       }
@@ -115,7 +133,8 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
           header,
           footer,
           article: item,
-          category: cat
+          category: cat,
+          base: basePath
         };
         const outDir = lang.dir === '.' ? path.join('..', cat, item.slug) : path.join('..', lang.dir, cat, item.slug);
         const outPath = path.join(__dirname, outDir, 'index.html');
@@ -124,11 +143,36 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
           const html = nunjucks.render('base.njk', pageData);
           fs.writeFileSync(outPath, html, 'utf-8');
           console.log(`Rendered article: ${outPath}`);
+          const route = lang.dir === '.' ? `/${cat}/${item.slug}/` : `/${lang.dir}/${cat}/${item.slug}/`;
+          collectedRoutes.add(route);
         } catch (e) {
           console.error(`Render error for article ${item.slug} (${langKey}):`, e.message);
         }
       }
     }
+  }
+
+  // ===== Generate sitemap.xml and robots.txt if siteUrl configured =====
+  try {
+    if (siteUrl) {
+      const urls = Array.from(collectedRoutes).sort();
+      const fullBase = siteUrl + basePath;
+      const now = new Date().toISOString();
+      const xml = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...urls.map((u) => `  <url><loc>${fullBase}${u}</loc><lastmod>${now}</lastmod></url>`),
+        '</urlset>'
+      ].join('\n');
+      fs.writeFileSync(path.join(__dirname, '..', 'sitemap.xml'), xml, 'utf-8');
+      const robots = `User-agent: *\nAllow: /\nSitemap: ${fullBase}/sitemap.xml\n`;
+      fs.writeFileSync(path.join(__dirname, '..', 'robots.txt'), robots, 'utf-8');
+      console.log(`Generated sitemap.xml with ${urls.length} URLs and robots.txt`);
+    } else {
+      console.log('SITE_URL not set; skip sitemap/robots generation.');
+    }
+  } catch (e) {
+    console.warn('Could not generate sitemap/robots:', e.message);
   }
 
   console.log('Done rendering pages.');
