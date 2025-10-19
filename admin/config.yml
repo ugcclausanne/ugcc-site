@@ -2,8 +2,9 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: ugcc-site-ltcsooecx-ugccs-projects.vercel.app
-  auth_endpoint: auth
+  base_url: https://ugcclausanne.github.io/ugcc-site/
+  auth_endpoint: implicit
+  add_ip: 75654
 
 publish_mode: editorial_workflow
 
