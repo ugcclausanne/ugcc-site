@@ -1,47 +1,40 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: ugcclausanne/ugcc-site   # заміни, якщо інший репозиторій
   branch: main
+  base_url: https://decapcms-oauth.netlify.app  # проксі для авторизації GitHub
+  auth_endpoint: auth
 
-media_folder: "assets/images/uploads"
-public_folder: "/assets/images/uploads"
+publish_mode: editorial_workflow
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
-  # 📰 ARTICLES (news, spiritual, community)
   - name: "articles"
-    label: "Статті / Articles"
-    file: "data/articles.json"
+    label: "Новини / Articles"
+    label_singular: "Стаття"
+    folder: "data"
+    create: true
     format: "json"
+    extension: "json"
+    slug: "{{slug}}"
     fields:
-      - { label: "Дата", name: "date", widget: "datetime" }
-      - { label: "Час", name: "time", widget: "string", required: false }
-      - { label: "Категорія", name: "category", widget: "select", options: ["news", "spiritual", "community"] }
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Деталі / Опис", name: "details", widget: "text" }
-      - { label: "Місце", name: "location", widget: "string", required: false }
-      - { label: "Мова", name: "language", widget: "select", options: ["uk", "en", "fr"] }
-      - { label: "Фото", name: "image", widget: "image", required: false }
-      - { label: "Посилання", name: "link", widget: "string", required: false }
-      - { label: "before_time", name: "before_time", widget: "string", required: false }
-      - { label: "before_details", name: "before_details", widget: "text", required: false }
-      - { label: "after_details", name: "after_details", widget: "text", required: false }
-      - { label: "after_time", name: "after_time", widget: "string", required: false }
+      - { name: "title", label: "Заголовок" }
+      - { name: "language", label: "Мова", widget: "select", options: ["uk", "en", "fr"], default: "uk" }
+      - { name: "category", label: "Категорія", widget: "select", options: ["news", "spiritual", "community"] }
+      - { name: "date", label: "Дата", widget: "datetime" }
+      - { name: "image", label: "Зображення", widget: "image", required: false }
+      - { name: "body", label: "Текст", widget: "markdown" }
 
-  # ⛪ SCHEDULE (liturgy & announcement)
   - name: "schedule"
-    label: "Розклад / Schedule"
-    file: "data/schedule.json"
+    label: "Розклад"
+    folder: "data"
+    create: true
     format: "json"
+    extension: "json"
+    slug: "{{slug}}"
     fields:
-      - { label: "Дата", name: "date", widget: "datetime" }
-      - { label: "Час", name: "time", widget: "string" }
-      - { label: "Категорія", name: "category", widget: "select", options: ["liturgy", "announcement"] }
-      - { label: "Назва", name: "title", widget: "string" }
-      - { label: "Деталі", name: "details", widget: "text" }
-      - { label: "Місце", name: "location", widget: "string", required: false }
-      - { label: "Мова", name: "language", widget: "select", options: ["uk", "en", "fr"] }
-      - { label: "Фото", name: "image", widget: "image", required: false }
-      - { label: "Посилання", name: "link", widget: "string", required: false }
-      - { label: "before_time", name: "before_time", widget: "string", required: false }
-      - { label: "before_details", name: "before_details", widget: "text", required: false }
-      - { label: "after_details", name: "after_details", widget: "text", required: false }
-      - { label: "after_time", name: "after_time", widget: "string", required: false }
+      - { name: "date", label: "Дата", widget: "datetime" }
+      - { name: "language", label: "Мова", widget: "select", options: ["uk", "en", "fr"], default: "uk" }
+      - { name: "event", label: "Подія" }
