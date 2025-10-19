@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: https://decapcms-oauth.vercel.app
+  base_url: ugcc-site-ltcsooecx-ugccs-projects.vercel.app
   auth_endpoint: auth
 
 publish_mode: editorial_workflow
