@@ -1,8 +1,8 @@
 backend:
   name: github
   repo: "ugcclausanne/ugcc-site"
-  branch: "main"                 # гілка, з якої рендериться сайт
-  client_id: "Iv23liIIRDw3tnhCPznq"  # <-- замініть на ваш OAuth Client ID
+  branch: "main"                 # або "gh-pages", якщо Pages з цієї гілки
+  client_id: "Iv23liIIRDw3tnhCPznq"    # <-- вставте ваш GitHub OAuth Client ID
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
