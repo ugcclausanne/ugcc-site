@@ -7,34 +7,16 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+media_folder: assets/uploads
+public_folder: /ugcc-site/assets/uploads
 
 collections:
-  - name: "articles"
-    label: "Новини / Articles"
-    label_singular: "Стаття"
-    folder: "data"
-    create: true
-    format: "json"
-    extension: "json"
-    slug: "{{slug}}"
-    fields:
-      - { name: "title", label: "Заголовок" }
-      - { name: "language", label: "Мова", widget: "select", options: ["uk", "en", "fr"], default: "uk" }
-      - { name: "category", label: "Категорія", widget: "select", options: ["news", "spiritual", "community"] }
-      - { name: "date", label: "Дата", widget: "datetime" }
-      - { name: "image", label: "Зображення", widget: "image", required: false }
-      - { name: "body", label: "Текст", widget: "markdown" }
+ - name: test
+   label: Test
+   folder: data/test
+   create: true
+   format: json
+   extension: json
+   fields:
 
-  - name: "schedule"
-    label: "Розклад"
-    folder: "data"
-    create: true
-    format: "json"
-    extension: "json"
-    slug: "{{slug}}"
-    fields:
-      - { name: "date", label: "Дата", widget: "datetime" }
-      - { name: "language", label: "Мова", widget: "select", options: ["uk", "en", "fr"], default: "uk" }
-      - { name: "event", label: "Подія" }
+   - { name: title, label: Title }
