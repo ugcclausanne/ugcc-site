@@ -26,7 +26,7 @@ collections:
       - { label: "after_details", name: "after_details", widget: "text", required: false }
       - { label: "after_time", name: "after_time", widget: "string", required: false }
 
-  # ⛪ SCHEDULE (liturgies & announcements)
+  # ⛪ SCHEDULE (liturgy & announcement)
   - name: "schedule"
     label: "Розклад / Schedule"
     file: "data/schedule.json"
