@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://khpankiv.github.io/UGCC-Lausanne/ugcc-site/sitemap.xml
