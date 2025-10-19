@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: "ugcclausanne/ugcc-site"   # ваш репозиторій
-  branch: "main"                   # гілка, з якої Pages віддає сайт (перевірити у налаштуваннях Pages)
-  client_id: "Iv23liIIRDw3tnhCPznq"  # <-- замініть на Client ID вашого OAuth App
+  repo: "ugcclausanne/ugcc-site"
+  branch: "main"
+  client_id: "Iv23liIIRDw3tnhCPznq"
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
