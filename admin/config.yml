@@ -1,22 +1,43 @@
 backend:
   name: github
-  repo: ugcclausanne/ugcc-site
-  branch: main
-  auth_type: implicit
-  app_id: 2144987
+  repo: "ugcclausanne/ugcc-site"
+  branch: "main"          
+  auth_type: implicit      
+  base_url: https://ugcclausanne.github.io/ugcc-site/
+  auth_scope: "repo"       
+  client_id: "Iv23liIIRDw3tnhCPznq"
 
-publish_mode: editorial_workflow
-
-media_folder: assets/uploads
-public_folder: /ugcc-site/assets/uploads
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
- - name: test
-   label: Test
-   folder: data/test
-   create: true
-   format: json
-   extension: json
-   fields:
+  - name: "site"
+    label: "Site content"
+    files:
+      - label: "Main site JSON"
+        name: "site_json"
+        file: "content/data/site.json"
+        format: json
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Footer", name: "footer", widget: "text"}
 
-   - { name: title, label: Title }
+  - name: "pages"
+    label: "Pages"
+    folder: "content/data/pages"
+    create: true
+    slug: "{{slug}}"
+    format: json
+    extension: ".json"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Meta"
+        name: "meta"
+        widget: "object"
+        fields:
+          - {label: "Description", name: "description", widget: "string"}
+          - {label: "Image", name: "image", widget: "string"}
