@@ -24,12 +24,7 @@ Built with **Eleventy (Nunjucks templates)** and **SCSS** for clean, modular sty
   npm install
 
 2. Run local server
-
   npm run dev
-
-3. Build for production
-
-  npm run build
 
 🌍 Deployment
 
