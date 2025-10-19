@@ -1,4 +1,4 @@
-backend:
+﻿backend:
   name: github
   repo: ugcclausanne/ugcc-site   # заміни, якщо інший репозиторій
   branch: main
