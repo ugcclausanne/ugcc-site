@@ -2,9 +2,8 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: https://ugcclausanne.github.io/ugcc-site/
-  auth_endpoint: implicit
-  add_ip: 75654
+  auth_type: implicit
+  app_id: 75654
 
 publish_mode: editorial_workflow
 
