@@ -16,26 +16,50 @@
       } catch (e) { /* ignore */ }
       window.CMS_MANUAL_INIT = true;
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.9.0/dist/decap-cms.js" defer></script>
     <script>
-      (function initCMS() {
-        if (window.CMS && typeof window.CMS.init === 'function') {
-          console.log('Initializing Decap CMS with GitHub App backend...');
-          window.CMS.init({
-            load_config_file: true,
-            config: {
-              backend: {
-                name: 'github',
-                repo: 'ugcclausanne/ugcc-site',
-                branch: 'main',
-                auth_type: 'implicit',
-                app_id: 2144987
-              }
-            }
-          });
-        } else {
-          setTimeout(initCMS, 50);
+      (function () {
+        function load(src, onload, onerror) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.defer = true;
+          s.crossOrigin = 'anonymous';
+          s.onload = onload;
+          s.onerror = onerror;
+          document.head.appendChild(s);
         }
+
+        function init() {
+          if (window.CMS && typeof window.CMS.init === 'function') {
+            console.log('Initializing Decap CMS with GitHub App backend...');
+            window.CMS.init({
+              load_config_file: true,
+              config: {
+                backend: {
+                  name: 'github',
+                  repo: 'ugcclausanne/ugcc-site',
+                  branch: 'main',
+                  auth_type: 'implicit',
+                  app_id: 2144987
+                }
+              }
+            });
+          } else {
+            setTimeout(init, 50);
+          }
+        }
+
+        function fallback() {
+          console.warn('Primary CDN failed, trying fallback for Decap CMS...');
+          load('https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js', init, function () {
+            console.warn('Fallback CDN failed, trying legacy version...');
+            load('https://cdn.jsdelivr.net/npm/decap-cms@3.8.4/dist/decap-cms.js', init, function () {
+              console.error('Could not load Decap CMS script from any CDN.');
+            });
+          });
+        }
+
+        // Try primary CDN first
+        load('https://cdn.jsdelivr.net/npm/decap-cms@3.9.0/dist/decap-cms.js', init, fallback);
       })();
     </script>
   </body>
