@@ -14,7 +14,75 @@
         localStorage.removeItem('netlifyUser');
         localStorage.removeItem('gotrue.user');
       } catch (e) { /* ignore */ }
+      window.CMS_MANUAL_INIT = true;
     </script>
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.4/dist/decap-cms.js" defer></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.CMS) return;
+        // Force GitHub App backend to avoid any stale Netlify state
+        window.CMS.init({
+          config: {
+            backend: {
+              name: 'github',
+              repo: 'ugcclausanne/ugcc-site',
+              branch: 'main',
+              auth_type: 'app',
+              app_id: 2144987
+            },
+            publish_mode: 'editorial_workflow',
+            media_folder: 'assets/uploads',
+            public_folder: '/ugcc-site/assets/uploads',
+            collections: [
+              {
+                name: 'articles',
+                label: 'Articles',
+                folder: 'data/articles',
+                create: true,
+                format: 'json',
+                extension: 'json',
+                slug: '{{year}}{{month}}{{day}}-{{slug}}',
+                fields: [
+                  { label: 'Date/Time', name: 'timestamp', widget: 'datetime', format: 'YYYY-MM-DD HH:mm:ss' },
+                  { label: 'Email', name: 'email', widget: 'string', required: false },
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Excerpt', name: 'excerpt', widget: 'text', required: false },
+                  { label: 'Category', name: 'category', widget: 'select', options: ['news', 'spiritual', 'community'] },
+                  { label: 'Language', name: 'language', widget: 'select', options: ['uk', 'en', 'fr'], default: 'uk' },
+                  { label: 'Image', name: 'image', widget: 'image', required: false },
+                  { label: 'Content', name: 'content', widget: 'text' },
+                  { label: 'Author', name: 'author', widget: 'string', required: false }
+                ]
+              },
+              {
+                name: 'schedule',
+                label: 'Schedule',
+                folder: 'data/schedule',
+                create: true,
+                format: 'json',
+                extension: 'json',
+                slug: '{{date}}-{{slug}}',
+                fields: [
+                  { label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'YYYY-MM-DD HH:mm:ss' },
+                  { label: 'Date', name: 'date', widget: 'date', required: false },
+                  { label: 'Time', name: 'time', widget: 'string', required: false },
+                  { label: 'Category', name: 'category', widget: 'select', options: ['liturgy', 'announcement'] },
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Details', name: 'details', widget: 'text', required: false },
+                  { label: 'Location', name: 'location', widget: 'string', required: false },
+                  { label: 'Language', name: 'language', widget: 'select', options: ['uk', 'en', 'fr'], default: 'uk' },
+                  { label: 'Before Time', name: 'before_time', widget: 'string', required: false },
+                  { label: 'Before Details', name: 'before_details', widget: 'string', required: false },
+                  { label: 'After Details', name: 'after_details', widget: 'string', required: false },
+                  { label: 'After Time', name: 'after_time', widget: 'string', required: false },
+                  { label: 'Image', name: 'image', widget: 'image', required: false },
+                  { label: 'Link', name: 'link', widget: 'string', required: false }
+                ]
+              }
+            ]
+          }
+        });
+      });
+    </script>
   </body>
 </html>
