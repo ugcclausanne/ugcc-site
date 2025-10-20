@@ -80,7 +80,7 @@
 
         function boot() {
           if (window.CMS && typeof window.CMS.init === 'function') {
-            window.CMS.init({ config });
+            window.CMS.init({ config, load_config_file: false });
           } else {
             // Retry in case the script hasn't loaded yet
             setTimeout(boot, 50);
