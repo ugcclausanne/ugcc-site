@@ -78,6 +78,9 @@
           ]
         };
 
+        // Expose quick debug helper
+        window.__cms_dbg = () => console.log('Manual init ON, collections:', (config.collections||[]).map(c=>c.name));
+
         function boot() {
           if (window.CMS && typeof window.CMS.init === 'function') {
             window.CMS.init({ config, load_config_file: false });
