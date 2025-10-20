@@ -45,17 +45,14 @@
       (function () {
         // Same config as admin/config.yml but inline, to guarantee GitHub App auth
         const urlNow = new URL(window.location.href);
-        const qClientId = urlNow.searchParams.get('client_id');
-        const CLIENT_ID = 'Iv23liIIRDw3tnhCPznq';
-        const resolvedClientId = qClientId || CLIENT_ID;
         const config = {
           backend: {
             name: 'github',
             repo: 'ugcclausanne/ugcc-site',
             branch: 'main',
             auth_type: 'implicit',
-            // Use GitHub OAuth App implicit flow (no Netlify proxy)
-            client_id: resolvedClientId
+            // Use GitHub App flow (avoids Netlify OAuth entirely)
+            app_id: 2144987
           },
           publish_mode: 'editorial_workflow',
           media_folder: 'assets/uploads',
