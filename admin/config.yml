@@ -3,7 +3,7 @@ backend:
   repo: ugcclausanne/ugcc-site
   branch: main
   auth_type: implicit
-  app_id: 2144987
+  app_id: 378057
 
 publish_mode: editorial_workflow
 

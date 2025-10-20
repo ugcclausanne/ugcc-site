@@ -45,6 +45,13 @@ function toKey(item) {
   return [ts, lang, cat, title].join('|');
 }
 
+function baseKey(item) {
+  const ts = String(item.timestamp || item.date || '').trim();
+  const cat = String(item.category || '').trim().toLowerCase();
+  const title = String(item.title || '').trim();
+  return [ts, cat, title].join('|');
+}
+
 function parseTimestamp(ts) {
   if (!ts) return 0;
   // Accept "YYYY-MM-DD HH:mm:ss" or ISO; fallback to Date parse
@@ -59,6 +66,28 @@ function mergeFolderIntoArray(targetArray, folderPath) {
     const content = readJsonSafe(f, []);
     const items = normalizeArray(content);
     targetArray.push(...items);
+  }
+}
+
+function ensureTranslations(items, targets = ['en', 'fr']) {
+  // Map baseKey -> { langs:Set<string>, ukItem:any }
+  const map = new Map();
+  for (const it of items) {
+    const bk = baseKey(it);
+    const l = String(it.language || '').trim().toLowerCase() || 'uk';
+    if (!map.has(bk)) map.set(bk, { langs: new Set(), ukItem: null });
+    const ent = map.get(bk);
+    ent.langs.add(l);
+    if (l === 'uk' && !ent.ukItem) ent.ukItem = it;
+  }
+  for (const [bk, ent] of map.entries()) {
+    if (!ent.ukItem) continue; // only duplicate if there is a uk source
+    for (const t of targets) {
+      if (!ent.langs.has(t)) {
+        const clone = { ...ent.ukItem, language: t, auto_translated: true };
+        items.push(clone);
+      }
+    }
   }
 }
 
@@ -92,6 +121,8 @@ function run() {
   const baseArticles = readJsonSafe(articlesFile, []);
   const allArticles = Array.isArray(baseArticles) ? [...baseArticles] : [];
   mergeFolderIntoArray(allArticles, articlesDir);
+  // Auto-create EN/FR placeholders for UK entries if missing
+  ensureTranslations(allArticles, ['en', 'fr']);
   const mergedArticles = dedupeAndSort(allArticles);
   writePrettyJson(articlesFile, mergedArticles);
   console.log(`Articles merged: ${mergedArticles.length}`);
@@ -100,10 +131,10 @@ function run() {
   const baseSchedule = readJsonSafe(scheduleFile, []);
   const allSchedule = Array.isArray(baseSchedule) ? [...baseSchedule] : [];
   mergeFolderIntoArray(allSchedule, scheduleDir);
+  ensureTranslations(allSchedule, ['en', 'fr']);
   const mergedSchedule = dedupeAndSort(allSchedule);
   writePrettyJson(scheduleFile, mergedSchedule);
   console.log(`Schedule merged: ${mergedSchedule.length}`);
 }
 
 run();
-
