@@ -6,42 +6,7 @@
     <title>UGCC Lausanne Admin</title>
   </head>
   <body>
-    <!-- <div id="nc-root"></div> -->
+    <div id="nc-root"></div>
     <p>sljvndlkzvjnkdjnbvjk</p>
-    <script>
-      // Clean up any stale Netlify Identity data so GitHub App flow is used
-      try {
-        localStorage.removeItem('netlifySiteURL');
-        localStorage.removeItem('netlifySiteID');
-        localStorage.removeItem('netlifyUser');
-        localStorage.removeItem('gotrue.user');
-      } catch {}
-      // Tell Decap not to auto-init from HTML alone; we’ll init with GitHub App
-      window.CMS_MANUAL_INIT = true;
-    </script>
-    <!-- Stable CDN version known to work well with GitHub App auth -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.4/dist/decap-cms.js" defer></script>
-    <script>
-      // Initialize Decap after the script loads; load the rest from config.yml
-      (function init() {
-        if (window.CMS && typeof window.CMS.init === 'function') {
-          console.log('Initializing Decap CMS (GitHub App)…');
-          window.CMS.init({
-            load_config_file: true,
-            config: {
-              backend: {
-                name: 'github',
-                repo: 'ugcclausanne/ugcc-site',
-                branch: 'main',
-                auth_type: 'implicit',
-                app_id: 2144987
-              }
-            }
-          });
-        } else {
-          setTimeout(init, 50);
-        }
-      })();
-    </script>
   </body>
   </html>
