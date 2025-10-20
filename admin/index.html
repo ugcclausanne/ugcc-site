@@ -50,9 +50,8 @@
             name: 'github',
             repo: 'ugcclausanne/ugcc-site',
             branch: 'main',
-            // OAuth via public Decap proxy (no Netlify Identity, no site_id)
-            base_url: 'https://decap-cms-oauth.netlify.app/.netlify/functions',
-            auth_endpoint: 'auth'
+            auth_type: 'implicit',
+            app_id: 2144987
           },
           publish_mode: 'editorial_workflow',
           media_folder: 'assets/uploads',
