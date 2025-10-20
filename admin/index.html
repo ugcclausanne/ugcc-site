@@ -51,8 +51,10 @@
             repo: 'ugcclausanne/ugcc-site',
             branch: 'main',
             auth_type: 'implicit',
-            // Use GitHub App flow (avoids Netlify OAuth entirely)
-            app_id: 2144987
+            // Use OAuth App via public Decap proxy (no Netlify Identity)
+            base_url: 'https://decapcms-oauth.netlify.app',
+            auth_endpoint: 'auth',
+            client_id: 'Iv23liIIRDw3tnhCPznq'
           },
           publish_mode: 'editorial_workflow',
           media_folder: 'assets/uploads',
