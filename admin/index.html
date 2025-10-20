@@ -16,24 +16,27 @@
       } catch (e) { /* ignore */ }
       window.CMS_MANUAL_INIT = true;
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.4/dist/decap-cms.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.9.0/dist/decap-cms.js" defer></script>
     <script>
-      window.addEventListener('load', function () {
-        if (!window.CMS) return;
-        // Force GitHub App backend, but load the rest from config.yml
-        window.CMS.init({
-          load_config_file: true,
-          config: {
-            backend: {
-              name: 'github',
-              repo: 'ugcclausanne/ugcc-site',
-              branch: 'main',
-              auth_type: 'implicit',
-              app_id: 2144987
+      (function initCMS() {
+        if (window.CMS && typeof window.CMS.init === 'function') {
+          console.log('Initializing Decap CMS with GitHub App backend...');
+          window.CMS.init({
+            load_config_file: true,
+            config: {
+              backend: {
+                name: 'github',
+                repo: 'ugcclausanne/ugcc-site',
+                branch: 'main',
+                auth_type: 'implicit',
+                app_id: 2144987
+              }
             }
-          }
-        });
-      });
+          });
+        } else {
+          setTimeout(initCMS, 50);
+        }
+      })();
     </script>
   </body>
 </html>
