@@ -79,11 +79,19 @@
         };
 
         // Expose quick debug helper
-        window.__cms_dbg = () => console.log('Manual init ON, collections:', (config.collections||[]).map(c=>c.name));
+        window.__cms_dbg = () => {
+          try {
+            const cfg = (window.CMS && window.CMS.getConfig) ? window.CMS.getConfig().toJS() : config;
+            console.log('Manual init ON, backend:', cfg.backend && cfg.backend.name, 'auth_type:', cfg.backend && cfg.backend.auth_type);
+            console.log('Collections:', (cfg.collections||[]).map(c=>c.name));
+          } catch (e) { console.log('dbg error', e); }
+        };
 
         function boot() {
           if (window.CMS && typeof window.CMS.init === 'function') {
             window.CMS.init({ config, load_config_file: false });
+            // Re-log resolved config shortly after init
+            setTimeout(() => { try { window.__cms_dbg(); } catch (_) {} }, 200);
           } else {
             // Retry in case the script hasn't loaded yet
             setTimeout(boot, 50);
