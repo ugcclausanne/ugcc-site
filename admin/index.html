@@ -3,14 +3,91 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>UGCC Lausanne Admin</title>
+    <!-- Explicit favicon for project Pages so browser doesn't request domain root /favicon.ico -->
+    <link rel="icon" href="/ugcc-site/favicon.ico" sizes="any">
+    <link rel="icon" href="/ugcc-site/assets/images/favicon.svg" type="image/svg+xml">
   </head>
   <body>
     <div id="nc-root"></div>
     <script>
-      // Ensure Decap loads the correct config on GitHub Pages project site
-      window.CMS_CONFIG_PATH = '/ugcc-site/admin/config.yml';
+      // Force manual init to avoid any fallback to Netlify OAuth
+      window.CMS_MANUAL_INIT = true;
     </script>
-    <!-- Decap CMS (formerly Netlify CMS) -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Decap CMS (pin a 3.x version with GitHub App implicit auth) -->
+    <script src="https://unpkg.com/decap-cms@3.3.0/dist/decap-cms.js"></script>
+    <script>
+      (function () {
+        // Same config as admin/config.yml but inline, to guarantee GitHub App auth
+        const config = {
+          backend: {
+            name: 'github',
+            repo: 'ugcclausanne/ugcc-site',
+            branch: 'main',
+            auth_type: 'implicit',
+            app_id: 2144987
+          },
+          publish_mode: 'editorial_workflow',
+          media_folder: 'assets/uploads',
+          public_folder: '/ugcc-site/assets/uploads',
+          collections: [
+            {
+              name: 'articles',
+              label: 'Articles',
+              folder: 'data/articles',
+              create: true,
+              format: 'json',
+              extension: 'json',
+              slug: '{{year}}{{month}}{{day}}-{{slug}}',
+              fields: [
+                { label: 'Date/Time', name: 'timestamp', widget: 'datetime', format: 'YYYY-MM-DD HH:mm:ss' },
+                { label: 'Email', name: 'email', widget: 'string', required: false },
+                { label: 'Title', name: 'title', widget: 'string' },
+                { label: 'Excerpt', name: 'excerpt', widget: 'text', required: false },
+                { label: 'Category', name: 'category', widget: 'select', options: ['news', 'spiritual', 'community'] },
+                { label: 'Language', name: 'language', widget: 'select', options: ['uk', 'en', 'fr'], default: 'uk' },
+                { label: 'Image', name: 'image', widget: 'image', required: false },
+                { label: 'Content', name: 'content', widget: 'text' },
+                { label: 'Author', name: 'author', widget: 'string', required: false }
+              ]
+            },
+            {
+              name: 'schedule',
+              label: 'Schedule',
+              folder: 'data/schedule',
+              create: true,
+              format: 'json',
+              extension: 'json',
+              slug: '{{date}}-{{slug}}',
+              fields: [
+                { label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'YYYY-MM-DD HH:mm:ss' },
+                { label: 'Date', name: 'date', widget: 'date', required: false },
+                { label: 'Time', name: 'time', widget: 'string', required: false },
+                { label: 'Category', name: 'category', widget: 'select', options: ['liturgy', 'announcement'] },
+                { label: 'Title', name: 'title', widget: 'string' },
+                { label: 'Details', name: 'details', widget: 'text', required: false },
+                { label: 'Location', name: 'location', widget: 'string', required: false },
+                { label: 'Language', name: 'language', widget: 'select', options: ['uk', 'en', 'fr'], default: 'uk' },
+                { label: 'Before Time', name: 'before_time', widget: 'string', required: false },
+                { label: 'Before Details', name: 'before_details', widget: 'string', required: false },
+                { label: 'After Details', name: 'after_details', widget: 'string', required: false },
+                { label: 'After Time', name: 'after_time', widget: 'string', required: false },
+                { label: 'Image', name: 'image', widget: 'image', required: false },
+                { label: 'Link', name: 'link', widget: 'string', required: false }
+              ]
+            }
+          ]
+        };
+
+        function boot() {
+          if (window.CMS && typeof window.CMS.init === 'function') {
+            window.CMS.init({ config });
+          } else {
+            // Retry in case the script hasn't loaded yet
+            setTimeout(boot, 50);
+          }
+        }
+        boot();
+      })();
+    </script>
   </body>
   </html>
