@@ -10,6 +10,32 @@
   <body>
     <div id="nc-root"></div>
     <script>
+      // Purge any stale Netlify Identity hints that can force Netlify OAuth
+      try {
+        const purgeKeys = (store) => {
+          const toDelete = [];
+          for (let i = 0; i < store.length; i++) {
+            const k = store.key(i);
+            if (!k) continue;
+            const kl = k.toLowerCase();
+            if (kl.includes('netlify')) toDelete.push(k);
+            if (kl.includes('site_id')) toDelete.push(k);
+          }
+          toDelete.forEach((k) => store.removeItem(k));
+        };
+        purgeKeys(window.localStorage);
+        purgeKeys(window.sessionStorage);
+      } catch (e) {}
+      // Remove any site_id from URL if present
+      try {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('site_id')) {
+          url.searchParams.delete('site_id');
+          history.replaceState({}, '', url.toString());
+        }
+      } catch (e) {}
+    </script>
+    <script>
       // Force manual init to avoid any fallback to Netlify OAuth
       window.CMS_MANUAL_INIT = true;
     </script>
