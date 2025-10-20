@@ -33,28 +33,6 @@
     "author": "о. Іван"
   },
   {
-    "timestamp": "2025-10-10 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Молитва Вервиці до Божого Милосердя",
-    "excerpt": "Щонеділі перед Літургією — спільна молитва Вервиці.",
-    "category": "spiritual",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Запрошуємо всіх долучатися до спільної молитви за мир в Україні.",
-    "author": "сестра Марія"
-  },
-  {
-    "timestamp": "2025-09-30 12:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Осінній ярмарок громади",
-    "excerpt": "Тепла зустріч після служби з чаєм, солодощами та піснями.",
-    "category": "community",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Кошти з ярмарку передано на підтримку українських родин у Швейцарії.",
-    "author": "парафіяльна рада"
-  },
-  {
     "timestamp": "2025-10-10 09:00:00",
     "email": "info@ugcc-lausanne.ch",
     "title": "Святкування Покрову",
@@ -64,127 +42,6 @@
     "image": "/assets/images/article.png",
     "content": "Після служби — благословення дітей і концерт на підтримку школи «Зернятко».",
     "author": "о. Іван"
-  },
-  {
-    "timestamp": "2025-10-05 09:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Неділя милосердя",
-    "excerpt": "Після служби збір пожертв для потреб України.",
-    "category": "news",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Парафіяни організували акцію доброти для українських родин у Швейцарії.",
-    "author": "п. Оксана"
-  },
-  {
-    "timestamp": "2025-09-25 19:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Молитва за мир",
-    "excerpt": "Щотижнева спільна молитва Вервиці.",
-    "category": "spiritual",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Запрошуємо долучитися до молитви щоп’ятниці о 19:00.",
-    "author": "сестра Марія"
-  },
-  {
-    "timestamp": "2025-09-22 14:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Життя громади: осінній ярмарок",
-    "excerpt": "Спільна подія з приготування страв і продажем солодощів.",
-    "category": "community",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Усі зібрані кошти передані на підтримку українських сімей у Швейцарії.",
-    "author": "рада парафії"
-  },
-  {
-    "timestamp": "2025-09-12 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Духовні роздуми отця Івана",
-    "excerpt": "Роздуми про прощення й силу віри.",
-    "category": "spiritual",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Коротка проповідь після недільної служби — у записі на сайті.",
-    "author": "о. Іван"
-  },
-  {
-    "timestamp": "2025-09-05 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Концерт українських виконавців",
-    "excerpt": "Благодійний вечір на підтримку школи «Зернятко».",
-    "category": "community",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Виступи дітей і дорослих, збір коштів для навчальних потреб.",
-    "author": "рада громади"
-  },
-  {
-    "timestamp": "2025-09-01 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Літній табір для дітей",
-    "excerpt": "Веселі заняття, катехизація та творчі ігри.",
-    "category": "community",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Діти вивчали притчі Ісуса через театральні сценки.",
-    "author": "сестра Марія"
-  },
-  {
-    "timestamp": "2025-08-25 09:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Роздуми над Євангелієм",
-    "excerpt": "Неділя після Преображення Господнього.",
-    "category": "spiritual",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Молитва про внутрішній спокій і віру в Божу любов.",
-    "author": "о. Іван"
-  },
-  {
-    "timestamp": "2025-08-20 09:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Волонтерська акція громади",
-    "excerpt": "Збір речей для новоприбулих українців.",
-    "category": "community",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "Приймаємо дитячий одяг, шкільне приладдя та побутові речі.",
-    "author": "рада громади"
-  },
-  {
-    "timestamp": "2025-08-10 11:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Новини парафії",
-    "excerpt": "Ремонт у парафіяльній залі завершено.",
-    "category": "news",
-    "language": "uk",
-    "image": "/assets/images/article.png",
-    "content": "З наступного тижня — оновлений простір для зустрічей.",
-    "author": "п. Ірина"
-  },
-  {
-    "timestamp": "2025-10-10 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Rosary Prayer to Divine Mercy",
-    "excerpt": "Every Sunday before the Liturgy — common Rosary prayer.",
-    "category": "spiritual",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "We invite everyone to join in prayer for peace in Ukraine.",
-    "author": "Sister Maria"
-  },
-  {
-    "timestamp": "2025-09-30 12:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Parish Autumn Fair",
-    "excerpt": "A warm gathering after the service with tea, sweets, and songs.",
-    "category": "community",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "Funds from the fair were donated to support Ukrainian families in Switzerland.",
-    "author": "Parish Council"
   },
   {
     "timestamp": "2025-10-10 09:00:00",
@@ -198,103 +55,37 @@
     "author": "Fr. Ivan"
   },
   {
-    "timestamp": "2025-10-05 09:00:00",
+    "timestamp": "2025-10-10 09:00:00",
     "email": "info@ugcc-lausanne.ch",
-    "title": "Sunday of Mercy",
-    "excerpt": "After the service, a collection for the needs of Ukraine.",
+    "title": "Fête de la Protection de la Mère de Dieu",
+    "excerpt": "Liturgie solennelle et service commémoratif pour les défenseurs de l'Ukraine.",
     "category": "news",
-    "language": "en",
+    "language": "fr",
     "image": "/assets/images/article.png",
-    "content": "Parishioners organized a charity drive for Ukrainian families in Switzerland.",
-    "author": "Mrs. Oksana"
+    "content": "Après la messe — bénédiction des enfants et concert en soutien à l’école « Zerniatko ».",
+    "author": "Père Ivan"
   },
   {
-    "timestamp": "2025-09-25 19:00:00",
+    "timestamp": "2025-10-10 08:30:00",
     "email": "info@ugcc-lausanne.ch",
-    "title": "Prayer for Peace",
-    "excerpt": "Weekly common Rosary prayer.",
+    "title": "Молитва Вервиці до Божого Милосердя",
+    "excerpt": "Щонеділі перед Літургією — спільна молитва Вервиці.",
+    "category": "spiritual",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Запрошуємо всіх долучатися до спільної молитви за мир в Україні.",
+    "author": "сестра Марія"
+  },
+  {
+    "timestamp": "2025-10-10 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Rosary Prayer to Divine Mercy",
+    "excerpt": "Every Sunday before the Liturgy — common Rosary prayer.",
     "category": "spiritual",
     "language": "en",
     "image": "/assets/images/article.png",
-    "content": "Join the prayer every Friday at 19:00.",
+    "content": "We invite everyone to join in prayer for peace in Ukraine.",
     "author": "Sister Maria"
-  },
-  {
-    "timestamp": "2025-09-22 14:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Parish Life: Autumn Fair",
-    "excerpt": "Joint event for cooking and selling sweets.",
-    "category": "community",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "All collected funds were donated to support Ukrainian families in Switzerland.",
-    "author": "Parish Council"
-  },
-  {
-    "timestamp": "2025-09-12 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Spiritual Reflections by Father Ivan",
-    "excerpt": "Reflections on forgiveness and the power of faith.",
-    "category": "spiritual",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "A short sermon after the Sunday service — available on the website.",
-    "author": "Fr. Ivan"
-  },
-  {
-    "timestamp": "2025-09-05 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Ukrainian Performers’ Concert",
-    "excerpt": "Charity evening to support the “Zerniatko” school.",
-    "category": "community",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "Performances by children and adults, fundraising for educational needs.",
-    "author": "Parish Council"
-  },
-  {
-    "timestamp": "2025-09-01 08:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Summer Camp for Children",
-    "excerpt": "Fun activities, catechesis, and creative games.",
-    "category": "community",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "The children learned the parables of Jesus through theater sketches.",
-    "author": "Sister Maria"
-  },
-  {
-    "timestamp": "2025-08-25 09:30:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Reflections on the Gospel",
-    "excerpt": "Sunday after the Transfiguration of the Lord.",
-    "category": "spiritual",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "A prayer for inner peace and faith in God's love.",
-    "author": "Fr. Ivan"
-  },
-  {
-    "timestamp": "2025-08-20 09:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Parish Volunteer Action",
-    "excerpt": "Collecting items for newly arrived Ukrainians.",
-    "category": "community",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "We accept children's clothing, school supplies, and household goods.",
-    "author": "Parish Council"
-  },
-  {
-    "timestamp": "2025-08-10 11:00:00",
-    "email": "info@ugcc-lausanne.ch",
-    "title": "Parish News",
-    "excerpt": "The renovation of the parish hall is complete.",
-    "category": "news",
-    "language": "en",
-    "image": "/assets/images/article.png",
-    "content": "From next week — a renewed space for meetings.",
-    "author": "Mrs. Iryna"
   },
   {
     "timestamp": "2025-10-10 08:30:00",
@@ -308,26 +99,26 @@
     "author": "Sœur Marie"
   },
   {
-    "timestamp": "2025-09-30 12:00:00",
+    "timestamp": "2025-10-05 09:00:00",
     "email": "info@ugcc-lausanne.ch",
-    "title": "Foire d’automne de la paroisse",
-    "excerpt": "Rencontre chaleureuse après la messe avec thé, douceurs et chants.",
-    "category": "community",
-    "language": "fr",
+    "title": "Неділя милосердя",
+    "excerpt": "Після служби збір пожертв для потреб України.",
+    "category": "news",
+    "language": "uk",
     "image": "/assets/images/article.png",
-    "content": "Les fonds de la foire ont été versés pour soutenir les familles ukrainiennes en Suisse.",
-    "author": "Conseil paroissial"
+    "content": "Парафіяни організували акцію доброти для українських родин у Швейцарії.",
+    "author": "п. Оксана"
   },
   {
-    "timestamp": "2025-10-10 09:00:00",
+    "timestamp": "2025-10-05 09:00:00",
     "email": "info@ugcc-lausanne.ch",
-    "title": "Fête de la Protection de la Mère de Dieu",
-    "excerpt": "Liturgie solennelle et service commémoratif pour les défenseurs de l'Ukraine.",
+    "title": "Sunday of Mercy",
+    "excerpt": "After the service, a collection for the needs of Ukraine.",
     "category": "news",
-    "language": "fr",
+    "language": "en",
     "image": "/assets/images/article.png",
-    "content": "Après la messe — bénédiction des enfants et concert en soutien à l’école « Zerniatko ».",
-    "author": "Père Ivan"
+    "content": "Parishioners organized a charity drive for Ukrainian families in Switzerland.",
+    "author": "Mrs. Oksana"
   },
   {
     "timestamp": "2025-10-05 09:00:00",
@@ -339,6 +130,61 @@
     "image": "/assets/images/article.png",
     "content": "Les paroissiens ont organisé une action de charité pour les familles ukrainiennes en Suisse.",
     "author": "Mme Oksana"
+  },
+  {
+    "timestamp": "2025-09-30 12:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Осінній ярмарок громади",
+    "excerpt": "Тепла зустріч після служби з чаєм, солодощами та піснями.",
+    "category": "community",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Кошти з ярмарку передано на підтримку українських родин у Швейцарії.",
+    "author": "парафіяльна рада"
+  },
+  {
+    "timestamp": "2025-09-30 12:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Parish Autumn Fair",
+    "excerpt": "A warm gathering after the service with tea, sweets, and songs.",
+    "category": "community",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "Funds from the fair were donated to support Ukrainian families in Switzerland.",
+    "author": "Parish Council"
+  },
+  {
+    "timestamp": "2025-09-30 12:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Foire d’automne de la paroisse",
+    "excerpt": "Rencontre chaleureuse après la messe avec thé, douceurs et chants.",
+    "category": "community",
+    "language": "fr",
+    "image": "/assets/images/article.png",
+    "content": "Les fonds de la foire ont été versés pour soutenir les familles ukrainiennes en Suisse.",
+    "author": "Conseil paroissial"
+  },
+  {
+    "timestamp": "2025-09-25 19:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Молитва за мир",
+    "excerpt": "Щотижнева спільна молитва Вервиці.",
+    "category": "spiritual",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Запрошуємо долучитися до молитви щоп’ятниці о 19:00.",
+    "author": "сестра Марія"
+  },
+  {
+    "timestamp": "2025-09-25 19:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Prayer for Peace",
+    "excerpt": "Weekly common Rosary prayer.",
+    "category": "spiritual",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "Join the prayer every Friday at 19:00.",
+    "author": "Sister Maria"
   },
   {
     "timestamp": "2025-09-25 19:00:00",
@@ -354,6 +200,28 @@
   {
     "timestamp": "2025-09-22 14:00:00",
     "email": "info@ugcc-lausanne.ch",
+    "title": "Життя громади: осінній ярмарок",
+    "excerpt": "Спільна подія з приготування страв і продажем солодощів.",
+    "category": "community",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Усі зібрані кошти передані на підтримку українських сімей у Швейцарії.",
+    "author": "рада парафії"
+  },
+  {
+    "timestamp": "2025-09-22 14:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Parish Life: Autumn Fair",
+    "excerpt": "Joint event for cooking and selling sweets.",
+    "category": "community",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "All collected funds were donated to support Ukrainian families in Switzerland.",
+    "author": "Parish Council"
+  },
+  {
+    "timestamp": "2025-09-22 14:00:00",
+    "email": "info@ugcc-lausanne.ch",
     "title": "Vie paroissiale : foire d’automne",
     "excerpt": "Événement commun pour la préparation et la vente de douceurs.",
     "category": "community",
@@ -361,6 +229,28 @@
     "image": "/assets/images/article.png",
     "content": "Tous les fonds collectés ont été versés pour soutenir les familles ukrainiennes en Suisse.",
     "author": "Conseil paroissial"
+  },
+  {
+    "timestamp": "2025-09-12 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Духовні роздуми отця Івана",
+    "excerpt": "Роздуми про прощення й силу віри.",
+    "category": "spiritual",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Коротка проповідь після недільної служби — у записі на сайті.",
+    "author": "о. Іван"
+  },
+  {
+    "timestamp": "2025-09-12 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Spiritual Reflections by Father Ivan",
+    "excerpt": "Reflections on forgiveness and the power of faith.",
+    "category": "spiritual",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "A short sermon after the Sunday service — available on the website.",
+    "author": "Fr. Ivan"
   },
   {
     "timestamp": "2025-09-12 08:30:00",
@@ -376,6 +266,28 @@
   {
     "timestamp": "2025-09-05 08:30:00",
     "email": "info@ugcc-lausanne.ch",
+    "title": "Концерт українських виконавців",
+    "excerpt": "Благодійний вечір на підтримку школи «Зернятко».",
+    "category": "community",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Виступи дітей і дорослих, збір коштів для навчальних потреб.",
+    "author": "рада громади"
+  },
+  {
+    "timestamp": "2025-09-05 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Ukrainian Performers’ Concert",
+    "excerpt": "Charity evening to support the “Zerniatko” school.",
+    "category": "community",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "Performances by children and adults, fundraising for educational needs.",
+    "author": "Parish Council"
+  },
+  {
+    "timestamp": "2025-09-05 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
     "title": "Concert des artistes ukrainiens",
     "excerpt": "Soirée caritative au profit de l’école « Zerniatko ».",
     "category": "community",
@@ -383,6 +295,28 @@
     "image": "/assets/images/article.png",
     "content": "Représentations d’enfants et d’adultes, collecte pour les besoins éducatifs.",
     "author": "Conseil paroissial"
+  },
+  {
+    "timestamp": "2025-09-01 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Літній табір для дітей",
+    "excerpt": "Веселі заняття, катехизація та творчі ігри.",
+    "category": "community",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Діти вивчали притчі Ісуса через театральні сценки.",
+    "author": "сестра Марія"
+  },
+  {
+    "timestamp": "2025-09-01 08:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Summer Camp for Children",
+    "excerpt": "Fun activities, catechesis, and creative games.",
+    "category": "community",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "The children learned the parables of Jesus through theater sketches.",
+    "author": "Sister Maria"
   },
   {
     "timestamp": "2025-09-01 08:30:00",
@@ -398,6 +332,28 @@
   {
     "timestamp": "2025-08-25 09:30:00",
     "email": "info@ugcc-lausanne.ch",
+    "title": "Роздуми над Євангелієм",
+    "excerpt": "Неділя після Преображення Господнього.",
+    "category": "spiritual",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Молитва про внутрішній спокій і віру в Божу любов.",
+    "author": "о. Іван"
+  },
+  {
+    "timestamp": "2025-08-25 09:30:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Reflections on the Gospel",
+    "excerpt": "Sunday after the Transfiguration of the Lord.",
+    "category": "spiritual",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "A prayer for inner peace and faith in God's love.",
+    "author": "Fr. Ivan"
+  },
+  {
+    "timestamp": "2025-08-25 09:30:00",
+    "email": "info@ugcc-lausanne.ch",
     "title": "Réflexions sur l’Évangile",
     "excerpt": "Dimanche après la Transfiguration du Seigneur.",
     "category": "spiritual",
@@ -409,6 +365,28 @@
   {
     "timestamp": "2025-08-20 09:00:00",
     "email": "info@ugcc-lausanne.ch",
+    "title": "Волонтерська акція громади",
+    "excerpt": "Збір речей для новоприбулих українців.",
+    "category": "community",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "Приймаємо дитячий одяг, шкільне приладдя та побутові речі.",
+    "author": "рада громади"
+  },
+  {
+    "timestamp": "2025-08-20 09:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Parish Volunteer Action",
+    "excerpt": "Collecting items for newly arrived Ukrainians.",
+    "category": "community",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "We accept children's clothing, school supplies, and household goods.",
+    "author": "Parish Council"
+  },
+  {
+    "timestamp": "2025-08-20 09:00:00",
+    "email": "info@ugcc-lausanne.ch",
     "title": "Action bénévole de la paroisse",
     "excerpt": "Collecte d'articles pour les nouveaux arrivants ukrainiens.",
     "category": "community",
@@ -416,6 +394,28 @@
     "image": "/assets/images/article.png",
     "content": "Nous acceptons des vêtements d’enfants, fournitures scolaires et objets ménagers.",
     "author": "Conseil paroissial"
+  },
+  {
+    "timestamp": "2025-08-10 11:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Новини парафії",
+    "excerpt": "Ремонт у парафіяльній залі завершено.",
+    "category": "news",
+    "language": "uk",
+    "image": "/assets/images/article.png",
+    "content": "З наступного тижня — оновлений простір для зустрічей.",
+    "author": "п. Ірина"
+  },
+  {
+    "timestamp": "2025-08-10 11:00:00",
+    "email": "info@ugcc-lausanne.ch",
+    "title": "Parish News",
+    "excerpt": "The renovation of the parish hall is complete.",
+    "category": "news",
+    "language": "en",
+    "image": "/assets/images/article.png",
+    "content": "From next week — a renewed space for meetings.",
+    "author": "Mrs. Iryna"
   },
   {
     "timestamp": "2025-08-10 11:00:00",
