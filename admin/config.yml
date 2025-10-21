@@ -3,17 +3,20 @@ backend:
   repo: ugcclausanne/ugcc-site
   branch: main
   auth_type: implicit
-  app_id: 75654
+  client_id: Ov23liHLc5n9hbQnfvVB
+  # auth_endpoint: /auth
 
 publish_mode: editorial_workflow
 
-media_folder: "assets/images/uploads"
-public_folder: "/assets/images/uploads"
+# Де зберігати завантажені файли (у репозиторії)
+media_folder: "assets/uploads"
+# Який публічний шлях до цих файлів на сайті
+public_folder: "/assets/uploads"
 
 collections:
-  - name: "posts"
+  - name: "news"
     label: "Новини"
-    folder: "posts"
+    folder: "news"
     create: true
     slug: "{{slug}}"
     fields:
