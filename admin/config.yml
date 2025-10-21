@@ -1,7 +1,6 @@
 backend:
   name: github
   repo: ugcclausanne/ugcc-site
-  name: github
 
   local_backend: true
   # branch: main
