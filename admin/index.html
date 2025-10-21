@@ -116,7 +116,7 @@
 
         function boot() {
           if (window.CMS && typeof window.CMS.init === 'function') {
-            window.CMS.init({ config, load_config_file: false });
+            window.CMS.init({ load_config_file: true });
             // Re-log resolved config shortly after init
             setTimeout(() => { try { window.__cms_dbg(); } catch (_) {} }, 200);
           } else {

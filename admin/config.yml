@@ -3,7 +3,7 @@ backend:
   repo: ugcclausanne/ugcc-site
   branch: main
   auth_type: implicit
-  base_url: https://ugcclausanne/ugcc-site
+  base_url: https://ugcclausanne.github.io/ugcc-site
   app_id: 2144987
 
 publish_mode: editorial_workflow
@@ -52,3 +52,42 @@ collections:
       - { label: After Time, name: after_time, widget: string, required: false }
       - { label: Image, name: image, widget: image, required: false }
       - { label: Link, name: link, widget: string, required: false }
+
+  - name: news
+    label: News
+    folder: news
+    create: true
+    format: json
+    extension: json
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: date }
+      - { label: Summary, name: summary, widget: text, required: false }
+      - { label: URL, name: url, widget: string, required: false }
+
+  - name: spiritual
+    label: Spiritual
+    folder: spiritual
+    create: true
+    format: json
+    extension: json
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: date }
+      - { label: Summary, name: summary, widget: text, required: false }
+      - { label: URL, name: url, widget: string, required: false }
+
+  - name: community
+    label: Community
+    folder: community
+    create: true
+    format: json
+    extension: json
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: date }
+      - { label: Summary, name: summary, widget: text, required: false }
+      - { label: URL, name: url, widget: string, required: false }
