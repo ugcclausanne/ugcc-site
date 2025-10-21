@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'data/**'
+      - 'templates/**'
+      - 'pages/**'
+      - 'scripts/**'
+      - 'admin/**'
+      - 'assets/**'
+      - 'package.json'
+      - '.nojekyll'
   workflow_dispatch:
 
 permissions:

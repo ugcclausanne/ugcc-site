@@ -1,91 +1,75 @@
 backend:
   name: github
+  # ВАШ РЕПОЗИТОРІЙ:
   repo: ugcclausanne/ugcc-site
   branch: main
-  site_url: https://ugcclausanne.github.io/ugcc-site
+  base_url: https://github.com
+  auth_scope: repo
+  client_id: "Ov23li8cbPFh52mLWFFS" 
+  auth_endpoint: "https://github.com/login/oauth/authorize"
 
-publish_mode: editorial_workflow
+publish_mode: editorial_workflow # Дозволяє редакторам створювати чернетки (Drafts)
 
-media_folder: assets/uploads
-public_folder: /ugcc-site/assets/uploads
+media_folder: "assets/images/uploads" # Шлях для завантажених фото
+public_folder: "/assets/images/uploads" # Шлях, який буде використовуватися на сайті
 
 collections:
-  - name: articles
-    label: Articles
-    folder: data/articles
+  # =================================================================
+  # КОЛЕКЦІЯ 1: НОВИНИ / СПІЛЬНОТА / ДУХОВНІ РОЗДУМИ (Маркдаун)
+  # =================================================================
+  - name: "posts"
+    label: "Статті / Новини"
+    folder: "content/posts" # <-- НОВА ПАПКА для Markdown-файлів
     create: true
-    format: json
-    extension: json
-    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: Date/Time, name: timestamp, widget: datetime, format: "YYYY-MM-DD HH:mm:ss" }
-      - { label: Email, name: email, widget: string, required: false }
-      - { label: Title, name: title, widget: string }
-      - { label: Excerpt, name: excerpt, widget: text, required: false }
-      - { label: Category, name: category, widget: select, options: [news, spiritual, community] }
-      - { label: Language, name: language, widget: select, options: [uk, en, fr], default: uk }
-      - { label: Image, name: image, widget: image, required: false }
-      - { label: Content, name: content, widget: text }
-      - { label: Author, name: author, widget: string, required: false }
+      - {label: "Заголовок (UA)", name: "title_ua", widget: "string", required: true}
+      - {label: "Дата та Час", name: "date", widget: "datetime", required: true}
+      - {label: "Категорія", name: "category", widget: "select", options: ["news", "spiritual", "community"], default: "news"}
+      - {label: "Автор", name: "author_ua", widget: "string", required: false}
+      - {label: "Зображення", name: "image", widget: "image", required: false, allow_multiple: false}
+      
+      # КОРОТКИЙ ОПИС (EXCERPT)
+      - {label: "Анотація/Опис (UA)", name: "excerpt_ua", widget: "text", required: true}
+      
+      # ПОВНИЙ ТЕКСТ (CONTENT)
+      - {label: "Текст Статті (UA)", name: "body_ua", widget: "markdown"}
+      
+      # -- ПОЛЯ ДЛЯ АВТОПЕРЕКЛАДУ (DEEPL) --
+      # Редактор їх ігнорує. Вони заповнюються автоматично.
+      - {label: "--- EN/FR Переклади ---", widget: "divider"}
+      - {label: "Заголовок (EN)", name: "title_en", widget: "string", required: false, default: " "}
+      - {label: "Анотація (EN)", name: "excerpt_en", widget: "text", required: false, default: " "}
+      - {label: "Текст (EN)", name: "body_en", widget: "markdown", required: false, default: " "}
+      - {label: "Заголовок (FR)", name: "title_fr", widget: "string", required: false, default: " "}
+      - {label: "Анотація (FR)", name: "excerpt_fr", widget: "text", required: false, default: " "}
+      - {label: "Текст (FR)", name: "body_fr", widget: "markdown", required: false, default: " "}
 
-  - name: schedule
-    label: Schedule
-    folder: data/schedule
-    create: true
-    format: json
-    extension: json
-    slug: "{{date}}-{{slug}}"
-    fields:
-      - { label: Timestamp, name: timestamp, widget: datetime, format: "YYYY-MM-DD HH:mm:ss" }
-      - { label: Date, name: date, widget: date, required: false }
-      - { label: Time, name: time, widget: string, required: false }
-      - { label: Category, name: category, widget: select, options: [liturgy, announcement] }
-      - { label: Title, name: title, widget: string }
-      - { label: Details, name: details, widget: text, required: false }
-      - { label: Location, name: location, widget: string, required: false }
-      - { label: Language, name: language, widget: select, options: [uk, en, fr], default: uk }
-      - { label: Before Time, name: before_time, widget: string, required: false }
-      - { label: Before Details, name: before_details, widget: string, required: false }
-      - { label: After Details, name: after_details, widget: string, required: false }
-      - { label: After Time, name: after_time, widget: string, required: false }
-      - { label: Image, name: image, widget: image, required: false }
-      - { label: Link, name: link, widget: string, required: false }
 
-  - name: news
-    label: News
-    folder: news
+  # =================================================================
+  # КОЛЕКЦІЯ 2: РОЗКЛАД СЛУЖБ (СТРУКТУРОВАНІ ДАНІ)
+  # =================================================================
+  - name: "schedule"
+    label: "Літургійний Розклад / Оголошення"
+    folder: "content/schedule" # <-- НОВА ПАПКА для Markdown-файлів
     create: true
-    format: json
-    extension: json
-    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    slug: "schedule-{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Date, name: date, widget: date }
-      - { label: Summary, name: summary, widget: text, required: false }
-      - { label: URL, name: url, widget: string, required: false }
+      - {label: "Назва Події (UA)", name: "title_ua", widget: "string", required: true}
+      - {label: "Дата", name: "date", widget: "date", required: true}
+      - {label: "Час", name: "time", widget: "string", pattern: ["^\\d{2}:\\d{2}$", "Час має бути у форматі HH:MM"], required: true}
+      - {label: "Категорія", name: "category", widget: "select", options: ["liturgy", "announcement"], default: "liturgy"}
+      - {label: "Локація", name: "location_ua", widget: "string", required: true}
+      - {label: "Деталі Події (UA)", name: "details_ua", widget: "text", required: true}
+      - {label: "Час ДО Події", name: "before_time", widget: "string", required: false, hint: "Наприклад: 09:00"}
+      - {label: "Опис ДО Події", name: "before_details_ua", widget: "string", required: false, hint: "Наприклад: Молитва Вервиці"}
+      - {label: "Посилання (Zoom/Google Maps)", name: "link", widget: "string", required: false}
 
-  - name: spiritual
-    label: Spiritual
-    folder: spiritual
-    create: true
-    format: json
-    extension: json
-    slug: "{{year}}{{month}}{{day}}-{{slug}}"
-    fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Date, name: date, widget: date }
-      - { label: Summary, name: summary, widget: text, required: false }
-      - { label: URL, name: url, widget: string, required: false }
-
-  - name: community
-    label: Community
-    folder: community
-    create: true
-    format: json
-    extension: json
-    slug: "{{year}}{{month}}{{day}}-{{slug}}"
-    fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Date, name: date, widget: date }
-      - { label: Summary, name: summary, widget: text, required: false }
-      - { label: URL, name: url, widget: string, required: false }
+      # -- ПОЛЯ ДЛЯ АВТОПЕРЕКЛАДУ (DEEPL) --
+      - {label: "--- EN/FR Переклади ---", widget: "divider"}
+      - {label: "Назва Події (EN)", name: "title_en", widget: "string", required: false, default: " "}
+      - {label: "Деталі Події (EN)", name: "details_en", widget: "text", required: false, default: " "}
+      - {label: "Локація (EN)", name: "location_en", widget: "string", required: false, default: " "}
+      - {label: "Назва Події (FR)", name: "title_fr", widget: "string", required: false, default: " "}
+      - {label: "Деталі Події (FR)", name: "details_fr", widget: "text", required: false, default: " "}
+      - {label: "Локація (FR)", name: "location_fr", widget: "string", required: false, default: " "}
