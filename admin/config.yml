@@ -5,10 +5,9 @@ backend:
   # local_backend: true
   branch: main
   auth_type: implicit
-  # base_url: https://github.com/login/oauth
-  authorize_url: https://github.com/login/oauth/authorize?client_id=Ov23liHLc5n9hbQnfvVB
-  # auth_endpoint: /auth
-  # client_id: Ov23liHLc5n9hbQnfvVB
+  base_url: https://github.com/login/oauth
+  auth_endpoint: /authorize
+  client_id: Ov23liHLc5n9hbQnfvVB
   # app_id:  2154474
   
 
