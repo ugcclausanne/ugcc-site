@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: https://ugcclausanne.github.io/ugcc-site
+  site_url: https://ugcclausanne.github.io/ugcc-site
 
 publish_mode: editorial_workflow
 
