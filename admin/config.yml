@@ -5,9 +5,9 @@ backend:
   local_backend: true
   # branch: main
   # auth_type: implicit
-  # base_url: http://api.github.com/
-  # auth_endpoint: /authorize
-  # client_id: Ov23liHLc5n9hbQnfvVB
+  base_url: http://api.github.com/
+  auth_endpoint: /login/oauth/authorize
+  client_id: Ov23liHLc5n9hbQnfvVB
 
 # preview_context: http://decap-oauth-proxy.netlify.app
 
