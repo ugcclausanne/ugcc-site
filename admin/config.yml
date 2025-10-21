@@ -2,16 +2,8 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  base_url: https://github.com
-  auth_scope: repo
+  auth_type: implicit
   app_id: 75654
-  
-  # ВИКОРИСТОВУЄМО ТІЛЬКИ CLIENT ID (для цього методу)
-  client_id: Ov23li8cbPFh52mLWFFS
-  
-  # !!! НОВИЙ/ВИПРАВЛЕНИЙ КЛЮЧ !!!
-  # Вказуємо CMS використовувати чистий OAuth
-  auth_endpoint: /login/oauth/authorize
 
 publish_mode: editorial_workflow
 
@@ -19,63 +11,12 @@ media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
 collections:
-  # =================================================================
-  # КОЛЕКЦІЯ 1: НОВИНИ / СПІЛЬНОТА / ДУХОВНІ РОЗДУМИ (Маркдаун)
-  # =================================================================
   - name: "posts"
-    label: "Статті / Новини"
-    folder: "content/posts"
+    label: "Новини"
+    folder: "posts"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
-      - {label: "Заголовок (UA)", name: "title_ua", widget: "string", required: true}
-      - {label: "Дата та Час", name: "date", widget: "datetime", required: true}
-      - {label: "Категорія", name: "category", widget: "select", options: ["news", "spiritual", "community"], default: "news"}
-      - {label: "Автор", name: "author_ua", widget: "string", required: false}
-      - {label: "Зображення", name: "image", widget: "image", required: false, allow_multiple: false}
-      
-      # КОРОТКИЙ ОПИС (EXCERPT)
-      - {label: "Анотація/Опис (UA)", name: "excerpt_ua", widget: "text", required: true}
-      
-      # ПОВНИЙ ТЕКСТ (CONTENT)
-      - {label: "Текст Статті (UA)", name: "body_ua", widget: "markdown"}
-      
-      # -- ПОЛЯ ДЛЯ АВТОПЕРЕКЛАДУ (DEEPL) --
-      # !!! ВИПРАВЛЕНО: додано name !!!
-      - {label: "--- EN/FR Переклади ---", name: "divider_posts", widget: "divider"}
-      - {label: "Заголовок (EN)", name: "title_en", widget: "string", required: false, default: " "}
-      - {label: "Анотація (EN)", name: "excerpt_en", widget: "text", required: false, default: " "}
-      - {label: "Текст (EN)", name: "body_en", widget: "markdown", required: false, default: " "}
-      - {label: "Заголовок (FR)", name: "title_fr", widget: "string", required: false, default: " "}
-      - {label: "Анотація (FR)", name: "excerpt_fr", widget: "text", required: false, default: " "}
-      - {label: "Текст (FR)", name: "body_fr", widget: "markdown", required: false, default: " "}
-
-
-  # =================================================================
-  # КОЛЕКЦІЯ 2: РОЗКЛАД СЛУЖБ (СТРУКТУРОВАНІ ДАНІ)
-  # =================================================================
-  - name: "schedule"
-    label: "Літургійний Розклад / Оголошення"
-    folder: "content/schedule"
-    create: true
-    slug: "schedule-{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Назва Події (UA)", name: "title_ua", widget: "string", required: true}
-      - {label: "Дата", name: "date", widget: "date", required: true}
-      - {label: "Час", name: "time", widget: "string", pattern: ["^\\d{2}:\\d{2}$", "Час має бути у форматі HH:MM"], required: true}
-      - {label: "Категорія", name: "category", widget: "select", options: ["liturgy", "announcement"], default: "liturgy"}
-      - {label: "Локація", name: "location_ua", widget: "string", required: true}
-      - {label: "Деталі Події (UA)", name: "details_ua", widget: "text", required: true}
-      - {label: "Час ДО Події", name: "before_time", widget: "string", required: false, hint: "Наприклад: 09:00"}
-      - {label: "Опис ДО Події", name: "before_details_ua", widget: "string", required: false, hint: "Наприклад: Молитва Вервиці"}
-      - {label: "Посилання (Zoom/Google Maps)", name: "link", widget: "string", required: false}
-
-      # -- ПОЛЯ ДЛЯ АВТОПЕРЕКЛАДУ (DEEPL) --
-      # !!! ВИПРАВЛЕНО: додано name !!!
-      - {label: "--- EN/FR Переклади ---", name: "divider_schedule", widget: "divider"}
-      - {label: "Назва Події (EN)", name: "title_en", widget: "string", required: false, default: " "}
-      - {label: "Деталі Події (EN)", name: "details_en", widget: "text", required: false, default: " "}
-      - {label: "Локація (EN)", name: "location_en", widget: "string", required: false, default: " "}
-      - {label: "Назва Події (FR)", name: "title_fr", widget: "string", required: false, default: " "}
-      - {label: "Деталі Події (FR)", name: "details_fr", widget: "text", required: false, default: " "}
-      - {label: "Локація (FR)", name: "location_fr", widget: "string", required: false, default: " "}
+      - { name: "title", label: "Заголовок", widget: "string" }
+      - { name: "date",  label: "Дата",      widget: "datetime" }
+      - { name: "body",  label: "Текст",     widget: "markdown" }

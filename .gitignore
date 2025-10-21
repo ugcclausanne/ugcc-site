@@ -1,20 +1,27 @@
-# Node
-node_modules/
-npm-debug.log*
-package-lock.json
-
-# Build outputs
-dist/
-_build/
-.cache/
-.tmp/
+# ОС та редактори
 .DS_Store
-
-# SCSS build
-assets/css/main.css.map
-
-# System files
 Thumbs.db
-*.log
 .idea/
 .vscode/
+*.log
+
+# Node / інструменти (про запас)
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.package-lock.json
+.pnpm-debug.log
+dist/
+build/
+.cache/
+.sass-cache/
+
+# ESlint/Stylelint/Prettier тимчасові
+.eslintcache
+.stylelintcache
+
+# Секрети
+.env
+.env.*
