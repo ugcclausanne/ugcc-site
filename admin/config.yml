@@ -5,7 +5,7 @@ backend:
   # local_backend: true
   branch: main
   auth_type: implicit
-  base_url: http://api.github.com/
+  base_url: http://github.com/
   # auth_endpoint: /auth
   client_id: Ov23liHLc5n9hbQnfvVB
   # app_id:  2154474
