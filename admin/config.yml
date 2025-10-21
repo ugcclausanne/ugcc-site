@@ -2,13 +2,10 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  # ВИДАЛІТЬ base_url та auth_url
   client_id: Ov23li8cbPFh52mLWFFS
   auth_endpoint: https://github.com/login/oauth/authorize
   auth_scope: repo
 
-
-# token_endpoint: /token
 publish_mode: editorial_workflow
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
