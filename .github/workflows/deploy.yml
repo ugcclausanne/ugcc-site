@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Merge data JSON
+        run: node scripts/merge-data.js
+
       - name: Build site
         run: npm run build
 
@@ -39,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'  # Assuming build outputs to dist/
+          path: './'  # Assuming build outputs to dist/
 
   deploy:
     environment:
