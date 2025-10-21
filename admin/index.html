@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UGCC Lausanne Admin</title>
-    <!-- Підключаємо Decap CMS з CDN (звичайний <script>, НЕ type="module") -->
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager</title>
   </head>
   <body>
-    <!-- Порожнє тіло — CMS сам рендерить UI -->
-		 <div id="decap-cms-root"></div>
+    <!-- Include the script that builds the page and powers Decap CMS -->
+    <div id="decap-cms-root"></div>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
-		<script src="https://unpkg.com/decap-cms@3.8.4/dist/decap-cms.js"></script>
 </html>

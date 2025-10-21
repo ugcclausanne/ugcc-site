@@ -1,13 +1,16 @@
 backend:
   name: github
   repo: ugcclausanne/ugcc-site
-  branch: main
+
+  # branch: main
   # auth_type: implicit
-  base_url: http://decap-oauth-proxy.netlify.app
+  base_url: http://app.github.com/oauth
   auth_endpoint: /auth
   client_id: Ov23liHLc5n9hbQnfvVB
 
+# preview_context: http://decap-oauth-proxy.netlify.app
 
+  token_endpoint: /token
 publish_mode: editorial_workflow
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
