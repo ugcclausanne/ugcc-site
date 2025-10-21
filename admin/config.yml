@@ -1,23 +1,18 @@
 backend:
-  # ЗМІНА КЛЮЧА: Це допомагає обійти конфлікт шляхів Netlify
-  name: git-gateway
+  name: github
   branch: main
-  
-  # ПОВЕРНІТЬСЯ ДО СТАНДАРТНОГО ШЛЯХУ API GitHub
-  enable_identity_routes: true 
+
+  auth_url: https://github.com/login/oauth/authorize
   
   # ОБОВ'ЯЗКОВІ КЛЮЧІ З ВАШОГО GITHUB OAUTH APP:
   repo: ugcclausanne/ugcc-site
+  auth_scope: repo
 
   client_id: Ov23li8cbPFh52mLWFFS
   client_secret: 3aa693cf1cd8b714cd0fcbf7466d6c4916bcd6c2
 
 publish_mode: editorial_workflow
 
-auth:
-  provider: github # Вказуємо використовувати GitHub OAuth
-  button_label: Увійти через GitHub # Кнопка для входу
-  
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
