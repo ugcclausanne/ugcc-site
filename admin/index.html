@@ -113,8 +113,8 @@
         // Expose quick debug helper
         window.__cms_dbg = () => {
           try {
-            const cfg = (window.CMS && window.CMS.getConfig) ? window.CMS.getConfig().toJS() : config;
-            console.log('Manual init ON, backend:', cfg.backend && cfg.backend.name, 'auth_type:', cfg.backend && cfg.backend.auth_type);
+            const cfg = (window.CMS && window.CMS.getConfig) ? window.CMS.getConfig().toJS() : {};
+            console.log('Config loaded from file, backend:', cfg.backend && cfg.backend.name, 'repo:', cfg.backend && cfg.backend.repo);
             console.log('Collections:', (cfg.collections||[]).map(c=>c.name));
           } catch (e) { console.log('dbg error', e); }
         };
