@@ -2,11 +2,13 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  auth_type: implicit
-  client_id: Ov23liHLc5n9hbQnfvVB
+  # auth_type: implicit
+  base_url: https://api.github.com
+  # client_id: Ov23liHLc5n9hbQnfvVB
+  auth_endpoint: /auth
+
 
 publish_mode: editorial_workflow
-
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
