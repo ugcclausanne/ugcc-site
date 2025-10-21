@@ -4,22 +4,19 @@ backend:
   branch: main
   auth_type: implicit
   client_id: Ov23liHLc5n9hbQnfvVB
-  # auth_endpoint: /auth
 
 publish_mode: editorial_workflow
 
-# Де зберігати завантажені файли (у репозиторії)
 media_folder: "assets/uploads"
-# Який публічний шлях до цих файлів на сайті
 public_folder: "/assets/uploads"
 
 collections:
   - name: "news"
-    label: "Новини"
+    label: "News"
     folder: "news"
     create: true
     slug: "{{slug}}"
     fields:
-      - { name: "title", label: "Заголовок", widget: "string" }
-      - { name: "date",  label: "Дата",      widget: "datetime" }
-      - { name: "body",  label: "Текст",     widget: "markdown" }
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "date",  label: "Date",      widget: "datetime" }
+      - { name: "body",  label: "Text",     widget: "markdown" }
