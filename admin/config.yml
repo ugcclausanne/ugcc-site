@@ -1,6 +1,5 @@
 backend:
   name: github
-  # ВАШ РЕПОЗИТОРІЙ:
   repo: ugcclausanne/ugcc-site
   branch: main
   base_url: https://github.com
@@ -8,10 +7,10 @@ backend:
   client_id: "Ov23li8cbPFh52mLWFFS" 
   auth_endpoint: "https://github.com/login/oauth/authorize"
 
-publish_mode: editorial_workflow # Дозволяє редакторам створювати чернетки (Drafts)
+publish_mode: editorial_workflow
 
-media_folder: "assets/images/uploads" # Шлях для завантажених фото
-public_folder: "/assets/images/uploads" # Шлях, який буде використовуватися на сайті
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
 
 collections:
   # =================================================================
@@ -19,7 +18,7 @@ collections:
   # =================================================================
   - name: "posts"
     label: "Статті / Новини"
-    folder: "content/posts" # <-- НОВА ПАПКА для Markdown-файлів
+    folder: "content/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
@@ -36,8 +35,8 @@ collections:
       - {label: "Текст Статті (UA)", name: "body_ua", widget: "markdown"}
       
       # -- ПОЛЯ ДЛЯ АВТОПЕРЕКЛАДУ (DEEPL) --
-      # Редактор їх ігнорує. Вони заповнюються автоматично.
-      - {label: "--- EN/FR Переклади ---", widget: "divider"}
+      # !!! ВИПРАВЛЕНО: додано name !!!
+      - {label: "--- EN/FR Переклади ---", name: "divider_posts", widget: "divider"}
       - {label: "Заголовок (EN)", name: "title_en", widget: "string", required: false, default: " "}
       - {label: "Анотація (EN)", name: "excerpt_en", widget: "text", required: false, default: " "}
       - {label: "Текст (EN)", name: "body_en", widget: "markdown", required: false, default: " "}
@@ -51,7 +50,7 @@ collections:
   # =================================================================
   - name: "schedule"
     label: "Літургійний Розклад / Оголошення"
-    folder: "content/schedule" # <-- НОВА ПАПКА для Markdown-файлів
+    folder: "content/schedule"
     create: true
     slug: "schedule-{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
@@ -66,7 +65,8 @@ collections:
       - {label: "Посилання (Zoom/Google Maps)", name: "link", widget: "string", required: false}
 
       # -- ПОЛЯ ДЛЯ АВТОПЕРЕКЛАДУ (DEEPL) --
-      - {label: "--- EN/FR Переклади ---", widget: "divider"}
+      # !!! ВИПРАВЛЕНО: додано name !!!
+      - {label: "--- EN/FR Переклади ---", name: "divider_schedule", widget: "divider"}
       - {label: "Назва Події (EN)", name: "title_en", widget: "string", required: false, default: " "}
       - {label: "Деталі Події (EN)", name: "details_en", widget: "text", required: false, default: " "}
       - {label: "Локація (EN)", name: "location_en", widget: "string", required: false, default: " "}
