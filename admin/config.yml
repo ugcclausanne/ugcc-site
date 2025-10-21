@@ -2,9 +2,8 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  auth_type: implicit
+  auth_type: pkce
   base_url: https://ugcclausanne.github.io/ugcc-site
-  app_id: 2144987
 
 publish_mode: editorial_workflow
 
