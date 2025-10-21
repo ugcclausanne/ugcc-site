@@ -2,15 +2,12 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-
-  # local_backend: true
-  # auth_type: implicit
-  # base_url: https://github.com/login/oauth/
-  auth_endpoint: https://github.com/login/oauth/authorize
-  client_id: Ov23liHLc5n9hbQnfvVB
-  # app_id:  2154474
-  
+  base_url: https://github.com 
   auth_scope: repo
+  
+  client_id: Ov23li8cbPFh52mLWFFS
+  
+  auth_endpoint: https://github.com/login/oauth/authorize
 
 # token_endpoint: /token
 publish_mode: editorial_workflow
