@@ -34,6 +34,11 @@
           history.replaceState({}, '', url.toString());
         }
       } catch (e) {}
+      // Remove site_id from localStorage
+      try {
+        localStorage.removeItem('site_id');
+        sessionStorage.removeItem('site_id');
+      } catch (e) {}
     </script>
     <script>
       // Force manual init to avoid any fallback to Netlify OAuth
