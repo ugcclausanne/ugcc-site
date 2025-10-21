@@ -6,10 +6,8 @@ backend:
   # branch: main
   # auth_type: implicit
   base_url: http://api.github.com/
-  auth_endpoint: /login/oauth/authorize
-  client_id: Ov23liHLc5n9hbQnfvVB
-
-# preview_context: http://decap-oauth-proxy.netlify.app
+  auth_endpoint: /auth
+  # client_id: Ov23liHLc5n9hbQnfvVB
 
 # token_endpoint: /token
 publish_mode: editorial_workflow
