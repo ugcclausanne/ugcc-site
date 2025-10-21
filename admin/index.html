@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,12 +7,10 @@
     <title>Content Manager</title>
   </head>
   <body>
-    <!-- Include the script that builds the page and powers Decap CMS -->
-    <div id="decap-cms-root"></div>
-   <script src="https://unpkg.com/sveltia-cms"></script>
-<!-- <script>
-    // Ініціалізація CMS, якщо вона потрібна окремо
-    SveltiaCMS.init();
-</script> -->
+    <!-- Sveltia CMS (drop-in replacement for Decap) -->
+    <div id="sveltia-cms-root"></div>
+    <script type="module">
+      import 'https://unpkg.com/sveltia-cms@latest/dist/sveltia-cms.js';
+    </script>
   </body>
 </html>
