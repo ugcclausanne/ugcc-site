@@ -2,9 +2,11 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
-  client_id: Ov23li8cbPFh52mLWFFS
-  auth_endpoint: https://github.com/login/oauth/authorize
-  auth_scope: repo
+
+  # auth_type: implicit
+  base_url: https://api.github.com/login/oauth/
+  auth_endpoint: /authorize
+  client_id: Ov23liHLc5n9hbQnfvVB
 
 publish_mode: editorial_workflow
 media_folder: "assets/uploads"
@@ -18,5 +20,5 @@ collections:
     slug: "{{slug}}"
     fields:
       - { name: "title", label: "Title", widget: "string" }
-      - { name: "date",  label: "Date",      widget: "datetime" }
-      - { name: "body",  label: "Text",     widget: "markdown" }
+      - { name: "date",  label: "Date",  widget: "datetime" }
+      - { name: "body",  label: "Text",  widget: "markdown" }
