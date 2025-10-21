@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <script>
+    if (window.opener) {
+      window.opener.postMessage({
+        'auth': {
+          'token': window.location.hash.substring(1),
+          'provider': 'github'
+        }
+      }, window.opener.location.origin);
+      window.close();
+    }
+  </script>
+</head>
+<body></body>
+</html>
