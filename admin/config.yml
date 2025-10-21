@@ -12,7 +12,7 @@ backend:
 
 # preview_context: http://decap-oauth-proxy.netlify.app
 
-  token_endpoint: /token
+# token_endpoint: /token
 publish_mode: editorial_workflow
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
