@@ -7,8 +7,8 @@ backend:
   auth_type: implicit
   base_url: http://api.github.com/
   # auth_endpoint: /auth
-  # client_id: Ov23liHLc5n9hbQnfvVB
-  app_id:  2154474
+  client_id: Ov23liHLc5n9hbQnfvVB
+  # app_id:  2154474
   
 
 # token_endpoint: /token
