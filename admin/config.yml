@@ -2,6 +2,7 @@ backend:
   name: github
   repo: ugcclausanne/ugcc-site
   branch: main
+  base_url: https://github.com
   auth_scope: repo
   
   # ВИКОРИСТОВУЄМО ТІЛЬКИ CLIENT ID (для цього методу)
@@ -9,7 +10,7 @@ backend:
   
   # !!! НОВИЙ/ВИПРАВЛЕНИЙ КЛЮЧ !!!
   # Вказуємо CMS використовувати чистий OAuth
-  auth_endpoint: https://github.com/login/oauth/authorize
+  auth_endpoint: /login/oauth/authorize
 
 publish_mode: editorial_workflow
 
