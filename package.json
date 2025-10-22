@@ -4,12 +4,9 @@
   "description": "UGCC Lausanne Parish Website",
   "scripts": {
     "sync:sanity": "node scripts/fetch-sanity.js",
-    "build": "npm run sync:sanity && node scripts/render-pages.js",
-    "post:publish": "node scripts/autopost.js",
+    "build": "node scripts/render-pages.js",
     "dev": "node scripts/render-pages.js --watch",
-    "update:now": "npm run sync:sanity && npm run build",
-    "local": "node scripts/dev.js",
-    "serve": "node scripts/serve.js"
+    "update:now": "npm run sync:sanity && npm run build"
   },
   "dependencies": {
     "nunjucks": "^3.2.4",

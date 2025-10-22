@@ -1,5 +1,6 @@
 [
   {
+    "_id": "9743c698-4689-437b-80b0-3ec86eeec6f1",
     "author": "Громада",
     "auto_translated": true,
     "category": "community",
@@ -9,6 +10,35 @@
     "image": "https://cdn.sanity.io/images/y4j9iov2/production/61834132c8629473c4b93cf38385a5f38c243894-1996x1305.png",
     "language": "uk",
     "timestamp": "2025-10-22T08:44:00.000Z",
-    "title": "10:00"
+    "title": "10:00",
+    "slug": "202510220844"
+  },
+  {
+    "_id": "9743c698-4689-437b-80b0-3ec86eeec6f1",
+    "author": "Громада",
+    "auto_translated": true,
+    "category": "community",
+    "content": "Кошти з ярмарку передано на підтримку українських родин у Швейцарії.",
+    "email": "ugcc.lausanne@gmail.com",
+    "excerpt": "Тепла зустріч після служби з чаєм, солодощами та піснями.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/61834132c8629473c4b93cf38385a5f38c243894-1996x1305.png",
+    "language": "en",
+    "timestamp": "2025-10-22T08:44:00.000Z",
+    "title": "10:00",
+    "slug": "202510220844"
+  },
+  {
+    "_id": "9743c698-4689-437b-80b0-3ec86eeec6f1",
+    "author": "Громада",
+    "auto_translated": true,
+    "category": "community",
+    "content": "Кошти з ярмарку передано на підтримку українських родин у Швейцарії.",
+    "email": "ugcc.lausanne@gmail.com",
+    "excerpt": "Тепла зустріч після служби з чаєм, солодощами та піснями.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/61834132c8629473c4b93cf38385a5f38c243894-1996x1305.png",
+    "language": "fr",
+    "timestamp": "2025-10-22T08:44:00.000Z",
+    "title": "10:00",
+    "slug": "202510220844"
   }
 ]

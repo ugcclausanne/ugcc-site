@@ -11,6 +11,5 @@ module.exports = createClient({
   apiVersion,
   token,
   useCdn: !token,
-  perspective: token ? 'previewDrafts' : 'published',
+  perspective: token ? 'drafts' : 'published',
 })
-

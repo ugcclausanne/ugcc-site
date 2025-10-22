@@ -92,7 +92,8 @@ async function loadSections() {
 
     const images = splitImages(a.image || a.images);
     const image = images[0] || a.image || '';
-    const base = slugBase(a.title, a.timestamp || a.date);
+    // Prefer incoming precomputed slug if provided; otherwise derive from title+date
+    const base = a.slug || slugBase(a.title, a.timestamp || a.date);
     const key = `${lang}:${cat}:${base}`;
     slugCounters[key] = (slugCounters[key] || 0) + 1;
     const slug = slugCounters[key] > 1 ? `${base}-${slugCounters[key]}` : base;

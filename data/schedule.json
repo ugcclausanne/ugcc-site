@@ -1,5 +1,6 @@
 [
   {
+    "_id": "78fd61fb-40c4-47f3-bbb6-a5501815d3e0",
     "after_details": "Катехизація після Літургії: «Як розпізнавати Божу волю»",
     "after_time": "11:30",
     "auto_translated": true,
@@ -14,6 +15,45 @@
     "location": "Фрібур",
     "time": "10:00",
     "timestamp": "2025-10-22T08:41:00.000Z",
-    "title": "Свята Літургія"
+    "title": "Свята Літургія",
+    "slug": "202510220841"
+  },
+  {
+    "_id": "78fd61fb-40c4-47f3-bbb6-a5501815d3e0",
+    "after_details": "Катехизація після Літургії: «Як розпізнавати Божу волю»",
+    "after_time": "11:30",
+    "auto_translated": true,
+    "before_details": "Молитва на вервиці",
+    "before_time": "09:30",
+    "category": "liturgy",
+    "date": "2025-10-25",
+    "details": "Пам’ять св. апостола Луки. Особливі молитви за хворих.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/9b81ae98c274dca1731f3a2667d35c945d4ee42e-1600x1066.jpg",
+    "language": "en",
+    "link": "",
+    "location": "Фрібур",
+    "time": "10:00",
+    "timestamp": "2025-10-22T08:41:00.000Z",
+    "title": "Свята Літургія",
+    "slug": "202510220841"
+  },
+  {
+    "_id": "78fd61fb-40c4-47f3-bbb6-a5501815d3e0",
+    "after_details": "Катехизація після Літургії: «Як розпізнавати Божу волю»",
+    "after_time": "11:30",
+    "auto_translated": true,
+    "before_details": "Молитва на вервиці",
+    "before_time": "09:30",
+    "category": "liturgy",
+    "date": "2025-10-25",
+    "details": "Пам’ять св. апостола Луки. Особливі молитви за хворих.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/9b81ae98c274dca1731f3a2667d35c945d4ee42e-1600x1066.jpg",
+    "language": "fr",
+    "link": "",
+    "location": "Фрібур",
+    "time": "10:00",
+    "timestamp": "2025-10-22T08:41:00.000Z",
+    "title": "Свята Літургія",
+    "slug": "202510220841"
   }
 ]
