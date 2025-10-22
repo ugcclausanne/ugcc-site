@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "UGCC Lausanne Parish Website",
   "scripts": {
-    "build": "node scripts/render-pages.js",
+    "sync:sanity": "node scripts/fetch-sanity.js",
+    "build": "npm run sync:sanity && node scripts/render-pages.js",
+    "post:publish": "node scripts/autopost.js",
     "dev": "node scripts/render-pages.js --watch"
   },
   "dependencies": {
     "nunjucks": "^3.2.4",
-    "glob": "^10.3.10"
+    "glob": "^10.3.10",
+    "@sanity/client": "^6.18.2"
   }
 }
