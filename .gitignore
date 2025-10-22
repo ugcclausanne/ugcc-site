@@ -26,5 +26,8 @@ build/
 .env
 .env.*
 
+# Autopost local state (keep translations tracked)
+.autopost-state.json
+
 #Історія постів
 .autopost-state.json

@@ -1,13 +1,15 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const crypto = require('node:crypto')
 const client = require('./sanityClient')
 const fetch = global.fetch || ((...args) => import('node-fetch').then(({default: f}) => f(...args)))
 
 const ALL_LANGS = ['uk', 'en', 'fr']
 
-const PROVIDER = process.env.TRANSLATE_PROVIDER || '' // 'deepl' | 'google'
+const PROVIDER = process.env.TRANSLATE_PROVIDER || '' // 'deepl' | 'google' | 'libre'
 const DEEPL_KEY = process.env.DEEPL_API_KEY || ''
 const GOOGLE_KEY = process.env.GOOGLE_API_KEY || ''
+const LIBRE_URL = process.env.LIBRE_TRANSLATE_URL || 'https://libretranslate.com'
 
 async function translate(text, target, source) {
   const t = (text || '').toString()
@@ -38,10 +40,39 @@ async function translate(text, target, source) {
       const data = await res.json()
       return (data.data && data.data.translations && data.data.translations[0] && data.data.translations[0].translatedText) || t
     }
+    if (PROVIDER.toLowerCase() === 'libre') {
+      const url = `${LIBRE_URL.replace(/\/$/, '')}/translate`
+      const payload = { q: t, source: source || 'auto', target, format: 'text' }
+      const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      if (!res.ok) throw new Error(`Libre ${res.status}`)
+      const data = await res.json()
+      return (data.translatedText) || t
+    }
   } catch (e) {
     console.warn(`Translate fail (${source || 'auto'}→${target}):`, e.message)
   }
   return t
+}
+
+// Persistent translation cache stored in repo: data/translation-cache.json
+const cachePath = path.join(__dirname, '..', 'data', 'translation-cache.json')
+function readCache() {
+  try { return JSON.parse(fs.readFileSync(cachePath, 'utf-8')) } catch { return {} }
+}
+function writeCache(obj) {
+  fs.writeFileSync(cachePath, JSON.stringify(obj, null, 2))
+}
+function hashKey(s) {
+  return crypto.createHash('sha1').update(String(s)).digest('hex').slice(0, 16)
+}
+function makeKey(item, type) {
+  const srcLang = (item.language || 'uk').toLowerCase()
+  const ts = String(item.timestamp || '')
+  const cat = String(item.category || type)
+  const baseText = type === 'article'
+    ? [item.title, item.excerpt, item.content].join('\n')
+    : [item.title, item.details, item.location].join('\n')
+  return `${type}:${srcLang}:${ts}:${cat}:${hashKey(baseText)}`
 }
 
 const qArticles = `*[_type=="article"] | order(timestamp desc){
@@ -89,10 +120,13 @@ async function main() {
 
     // Auto-translate into missing languages (in-memory for site JSON)
     async function ensureTranslations(items, type) {
+      const cache = readCache()
+      let cacheTouched = false
       const out = [...items]
       // group key: timestamp + category + title (source language)
       for (const item of items) {
         const srcLang = (item.language || 'uk').toLowerCase()
+        const baseKey = makeKey(item, type)
         const targets = ALL_LANGS.filter((l) => l !== srcLang)
         // Check existing items with the same timestamp+category+title in other languages
         for (const tgt of targets) {
@@ -102,7 +136,14 @@ async function main() {
             (x.language || '') === tgt
           )
           if (exists) continue
-          // Fields to translate
+          // 1) Try cache first
+          const key = `${baseKey}->${tgt}`
+          const cached = cache[key]
+          if (cached) {
+            out.push({ ...item, ...cached, language: tgt, auto_translated: true })
+            continue
+          }
+          // 2) If provider configured, translate now and store
           if (PROVIDER && (DEEPL_KEY || GOOGLE_KEY)) {
             const translated = { ...item, language: tgt, auto_translated: true }
             if (type === 'article') {
@@ -116,9 +157,16 @@ async function main() {
               translated.location = item.location ? await translate(item.location, tgt, srcLang) : item.location
             }
             out.push(translated)
+            // store minimal diff in cache
+            const store = type === 'article'
+              ? { title: translated.title, excerpt: translated.excerpt, content: translated.content }
+              : { title: translated.title, details: translated.details, location: translated.location }
+            cache[key] = store
+            cacheTouched = true
           }
         }
       }
+      if (cacheTouched) writeCache(cache)
       return out
     }
 

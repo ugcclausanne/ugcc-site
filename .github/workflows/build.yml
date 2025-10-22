@@ -34,6 +34,7 @@ jobs:
           TRANSLATE_PROVIDER: ${{ secrets.TRANSLATE_PROVIDER }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          LIBRE_TRANSLATE_URL: ${{ secrets.LIBRE_TRANSLATE_URL }}
         run: |
           npm run sync:sanity
           npm run build
@@ -66,4 +67,3 @@ jobs:
           WA_RECIPIENTS: ${{ secrets.WA_RECIPIENTS }}
         run: |
           npm run post:publish || echo "Autopost skipped or failed; continuing."
-
