@@ -3,6 +3,8 @@ name: Sync, Build, and (Optional) Autopost
 on:
   push:
     branches: [ main ]
+  schedule:
+    - cron: '0 3 * * *'  # daily at 03:00 UTC
   workflow_dispatch: {}
 
 permissions:
@@ -30,6 +32,7 @@ jobs:
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
           SANITY_API_VERSION: ${{ secrets.SANITY_API_VERSION }}
           SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN }}
+          BASE_PATH: ${{ secrets.BASE_PATH }}
           # Optional translation
           TRANSLATE_PROVIDER: ${{ secrets.TRANSLATE_PROVIDER }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}

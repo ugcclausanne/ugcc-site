@@ -6,11 +6,15 @@
     "sync:sanity": "node scripts/fetch-sanity.js",
     "build": "npm run sync:sanity && node scripts/render-pages.js",
     "post:publish": "node scripts/autopost.js",
-    "dev": "node scripts/render-pages.js --watch"
+    "dev": "node scripts/render-pages.js --watch",
+    "update:now": "npm run sync:sanity && npm run build",
+    "local": "node scripts/dev.js",
+    "serve": "node scripts/serve.js"
   },
   "dependencies": {
     "nunjucks": "^3.2.4",
     "glob": "^10.3.10",
-    "@sanity/client": "^6.18.2"
+    "@sanity/client": "^6.18.2",
+    "dotenv": "^16.4.5"
   }
 }

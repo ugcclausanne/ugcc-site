@@ -1,3 +1,6 @@
+// Load env from .env if present
+try { require('dotenv').config() } catch {}
+
 const fs = require('node:fs')
 const path = require('node:path')
 const crypto = require('node:crypto')
