@@ -1,9 +1,10 @@
 {
   "default_lang": "uk",
-  
   "site_url": "https://khpankiv.github.io/UGCC-Lausanne",
-  "default_hero_image": "/assets/images/church-bg.jpg",
+  "default_hero_image": "/assets/images/hero.jpg",
+	"logo_image": "/assets/images/logo.png",
   "default_page_hero": true,
+	"base": "${BASE_PATH}",
 
   "common": {
     "email": "ugcc.lausanne@gmail.com",

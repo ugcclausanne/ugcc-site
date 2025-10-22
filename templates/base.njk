@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {# === Заголовок сторінки === #}
+  {# === Header === #}
   {% if meta and meta.title %}
     <title>{{ meta.title }}</title>
   {% else %}
@@ -36,7 +36,7 @@
   {% if _desc %}<meta name="twitter:description" content="{{ _desc }}">{% endif %}
   {% if _image %}<meta name="twitter:image" content="{{ _image }}">{% endif %}
 
-  {# === SEO метадані === #}
+  {# === SEO metadata === #}
   {% if meta and meta.description %}
     <meta name="description" content="{{ meta.description }}">
   {% endif %}
@@ -60,21 +60,19 @@
   <link rel="stylesheet" href="{{ base }}/assets/css/styles.css">
   <link rel="stylesheet" href="{{ base }}/assets/css/header.css">
   <link rel="stylesheet" href="{{ base }}/assets/css/footer.css">
-  <link rel="stylesheet" href="{{ base }}/assets/css/cards.css">  {# новий файл для карток і сторінок #}
+  <link rel="stylesheet" href="{{ base }}/assets/css/cards.css"> 
   <link rel="stylesheet" href="{{ base }}/assets/css/overrides.css">
-	
-	<!-- Стилі героя -->
 	{% if page_hero %}
   <link rel="stylesheet" href="{{ base }}/assets/css/page-hero.css">
 	{% endif %}
 
-  <!-- Іконки -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
 <body>
-  {% include "header.njk" %}
+  {% include "partials/header.njk" %}
 
   {# === Герой сторінки === #}
 		{% if page_hero %}
@@ -84,12 +82,12 @@
   <main>
     {% block content %}{% endblock %}
 
-    {# === Вставка шаблону сторінки === #}
+    {# === Page template === #}
     {% set page_template = "pages/" + page + ".njk" %}
     {% include page_template ignore missing %}
   </main>
 
-  {% include "footer.njk" %}
+  {% include "partials/footer.njk" %}
 
   <script src="{{ base }}/assets/js/main.js"></script>
 </body>

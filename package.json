@@ -6,7 +6,9 @@
     "sync:sanity": "node scripts/fetch-sanity.js",
     "build": "node scripts/render-pages.js",
     "dev": "node scripts/render-pages.js --watch",
-    "update:now": "npm run sync:sanity && npm run build"
+    "update:now": "npm run sync:sanity && npm run build",
+    "local": "npm run update:now && python -m http.server 8000"
+
   },
   "dependencies": {
     "nunjucks": "^3.2.4",

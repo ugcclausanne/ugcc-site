@@ -3,7 +3,6 @@ try { require('dotenv').config() } catch {}
 
 const fs = require('node:fs')
 const path = require('node:path')
-const crypto = require('node:crypto')
 const client = require('./sanityClient')
 const fetch = global.fetch || ((...args) => import('node-fetch').then(({default: f}) => f(...args)))
 
@@ -69,26 +68,7 @@ async function translate(text, target, source) {
   return t
 }
 
-// Persistent translation cache stored in repo: data/translation-cache.json
-const cachePath = path.join(__dirname, '..', 'data', 'translation-cache.json')
-function readCache() {
-  try { return JSON.parse(fs.readFileSync(cachePath, 'utf-8')) } catch { return {} }
-}
-function writeCache(obj) {
-  fs.writeFileSync(cachePath, JSON.stringify(obj, null, 2))
-}
-function hashKey(s) {
-  return crypto.createHash('sha1').update(String(s)).digest('hex').slice(0, 16)
-}
-function makeKey(item, type) {
-  const srcLang = (item.language || 'uk').toLowerCase()
-  const ts = String(item.timestamp || '')
-  const cat = String(item.category || type)
-  const baseText = type === 'article'
-    ? [item.title, item.excerpt, item.content].join('\n')
-    : [item.title, item.details, item.location].join('\n')
-  return `${type}:${srcLang}:${ts}:${cat}:${hashKey(baseText)}`
-}
+// No separate cache file. We reuse translations already present in data/articles.json and data/schedule.json
 
 const qArticles = `*[_type=="article"] | order(timestamp desc){
   _id,
@@ -149,32 +129,31 @@ async function main() {
     for (const a of articles) a.slug = slugFromTs(a)
     for (const s of schedule) s.slug = slugFromTs(s)
 
+    // Load existing site data to reuse prior translations
+    const dataDir = path.join(__dirname, '..', 'data')
+    let existingArticles = []
+    let existingSchedule = []
+    try { const p = path.join(dataDir, 'articles.json'); if (fs.existsSync(p)) existingArticles = JSON.parse(fs.readFileSync(p, 'utf-8')) } catch {}
+    try { const p = path.join(dataDir, 'schedule.json'); if (fs.existsSync(p)) existingSchedule = JSON.parse(fs.readFileSync(p, 'utf-8')) } catch {}
+    const idxA = new Map(existingArticles.map(x => [`${x.slug}|${(x.language||'uk').toLowerCase()}`, x]))
+    const idxS = new Map(existingSchedule.map(x => [`${x.slug}|${(x.language||'uk').toLowerCase()}`, x]))
+
     // Auto-translate into missing languages (in-memory for site JSON)
     async function ensureTranslations(items, type) {
-      const cache = readCache()
-      let cacheTouched = false
       const out = [...items]
-      // group key: timestamp + category + title (source language)
+      // Ensure all target languages exist. First try existing data, then translate.
       for (const item of items) {
         const srcLang = (item.language || 'uk').toLowerCase()
-        const baseKey = makeKey(item, type)
         const targets = ALL_LANGS.filter((l) => l !== srcLang)
-        // Check existing items with the same timestamp+category+title in other languages
+        // Check by slug + language
         for (const tgt of targets) {
-          const exists = out.find((x) =>
-            (x.timestamp || '') === (item.timestamp || '') &&
-            (x.category || '') === (item.category || '') &&
-            (x.language || '') === tgt
-          )
+          const exists = out.find((x) => (x.slug||'') === (item.slug||'') && (x.language||'') === tgt)
           if (exists) continue
-          // 1) Try cache first
-          const key = `${baseKey}->${tgt}`
-          const cached = cache[key]
-          if (cached) {
-            out.push({ ...item, ...cached, slug: item.slug, language: tgt, auto_translated: true })
-            continue
-          }
-          // 2) If provider configured, translate now and store
+          // 1) Try existing site data first
+          const idx = type === 'article' ? idxA : idxS
+          const prior = idx.get(`${item.slug}|${tgt}`)
+          if (prior) { out.push(prior); continue }
+          // 2) Else translate now
           const provider = (PROVIDER || '').toLowerCase()
           const canTranslate = (provider === 'deepl' && !!DEEPL_KEY) || (provider === 'google' && !!GOOGLE_KEY) || (provider === 'libre')
           if (canTranslate) {
@@ -193,16 +172,9 @@ async function main() {
               translated.location = item.location ? await translate(item.location, tgt, srcLang) : item.location
             }
             out.push(translated)
-            // store minimal diff in cache
-            const store = type === 'article'
-              ? { title: translated.title, excerpt: translated.excerpt, content: translated.content }
-              : { title: translated.title, details: translated.details, location: translated.location }
-            cache[key] = store
-            cacheTouched = true
           }
         }
       }
-      if (cacheTouched) writeCache(cache)
       return out
     }
 
@@ -210,7 +182,6 @@ async function main() {
     const beforeS = schedule.length
     articles = await ensureTranslations(articles, 'article')
     schedule = await ensureTranslations(schedule, 'schedule')
-    const dataDir = path.join(__dirname, '..', 'data')
     if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, {recursive: true})
     fs.writeFileSync(path.join(dataDir, 'articles.json'), JSON.stringify(articles, null, 2))
     fs.writeFileSync(path.join(dataDir, 'schedule.json'), JSON.stringify(schedule, null, 2))
