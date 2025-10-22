@@ -1,5 +1,19 @@
 [
   {
+    "_id": "6152bf08-2679-4c49-a27a-43d5891ab877",
+    "author": "Громада",
+    "auto_translated": true,
+    "category": "spiritual",
+    "content": "Запрошуємо всіх долучатися до спільної молитви за мир в Україні.",
+    "email": "ugcc.lausanne@gmail.com",
+    "excerpt": "Щонеділі перед Літургією — спільна молитва Вервиці.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/455e13c2b9c7d4c23858b1a1c67e897b77d3a52e-1024x1024.png",
+    "language": "uk",
+    "timestamp": "2025-10-22T17:45:08.516Z",
+    "title": "Молитва Вервиці до Божого Милосердя",
+    "slug": "202510221745"
+  },
+  {
     "_id": "9743c698-4689-437b-80b0-3ec86eeec6f1",
     "author": "Громада",
     "auto_translated": true,
@@ -12,6 +26,34 @@
     "timestamp": "2025-10-22T08:44:00.000Z",
     "title": "10:00",
     "slug": "202510220844"
+  },
+  {
+    "_id": "6152bf08-2679-4c49-a27a-43d5891ab877",
+    "author": "Громада",
+    "auto_translated": true,
+    "category": "spiritual",
+    "content": "Запрошуємо всіх долучатися до спільної молитви за мир в Україні.",
+    "email": "ugcc.lausanne@gmail.com",
+    "excerpt": "Щонеділі перед Літургією — спільна молитва Вервиці.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/455e13c2b9c7d4c23858b1a1c67e897b77d3a52e-1024x1024.png",
+    "language": "en",
+    "timestamp": "2025-10-22T17:45:08.516Z",
+    "title": "Молитва Вервиці до Божого Милосердя",
+    "slug": "202510221745"
+  },
+  {
+    "_id": "6152bf08-2679-4c49-a27a-43d5891ab877",
+    "author": "Громада",
+    "auto_translated": true,
+    "category": "spiritual",
+    "content": "Запрошуємо всіх долучатися до спільної молитви за мир в Україні.",
+    "email": "ugcc.lausanne@gmail.com",
+    "excerpt": "Щонеділі перед Літургією — спільна молитва Вервиці.",
+    "image": "https://cdn.sanity.io/images/y4j9iov2/production/455e13c2b9c7d4c23858b1a1c67e897b77d3a52e-1024x1024.png",
+    "language": "fr",
+    "timestamp": "2025-10-22T17:45:08.516Z",
+    "title": "Молитва Вервиці до Божого Милосердя",
+    "slug": "202510221745"
   },
   {
     "_id": "9743c698-4689-437b-80b0-3ec86eeec6f1",
