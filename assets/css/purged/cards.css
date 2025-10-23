@@ -1,0 +1,141 @@
+/* Unified card styles across the site */
+
+/* Base: apply to common outer card containers */
+.list-card,
+.card-article,
+.card-liturgy, 
+.card-static {
+  background: var(--white);
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.list-card:hover,
+.card-article:hover,
+.card-liturgy:hover,
+.list-card:focus-visible,
+.card-article:focus-visible,
+.card-liturgy:focus-visible {
+  transform: translateY(calc(-1 * var(--raise-xs)));
+  box-shadow: var(--shadow-hover);
+  outline: none;
+}
+
+/* Normalize inner paddings (keep existing section-specific spacing reasonable) */
+.card-article, .list-card, .card-static { 
+	padding: var(--space-md); 
+	gap: var(--space-md);
+}
+
+/* Liturgy card previously used only bottom border; convert to box card */
+
+/* Padding for liturgy card will be handled in liturgy-card.css to allow a tighter layout */
+
+.card-article {
+  background: var(--white);
+  border: var(--border-width) solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-img img {
+  width: 100%;
+  height: auto; /* keep original aspect without cropping */
+  object-fit: contain;
+  background: #fff; /* keep neutral background around images if aspect ratios differ */
+}
+
+/* Optional dark overlay on images when requested */
+.card-img { position: relative; }
+.card-img.overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--img-overlay, 0.35));
+}
+
+.card-title {
+  color: var(--burgundy);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-xs);
+  overflow-wrap: anywhere; /* wrap very long words when needed */
+  hyphens: auto;
+}
+.card-date { font-size: var(--font-size-small); color: var(--burgundy); display: block; margin-bottom: 0.25rem; }
+
+.card-text {
+  color: var(--ink);
+  font-size: var(--font-size-small);
+  margin-top: 0.4rem;
+}
+.card-meta { display: flex; align-items: baseline; justify-content: space-between; margin-top: var(--space-sm); font-size: var(--font-size-small); }
+.card-meta .meta-author { font-style: italic; color: var(--muted); white-space: nowrap; }
+.card-meta .meta-date { color: var(--muted); font-size: var(--font-size-small); white-space: nowrap; }
+
+.card-liturgy {
+  position: relative;
+  display: block;
+  padding: var(--space-sm);
+}
+
+.liturgy-date {
+  position: absolute;
+  top: var(--liturgy-ribbon-offset);
+  left: var(--liturgy-ribbon-offset); /* protrude to the left */
+  width: var(--liturgy-ribbon-width);
+  background: var(--burgundy);
+  color: #fff;
+  text-align: center;
+  border-radius: 0; /* sharp corners */
+  padding: var(--space-xs) 0;
+  box-shadow: var(--shadow);
+  z-index: 2;
+}
+
+.liturgy-date .day {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.liturgy-date .month { font-size: var(--font-size-small); text-transform: uppercase; }
+
+.liturgy-details { margin-left: calc(var(--liturgy-ribbon-width) + var(--space-md)); }
+
+.liturgy-details .title { color: var(--burgundy); font-weight: 700; margin: 0; }
+.liturgy-details .title-row { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs); }
+.liturgy-details .service-subtitle { color: var(--ink); font-weight: 600; margin: 4px 0 var(--space-sm); }
+.liturgy-details .subtitle { color: var(--text-soft); font-size: var(--font-size-small); display: flex; align-items: center; gap: var(--space-md); margin: 0 0 var(--space-sm); }
+.liturgy-details .subtitle .meta-line { display: inline-flex; align-items: center; gap: 6px; }
+.card-icon { color: var(--burgundy); }
+
+.event-section { border-top: 1px dashed var(--border); padding-top: var(--space-xs); margin-top: var(--space-xs); }
+.event-section .section-label { font-size: var(--font-size-small); color: var(--muted); text-transform: uppercase; letter-spacing: .02em; margin-bottom: 2px; }
+.before-event, .after-event { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; font-size: var(--font-size-small); }
+
+.liturgy-details .details {
+  color: var(--ink);
+  margin-top: var(--space-xs);
+}
+
+/* Layout for the list of liturgies */
+.liturgy-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* Remove black focus outline on address links inside schedule cards; keep underline */
+.schedule-page .card-liturgy a:focus-visible {
+  outline: none;
+  box-shadow: none;
+  text-decoration: underline;
+}
+
+/* Month heading and top nav */
+.schedule-top-nav { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
+.schedule-top-nav a { color: var(--burgundy); border: var(--border-width) solid var(--border); padding: var(--space-xs) var(--space-sm); background: var(--white); box-shadow: var(--shadow); }
+.schedule-top-nav a:hover { background: var(--bgsoft); color: var(--burgundy); }
+
+/* Category badges */

@@ -7,13 +7,25 @@
     "build": "node scripts/render-pages.js",
     "dev": "node scripts/render-pages.js --watch",
     "update:now": "npm run sync:sanity && npm run build",
-    "local": "npm run update:now && python -m http.server 8000"
-
+    "local": "npm run update:now && python -m http.server 8000",
+    "lint": "eslint scripts --ext .js",
+    "lint:fix": "eslint scripts --ext .js --fix",
+    "css:purge": "postcss assets/css/*.css -d assets/css/purged",
+    "build:prod": "npm run build && npm run css:purge && npm run lint"
   },
   "dependencies": {
-    "nunjucks": "^3.2.4",
-    "glob": "^10.3.10",
     "@sanity/client": "^6.18.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "glob": "^10.3.10",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
   }
 }

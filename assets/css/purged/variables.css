@@ -1,0 +1,98 @@
+/* CSS Variables for UGCC Lausanne site (ugcc.fr style) */
+
+:root {
+  /* Colors */
+
+  /* --gold: #e6b800; */
+	--gold: #96692a;
+  --burgundy: #7c1839;
+  --bgsoft: #f6f6f7;
+  --bg: #fff;
+
+  /* Use single unified background across pages */
+  --bg-section: var(--bgsoft);
+  --border: #e0e0e0;
+  --text-main: #222;
+  --text-soft: #555;
+  --ink: #333;
+  --muted: #777;
+  --white: #fff;
+  --black: #111;
+  --burgundy-light: rgb(124 24 57 / 10%);
+  --link: var(--burgundy);
+  --link-hover: var(--gold);
+  --shadow-hover: 0 6px 20px rgb(0 0 0 / 12%);
+
+  /* Fonts */
+
+  /* Headline (gothic), body, and detail fonts */
+  --font-headline: Forum, serif;
+  --font-body: Segoe UI, serif;
+  --font-detail: Verdana, sans-serif;
+
+	
+  /* Backward-compat aliases used across styles */
+  --font-main: var(--font-body);
+  --font-accent: var(--font-headline);
+
+  /* Sizes */
+  --font-size-main: clamp(1rem, 1vw + 0.9rem, 1.15rem);
+  --font-size-title: clamp(2rem, 3vw + 1rem, 3rem);
+  --font-size-menu: clamp(1rem, 1vw + 0.8rem, 1.1rem);
+  --font-size-small: clamp(0.9rem, 0.7vw + 0.7rem, 1rem);
+
+  /* Radii, borders, UI sizes */
+  --radius: 6px;
+  --border-width: 1px;
+
+  /* Card/layout helpers */
+  --card-thumb-height: 220px;
+  --raise-xs: 4px;
+  --raise-sm: 6px;
+
+  /* Liturgy ribbon measurements */
+  --liturgy-ribbon-width: 76px;
+  --liturgy-ribbon-offset: -10px;
+
+  /* Spacing: small — fixed, medium/large — adaptive */
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: clamp(16px, 3vw, 32px);
+  --space-lg: clamp(32px, 6vw, 64px);
+
+  /* Header */
+  --header-gap: var(--space-md);
+  --header-block-padding: var(--space-md);
+  --header-logo-width: 80px;
+  --header-logo-mobile-max-width: 40px;
+  --header-search-width: 180px;
+  --lang-circle-size: 44px;
+  --socials-font-size: 1.35rem;
+  --donate-btn-width: 200px;
+  --menu-height: 56px;
+  --menu-padding-y: 8px;
+  --section-block-padding: var(--space-lg);
+  --footer-block-padding: var(--header-block-padding);
+
+  /* Shadows */
+  --shadow: 0 4px 16px rgb(0 0 0 / 8%);
+
+  /* Transition */
+  --transition: 0.5s;
+
+  /* === Base styles for UGCC Lausanne === */
+  --container-width: 1200px;
+  --container-padding: var(--space-md);
+
+  /* Layout specific variables */
+  --layout-gap: var(--space-md);
+  --layout-card-min-width: 280px;
+  --layout-card-min-width-mobile: 180px;
+  --layout-controls-size: 44px;
+  --layout-controls-radius: 999px;
+  --layout-controls-padding: 14px;
+  --layout-dots-size: 10px;
+  --layout-dots-gap: 8px;
+  --layout-slide-padding: 90px 0;
+  --layout-slide-padding-mobile: 40px 0;
+}

@@ -42,6 +42,7 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
     if (b && !b.startsWith('/')) b = '/' + b;
     return b;
   };
+	
   const basePath = normalizeBase(process.env.BASE_PATH || globalConfig.base_path || '');
   const siteUrl = (process.env.SITE_URL || globalConfig.site_url || '').replace(/\/$/, '');
   const collectedRoutes = new Set();

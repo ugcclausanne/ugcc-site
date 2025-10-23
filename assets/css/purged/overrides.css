@@ -1,0 +1,49 @@
+/* Responsive overrides and small UX tweaks */
+
+/* 1) Home announcements: on mobile show extra info inline (no hover) */
+@media (width <= 900px) {
+  .home-announce-strip .announce .extra,
+  .home-section .announce-grid .announce .extra {
+    position: static;
+    display: block;
+    border: 0;
+    box-shadow: none;
+    padding: 4px 0 0;
+    background: transparent;
+  }
+}
+
+/* 2) Article cards: keep images un-cropped on narrow screens too */
+@media (width <= 900px) {
+  .card-img img { height: auto; object-fit: contain; }
+}
+
+/* 3) Footer: extra breathing room above copyright on mobile */
+@media (width <= 900px) {
+  .footer .container { padding-bottom: var(--space-lg); }
+  .footer-copyright { margin-top: var(--space-lg); }
+}
+
+/* 4) Smaller headings on narrow screens */
+@media (width <= 900px) {
+  h1 { font-size: clamp(1.8rem, 5vw, 2.2rem); }
+  h2 { font-size: clamp(1.3rem, 4.2vw, 1.6rem); }
+  .card-title { font-size: 1.05rem; }
+}
+
+/* 5) Hide footer sections on mobile; navigation доступне через бургер */
+
+
+/* Headings hyphenation for better wrapping */
+h1, h2, h3 { hyphens: auto; overflow-wrap: anywhere; }
+
+/* Outline style button (icon + text) */
+.btn-outline {
+  background: transparent;
+  color: var(--burgundy);
+  border: 1px solid var(--burgundy);
+}
+.btn-outline:hover { background: var(--gold); color: var(--burgundy); }
+
+
+@media (width <= 1100px){ .footer .footer-sections { display: none; } }

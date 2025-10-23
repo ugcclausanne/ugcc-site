@@ -3,8 +3,8 @@
   "site_url": "https://khpankiv.github.io/UGCC-Lausanne",
   "default_hero_image": "/assets/images/hero.jpg",
 	"logo_image": "/assets/images/logo.png",
+	"base_path": "/ugcc-site",
   "default_page_hero": true,
-	"base": "${BASE_PATH}",
 
   "common": {
     "email": "ugcc.lausanne@gmail.com",
