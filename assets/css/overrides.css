@@ -21,7 +21,7 @@
 /* 3) Footer: extra breathing room above copyright on mobile */
 @media (width <= 900px) {
   .footer .container { padding-bottom: var(--space-lg); }
-  .footer-copyright { margin-top: var(--space-lg); }
+  .footer-copyright { margin-top: var(--space-sm); }
 }
 
 /* 4) Smaller headings on narrow screens */

@@ -3,7 +3,9 @@
 
 @font-face {
   font-family: 'Forum';
-  src: local('Forum'), url('../fonts/Forum/Forum-Regular.ttf') format('truetype');
+  src: local('Forum'),
+       url('../fonts/Forum/Forum-Regular.woff2') format('woff2'),
+       url('../fonts/Forum/Forum-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

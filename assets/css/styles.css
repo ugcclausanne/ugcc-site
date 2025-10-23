@@ -11,7 +11,7 @@
 }
 
 body {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   font-size: var(--font-size-main);
   color: var(--text-main);
   background: var(--bgsoft);
@@ -25,7 +25,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-accent);
+  font-family: var(--font-headline);
   color: var(--burgundy);
   /* margin-block: var(--space-sm); */
   font-weight: 700;
@@ -53,7 +53,7 @@ a:hover {
 
 button,
 .btn {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
 	font-weight: 600;
   font-size: var(--font-size-main);
   background: var(--burgundy);
@@ -148,7 +148,7 @@ img {
 
 @media (width <= 800px) { .contact-form .form-row.two { grid-template-columns: 1fr; } }
 .contact-form label { display: grid; gap: var(--space-xs); color: var(--text-soft); }
-.contact-form input, .contact-form textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--burgundy); outline: none; border-radius: 0; font-family: var(--font-main); font-size: 1rem; }
+.contact-form input, .contact-form textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--burgundy); outline: none; border-radius: 0; font-family: var(--font-body); font-size: 1rem; }
 .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 2px var(--burgundy-light); }
 .contact-form .form-actions { display: flex; justify-content: flex-end; }
 

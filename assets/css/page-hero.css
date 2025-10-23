@@ -1,8 +1,9 @@
 .page-hero {
   position: relative;
   height: 300px;
-  /* background-image: var(--hero-bg); */
+  background-image: var(--hero-bg);
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
@@ -10,7 +11,7 @@
   color: #fff;
   text-align: center;
   overflow: hidden;
-	padding-block: var(--hero-padding-vertical);
+	margin-block: var(--hero-padding-vertical);
 }
 
 .page-hero .overlay {
@@ -57,7 +58,7 @@
 }
 
 .page-hero p {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   color: #f0f0f0;
   margin-top: 0.5rem;
   font-size: 1.1rem;

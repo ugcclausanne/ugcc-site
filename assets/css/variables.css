@@ -29,12 +29,6 @@
   --font-headline: Forum, serif;
   --font-body: Segoe UI, serif;
   --font-detail: Verdana, sans-serif;
-
-	
-  /* Backward-compat aliases used across styles */
-  --font-main: var(--font-body);
-  --font-accent: var(--font-headline);
-
   /* Sizes */
   --font-size-main: clamp(1rem, 1vw + 0.9rem, 1.15rem);
   --font-size-title: clamp(2rem, 3vw + 1rem, 3rem);

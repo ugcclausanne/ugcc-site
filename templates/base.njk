@@ -50,6 +50,9 @@
   <!-- Favicon -->
   <link rel="icon" href="{{ base }}/assets/images/favicon.svg" type="image/svg+xml">
 
+  {# Preload headline font (WOFF2) to speed up first paint of headings #}
+  <link rel="preload" href="{{ base }}/assets/fonts/Forum/Forum-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
   <!-- Fonts: headline/body/detail (no preload to avoid console warnings) -->
   <link rel="stylesheet" href="{{ base }}/assets/css/fonts.css">
   {# If web-hosted fonts are desired as fallback, re-enable the links below. Now using self-hosted faces. #}

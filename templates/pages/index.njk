@@ -90,17 +90,20 @@
 {% endif %}
 
   <!-- News (3 cards) -->
+  {% set _news = sections.news | take(0,3) %}
+  {% if _news and (_news | length) > 0 %}
   {% set title = latest_news_title %}
   <section class="home-section">
     <div class="container">
       <h2>{{ title }}</h2>
       <div class="grid cols-3">
-        {% for item in sections.news | take(0,3) %}
+        {% for item in _news %}
           {% include "partials/card-article.njk" %}
         {% endfor %}
       </div>
     </div>
   </section>
+  {% endif %}
 
   <!-- Spiritual (3 cards) -->
   {% set title = spiritual_title %}
@@ -127,5 +130,4 @@
       </div>
     </div>
   </section>
-
 

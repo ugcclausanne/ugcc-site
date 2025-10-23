@@ -21,15 +21,15 @@
 .footer-grid {
   display: grid;
   /* Three equal tracks that don’t collapse too narrow */
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
-  gap: var(--space-lg);
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: var(--space-md);
   align-items: start; /* top-aligned */
 }
 
 /* Ensure each column stacks its content vertically with consistent rhythm */
 .footer .footer-col { 
 	display: grid; 
-	gap: 16px; 
+\tgap: 10px; 
 	align-content: center; 
 	justify-items: center; 
 	text-align: center; }
@@ -43,11 +43,11 @@
 /* Headings: uppercase with gold underline accent */
 .footer h3 {
   color: var(--white);
-  font-size: 1.1em;
+  font-size: 1em;
   text-transform: uppercase;
   letter-spacing: .04em;
-  margin: 0 0 var(--space-sm);
-  padding-bottom: 6px;
+  margin: 0 0 8px;
+  padding-bottom: 4px;
   position: relative;
 }
 
@@ -55,7 +55,7 @@
   content: "";
   position: absolute;
   left: 0; bottom: 0;
-  width: 44px; height: 3px;
+  width: 36px; height: 2px;
   background: var(--gold);
 }
 
@@ -66,7 +66,7 @@
 .footer .footer-links a.active::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); bottom: -6px; width: 44px; height: 2px; background: var(--gold); }
 /* Focus ring for footer links */
 .footer a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgb(150 105 42 / 35%); border-radius: 4px; }
-.footer .links, .footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.footer .links, .footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 
 /* Contact lines */
 .footer .contact-line { margin: 0; text-align: center; }
@@ -96,10 +96,10 @@
 .footer { overflow-x: hidden; }
 
 /* Divider and copyright */
-.footer-divider { height: 1px; background: rgb(255 255 255 / 20%); margin-block: var(--space-md); }
+.footer-divider { height: 1px; background: rgb(255 255 255 / 20%); margin-block: var(--space-sm); }
 .footer-copyright { text-align: right; opacity: .9; }
 
 /* Footer socials: match header spacing */
 .footer .socials { display: inline-flex; align-items: center; gap: var(--space-sm); font-size: var(--socials-font-size); }
 
-@media (width <= 900px){ .footer { padding-block: var(--space-md); margin-top: var(--space-sm); } }
+@media (width <= 900px){ .footer { padding-block: var(--space-sm); margin-top: var(--space-sm); } }

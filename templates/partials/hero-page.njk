@@ -8,8 +8,8 @@
   {% endif %}
 {% endif %}
 
-<div class="page-hero">
-  <img class="hero-bg" src="{{ _hero_src }}" alt="" aria-hidden="true" />
+{# Use background image via CSS custom property for layout control #}
+<div class="page-hero" style="--hero-bg: url('{{ _hero_src }}')">
   <div class="hero-content">
     <h1 class="page-hero-title">{{ title }}</h1>
     {% if page_subtitle %}
