@@ -251,7 +251,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  font-family: var(--font-main);
+  font-family: var(--font-headline);
   font-size: var(--font-size-menu);
   text-transform: uppercase;
   letter-spacing: 0.02em;
