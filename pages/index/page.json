@@ -1,7 +1,6 @@
 {
 	"common": {
     "page_hero": true,
-    "hero_image": "/assets/images/church-bg.jpg",
 		"icon": "<svg viewBox='0 0 24 24' focusable='false' role='img'><circle cx='12' cy='8' r='3'/><circle cx='5' cy='11' r='2.5'/><circle cx='19' cy='11' r='2.5'/><path d='M4 19c1.5-3 4-4 8-4s6.5 1 8 4'/></svg>"
   },
   "uk": {

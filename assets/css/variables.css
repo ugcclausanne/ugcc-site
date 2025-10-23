@@ -74,6 +74,8 @@
   --section-block-padding: var(--space-lg);
   --footer-block-padding: var(--header-block-padding);
 
+	--hero-padding-vertical: var(--space-md);
+
   /* Shadows */
   --shadow: 0 4px 16px rgb(0 0 0 / 8%);
 

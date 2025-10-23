@@ -3,7 +3,7 @@
   "site_url": "https://khpankiv.github.io/UGCC-Lausanne",
   "default_hero_image": "/assets/images/hero.jpg",
 	"logo_image": "/assets/images/logo.png",
-	"base_path": "",
+	"base_path": "/",
   "default_page_hero": true,
 
   "common": {
@@ -12,7 +12,6 @@
     "address": "Chem. de Beau-Rivage 3, 1006 Lausanne",
     "social_list": [
       { "title": "Facebook", "url": "https://www.facebook.com/ugcc.lausanne" },
-      { "title": "YouTube", "url": "https://www.youtube.com/@ugcc-lausanne" },
       { "title": "Instagram", "url": "#" },
       { "title": "WhatsApp", "url": "#" }
     ],

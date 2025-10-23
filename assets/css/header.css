@@ -1,6 +1,7 @@
 .header {
-	background: var(--bg);
-	padding-top: var(--header-block-padding);
+    background: var(--bg);
+    /* tighter top padding */
+    padding-top: var(--space-sm);
 	position: sticky; 
 	top: 0; 
 	z-index: 50;
@@ -18,12 +19,13 @@
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  /* gap: var(--space-md); */
+  gap: var(--space-sm);
 }
 
 .header-logo-full {
   object-fit: contain;
-  max-width: var(--header-logo-width);
+  /* slightly smaller logo */
+  max-width: 64px;
 }
 
 /* Remove default black focus outline around the logo link; use soft glow */
@@ -37,14 +39,14 @@
 }
 
 .header-title-small {
-  font-size: var(--font-size-menu);
+  font-size: calc(var(--font-size-menu) - 0.1rem);
   font-weight: 500;
   color: var(--muted);
-  margin-bottom: var(--space-xs);
+  margin-bottom: 2px;
 }
 
 .header-title {
-  font-size: var(--font-size-title);
+  font-size: clamp(1.6rem, 2.2vw + 0.6rem, 2.4rem);
 }
 
 /* Make logo titles turn gold on hover/focus of the home link */
@@ -69,7 +71,7 @@
   grid-auto-rows: max-content;
   place-items: center end;
   justify-content: end;
-  gap: var(--space-sm);
+  gap: 8px;
 }
 
 /* Keep consistent Donate width across languages */
@@ -116,6 +118,8 @@
 
 /* Provide subtle focus ring for language button */
 .lang-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgb(150 105 42 / 35%); border-radius: 4px; }
+
+.lang-dropdown { position: relative; display: inline-block; }
 
 .lang-list {
   position: absolute;
@@ -184,6 +188,7 @@
 }
 
 .socials-header .icon-btn { background: transparent; border: 0; padding: 0; cursor: pointer; }
+.socials-row { display: inline-flex; align-items: center; gap: 10px; }
 
 .header-search { margin-left: 0; width: var(--header-search-width); max-width: 100%; display: none; }
 .header-actions-right.search-open .header-search { display: block; }
@@ -199,9 +204,9 @@
 
 .header-menu-row {
   width: 100%;
-  margin-top: var(--space-sm);
+  margin-top: 6px;
   background: var(--burgundy);
-  height: calc(var(--menu-height) + var(--menu-padding-y) * 2);
+  height: calc(44px + 6px * 2);
 }
 
 .header-menu-row > .container {

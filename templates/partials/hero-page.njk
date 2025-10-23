@@ -8,12 +8,12 @@
   {% endif %}
 {% endif %}
 
-<section class="page-hero" style="--hero-bg: url('{{ _hero_src }}'); --hero-pos: {{ _hero_pos }}">
-  <div class="overlay"></div>
+<div class="page-hero">
+  <img class="hero-bg" src="{{ _hero_src }}" alt="" aria-hidden="true" />
   <div class="hero-content">
     <h1 class="page-hero-title">{{ title }}</h1>
     {% if page_subtitle %}
       <p>{{ page_subtitle }}</p>
     {% endif %}
   </div>
-</section>
+</div>

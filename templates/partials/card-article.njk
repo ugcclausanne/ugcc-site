@@ -1,17 +1,15 @@
 <a class="card-article" href="{{ base }}{{ item.url }}" itemscope itemtype="https://schema.org/Article">
-  {% if item.image %}
-    <div class="card-img">
-      {% set _img = item.image %}
-      {% if (_img | substr(0,4)) != 'http' %}
-        {% if (_img | substr(0,1)) == '/' %}
-          {% set _img = base + _img %}
-        {% else %}
-          {% set _img = base + '/' + _img %}
-        {% endif %}
+  <div class="card-img">
+    {% set _img = item.image or ('' | fallback_article_image(item._id or item.title or item.timestamp)) %}
+    {% if (_img | substr(0,4)) != 'http' %}
+      {% if (_img | substr(0,1)) == '/' %}
+        {% set _img = base + _img %}
+      {% else %}
+        {% set _img = base + '/' + _img %}
       {% endif %}
-      <img src="{{ _img }}" alt="{{ item.title }}" itemprop="image">
-    </div>
-  {% endif %}
+    {% endif %}
+    <img src="{{ _img }}" alt="{{ item.title }}" itemprop="image">
+  </div>
   <div class="card-body">
     <h3 class="card-title" itemprop="headline">{{ item.title }}</h3>
     <p class="card-text" itemprop="description">{{ item.excerpt or item.text | truncate(140) }}</p>

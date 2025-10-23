@@ -76,6 +76,9 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
         ...pageLang,
         // add underscore alias for templates
         no_events: noEventsText,
+        // expose global media paths
+        default_hero_image: globalConfig.default_hero_image || pageCommon.default_hero_image,
+        logo_image: globalConfig.logo_image || pageCommon.logo_image,
         lang: langKey,
         page: pageName,
         header,

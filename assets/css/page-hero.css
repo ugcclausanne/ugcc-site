@@ -1,16 +1,16 @@
 .page-hero {
   position: relative;
   height: 300px;
-  background-image: var(--hero-bg, url('/assets/images/church-bg.jpg'));
+  /* background-image: var(--hero-bg); */
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: var(--hero-pos, center);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   text-align: center;
   overflow: hidden;
+	padding-block: var(--hero-padding-vertical);
 }
 
 .page-hero .overlay {

@@ -5,6 +5,18 @@
     <span class="month">{{ item.date | substr(5, 2) | monthname(lang) | substr(0,3) }}</span>
   </div>
   <div class="liturgy-details">
+    {# optional small thumbnail: use item.image or random prayer-N fallback #}
+    <div class="liturgy-thumb">
+      {% set _img = item.image or ('' | fallback_prayer_image(item._id or item.title or item.timestamp)) %}
+      {% if (_img | substr(0,4)) != 'http' %}
+        {% if (_img | substr(0,1)) == '/' %}
+          {% set _img = base + _img %}
+        {% else %}
+          {% set _img = base + '/' + _img %}
+        {% endif %}
+      {% endif %}
+      <img src="{{ _img }}" alt="{{ item.title }}">
+    </div>
     {% set categoryIcon = 'fa-regular fa-calendar' %}
     {% if item.category == 'liturgy' %}{% set categoryIcon = 'fa-solid fa-church' %}{% endif %}
     {% if item.category == 'announcement' %}{% set categoryIcon = 'fa-regular fa-bell' %}{% endif %}

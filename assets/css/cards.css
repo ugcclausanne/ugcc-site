@@ -104,6 +104,22 @@
 
 .liturgy-details { margin-left: calc(var(--liturgy-ribbon-width) + var(--space-md)); }
 
+.liturgy-details .liturgy-thumb {
+  width: 120px;
+  height: 80px;
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+  background: #fff;
+}
+.liturgy-details .liturgy-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .liturgy-details .title { color: var(--burgundy); font-weight: 700; margin: 0; }
 .liturgy-details .title-row { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs); }
 .liturgy-details .service-subtitle { color: var(--ink); font-weight: 600; margin: 4px 0 var(--space-sm); }

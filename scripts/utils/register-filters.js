@@ -1,12 +1,32 @@
 // Centralized Nunjucks filter registration.
 
 const { parseToDate } = require('./date');
+const fs = require('node:fs');
+const path = require('node:path');
 
 /**
  * Register all custom filters on a given Nunjucks environment.
  * @param {import('nunjucks').Environment} env
  */
 function registerFilters(env) {
+  // Preload available fallback images once
+  const imagesDir = path.join(__dirname, '..', '..', 'assets', 'images');
+  const files = fs.existsSync(imagesDir) ? fs.readdirSync(imagesDir) : [];
+  const articleFallbacks = files.filter((f) => /^(article|articles)-\d+\.(png|jpg|jpeg|webp)$/i.test(f));
+  const prayerFallbacks = files.filter((f) => /^prayer-\d+\.(png|jpg|jpeg|webp)$/i.test(f));
+  const pickBySeed = (seed, list, def) => {
+    if (!list.length) return def;
+    const s = String(seed || '').split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
+    const idx = Math.abs(s) % list.length;
+    return '/assets/images/' + list[idx];
+  };
+
+  env.addFilter('fallback_article_image', (seed = '') =>
+    pickBySeed(seed, articleFallbacks, '/assets/images/article.png')
+  );
+  env.addFilter('fallback_prayer_image', (seed = '') =>
+    pickBySeed(seed, prayerFallbacks, '/assets/images/prayer.png')
+  );
   // Text truncation for cards/previews
   env.addFilter('truncate', (str, len = 150) => {
     if (!str || typeof str !== 'string') return '';

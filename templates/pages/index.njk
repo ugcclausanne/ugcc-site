@@ -9,7 +9,15 @@
     <div class="container">
       <div class="grid cols-2 next-grid list-card" itemscope itemtype="https://schema.org/Event">
         <div class="next-media">
-          <img src="{{ base }}/assets/images/prayer.png" alt="Prayer">
+          {% set _img = next.image or ('' | fallback_prayer_image(next._id or next.title or next.timestamp)) %}
+          {% if (_img | substr(0,4)) != 'http' %}
+            {% if (_img | substr(0,1)) == '/' %}
+              {% set _img = base + _img %}
+            {% else %}
+              {% set _img = base + '/' + _img %}
+            {% endif %}
+          {% endif %}
+          <img src="{{ _img }}" alt="Prayer">
         </div>
         <div class="next-info">
           <h2 itemprop="name">{{ next.title }}</h2>
@@ -50,7 +58,7 @@
 
   {# 2) Announcements strip from schedule (category == 'announcement', next 3 future) #}
   {% set ann = sections.schedule | where('category', 'announcement') | upcoming | take(0,3) %}
-  {% if ann and ann.length %}
+  {% if (ann | length) > 0 %}
   <section class="home-announce-strip home-section">
     <div class="container">
       <h2>{{ announcements_title }}</h2>

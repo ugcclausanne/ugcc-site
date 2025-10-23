@@ -3,7 +3,15 @@
   <div class="container">
     <div class="header-top-row grid-header">
       <a class="header-logo-titles header-home-link" href="{{ base }}{{ header.menu[0].url }}">
-        <img src="{{ base }}{{ logo-image }}" alt="UGCC Logo" class="header-logo-full">
+        {% set _logo = logo_image %}
+        {% if (_logo | substr(0,4)) != 'http' %}
+          {% if (_logo | substr(0,1)) == '/' %}
+            {% set _logo = base + _logo %}
+          {% else %}
+            {% set _logo = base + '/' + _logo %}
+          {% endif %}
+        {% endif %}
+        <img src="{{ _logo }}" alt="UGCC Logo" class="header-logo-full">
         <div class="header-titles">
           <div class="header-title-small">{{ header.siteSubtitle }}</div>
           <h1 class="header-title">{{ header.siteName }}</h1>
@@ -14,21 +22,6 @@
           <button class="icon-btn menu-toggle" aria-expanded="false" aria-controls="main-menu" title="Menu">
             <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
           </button>
-          <div class="lang-circle">
-            <!-- Accessible language toggle button: JS expects .lang-btn and toggles .lang-list -->
-            <button class="lang-btn" aria-expanded="false" aria-controls="lang-menu" title="{{ header.langTitle }}">
-              <span class="lang-label"><i class="fa-solid fa-globe"></i><span class="label-text">{{ header.currentLangLabel }}</span></span>
-            </button>
-{% set currentPage = page %}
-{% set urlUk = '/' if currentPage == 'index' else '/' + currentPage + '/' %}
-{% set urlFr = '/fr/' if currentPage == 'index' else '/fr/' + currentPage + '/' %}
-{% set urlEn = '/en/' if currentPage == 'index' else '/en/' + currentPage + '/' %}
-<ul id="lang-menu" class="lang-list" role="menu" hidden>
-  <li role="menuitem"><a href="{{ base }}{{ urlUk }}">Українська</a></li>
-  <li role="menuitem"><a href="{{ base }}{{ urlFr }}">Français</a></li>
-  <li role="menuitem"><a href="{{ base }}{{ urlEn }}">English</a></li>
-</ul>
-          </div>
           <div class="socials-row">
             <span class="socials socials-header">
               {% set socials = social_list or footer.social %}
@@ -36,6 +29,21 @@
                 <a href="{{ social.url }}" title="{{ social.title }}"><i class="fa-brands fa-{{ social.title | lower }}"></i></a>
               {% endfor %}
             </span>
+            {# Language toggle: globe icon only, inline with other icons, before search #}
+            {% set currentPage = page %}
+            {% set urlUk = '/' if currentPage == 'index' else '/' + currentPage + '/' %}
+            {% set urlFr = '/fr/' if currentPage == 'index' else '/fr/' + currentPage + '/' %}
+            {% set urlEn = '/en/' if currentPage == 'index' else '/en/' + currentPage + '/' %}
+            <div class="lang-dropdown">
+              <button class="icon-btn lang-btn" aria-expanded="false" aria-controls="lang-menu" title="{{ header.langTitle }}">
+                <i class="fa-solid fa-globe"></i>
+              </button>
+              <ul id="lang-menu" class="lang-list" role="menu" hidden>
+                <li role="menuitem"><a href="{{ base }}{{ urlUk }}">Українська</a></li>
+                <li role="menuitem"><a href="{{ base }}{{ urlFr }}">Français</a></li>
+                <li role="menuitem"><a href="{{ base }}{{ urlEn }}">English</a></li>
+              </ul>
+            </div>
             <button class="icon-btn search-toggle" aria-expanded="false" title="{{ header.searchPlaceholder }}">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -67,6 +75,3 @@
     </div>
   </nav>
 </header>
-
-
-
