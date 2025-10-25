@@ -33,11 +33,9 @@ h6 {
   font-synthesis: none;
 }
 
-/* Unified underline for headings (except logo and hero h1). Line spans text width */
-h1:not(.header-title):not(.page-hero-title),
-h2, h3, h4, h5, h6 { display: inline-block; position: relative; padding-bottom: 6px; }
-h1:not(.header-title):not(.page-hero-title)::after,
-h2::after, h3::after, h4::after, h5::after, h6::after {
+/* Utility: gold underline that spans text width. Apply where needed. */
+.u-underline { display: inline-block; position: relative; padding-bottom: 6px; }
+.u-underline::after {
   content: "";
   position: absolute;
   left: 0;
@@ -46,6 +44,10 @@ h2::after, h3::after, h4::after, h5::after, h6::after {
   height: 2px;
   background: linear-gradient(90deg, transparent, rgb(230 184 0 / 90%), transparent);
 }
+
+/* Optional size variants */
+.u-underline--thin::after { height: 1px; }
+.u-underline--thick::after { height: 3px; }
 
 /* Uppercase main headings */
 h1,
