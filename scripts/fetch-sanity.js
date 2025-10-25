@@ -17,6 +17,9 @@ const GOOGLE_KEY = process.env.GOOGLE_API_KEY || ''
 const LIBRE_URL = process.env.LIBRE_TRANSLATE_URL || 'https://libretranslate.com'
 const LIBRE_FALLBACK_URL = process.env.LIBRE_TRANSLATE_FALLBACK_URL || 'https://libretranslate.de'
 const TRANSLATE_DELAY_MS = Number(process.env.TRANSLATE_DELAY_MS || 600)
+const TRANSLATE_TIMEOUT_MS = Number(process.env.TRANSLATE_TIMEOUT_MS || 8000)
+const TRANSLATE_RETRIES = Number(process.env.TRANSLATE_RETRIES || 2)
+const FORCE_RETRANSLATE = String(process.env.FORCE_RETRANSLATE || '').toLowerCase() === 'true'
 // Map of prior _id -> slug read from existing data (filled later if files exist)
 const idToSlug = new Map()
 
@@ -53,19 +56,28 @@ async function translate(text, target, source) {
     }
     if (PROVIDER.toLowerCase() === 'libre') {
       const payload = { q: t, source: source || 'auto', target, format: 'text' }
-      const call = async (base) => {
+      const endpoints = [LIBRE_URL, LIBRE_FALLBACK_URL].filter(Boolean)
+      const wait = (ms) => new Promise(r => setTimeout(r, ms))
+      for (const base of endpoints) {
         const url = `${base.replace(/\/$/, '')}/translate`
-        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-        if (!res.ok) throw new Error(`Libre ${res.status}`)
-        const data = await res.json()
-        return data.translatedText || t
+        for (let attempt = 0; attempt <= TRANSLATE_RETRIES; attempt++) {
+          try {
+            const ctrl = new AbortController()
+            const timer = setTimeout(() => ctrl.abort(), TRANSLATE_TIMEOUT_MS)
+            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: ctrl.signal })
+            clearTimeout(timer)
+            if (!res.ok) throw new Error(`Libre ${res.status}`)
+            const data = await res.json()
+            const out = (data && data.translatedText) || ''
+            if (out && out.trim()) return out
+          } catch (e) {
+            const delay = 300 * Math.pow(2, attempt)
+            console.warn(`Translate fail (${source||'auto'}→${target}) via ${url}: ${e.message}. Retry in ${delay}ms`)
+            await wait(delay)
+          }
+        }
       }
-      try {
-        const out = await call(LIBRE_URL)
-        if (out && out.trim()) return out
-      } catch {}
-      const fallback = await call(LIBRE_FALLBACK_URL)
-      return fallback
+      return t
     }
   } catch (e) {
     console.warn(`Translate fail (${source || 'auto'}→${target}):`, e.message)
@@ -150,7 +162,7 @@ async function main() {
           // 1) Try existing site data first
           const idx = type === 'article' ? idxA : idxS
           const prior = idx.get(`${item._id||''}|${tgt}`)
-          if (prior) { out.push(prior); continue }
+          if (prior && !(FORCE_RETRANSLATE && prior.auto_translated)) { out.push(prior); continue }
           // 2) Else translate now
           const provider = (PROVIDER || '').toLowerCase()
           const canTranslate = (provider === 'deepl' && !!DEEPL_KEY) || (provider === 'google' && !!GOOGLE_KEY) || (provider === 'libre')
