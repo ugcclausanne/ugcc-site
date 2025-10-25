@@ -4,9 +4,11 @@
   font-family: 'Forum';
   src: local('Forum'),
        url('../fonts/Forum/Forum-Regular.woff2') format('woff2');
-  font-weight: 400;
+  font-weight: 400 700 900;
   font-style: normal;
   font-display: swap;
+	line-height: 1;
+
 }
 
 @font-face {

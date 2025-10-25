@@ -1,4 +1,5 @@
 // Nunjucks static-site renderer (reads config.json and templates)
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const nunjucks = require('nunjucks');
@@ -45,6 +46,10 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
 	
   const basePath = normalizeBase(process.env.BASE_PATH);
   const siteUrl = (process.env.SITE_URL || globalConfig.site_url || '').replace(/\/$/, '');
+  const shouldGenerateSitemap = (
+    (process.env.GENERATE_SITEMAP || '').toLowerCase() === 'true' ||
+    (process.env.NODE_ENV || '').toLowerCase() === 'production'
+  );
   const collectedRoutes = new Set();
   const pageJsonFiles = glob.sync(pagesDir.replace(/\\/g, '/') + '/*/page.json');
   console.log('Found pages:', pageJsonFiles.map(p => path.relative(path.join(__dirname, '..'), p)));
@@ -156,9 +161,9 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
     }
   }
 
-  // ===== Generate sitemap.xml and robots.txt if siteUrl configured =====
+  // ===== Generate sitemap.xml and robots.txt (only in prod or when enabled) =====
   try {
-    if (siteUrl) {
+    if (siteUrl && shouldGenerateSitemap) {
       const urls = Array.from(collectedRoutes).sort();
       const fullBase = siteUrl + basePath;
       const now = new Date().toISOString();
@@ -173,7 +178,7 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
       fs.writeFileSync(path.join(__dirname, '..', 'robots.txt'), robots, 'utf-8');
       console.log(`Generated sitemap.xml with ${urls.length} URLs and robots.txt`);
     } else {
-      console.log('SITE_URL not set; skip sitemap/robots generation.');
+      console.log('Skip sitemap/robots generation (SITE_URL missing or disabled by flag).');
     }
   } catch (e) {
     console.warn('Could not generate sitemap/robots:', e.message);

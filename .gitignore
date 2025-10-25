@@ -1,11 +1,11 @@
-# �?�� �'�� �?��?����'�?�?��
+# Operating System files
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
 *.log
 
-# Node / �-�?�?�'�?�?�?��?�'�� (���?�? ���������?)
+# Node / npm files
 node_modules/
 npm-debug.log*
 pnpm-debug.log*
@@ -18,18 +18,23 @@ build/
 .cache/
 .sass-cache/
 
-# ESlint/Stylelint/Prettier �'��?�ؐ��?�?�?�-
+# ESlint/Stylelint/Prettier files
 .eslintcache
 .stylelintcache
 
-# �����?��'��
+# Environment variables
 .env
 .env.*
 
 # Autopost local state (keep translations tracked)
 .autopost-state.json
 
-#�ő?�'�?�?�-�? ���?�?�'�-�?
-.autopost-state.json
-sitemap.xml
+# Ignore generated HTML outputs (built by CI)
+# keep sources (templates/, pages/, assets/) tracked
+index.html
+*/index.html
+*/*/index.html
+*/*/*/index.html
 
+# Sitemap
+.sitemap.xml
