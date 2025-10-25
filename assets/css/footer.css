@@ -54,8 +54,9 @@
 .footer h3::after {
   content: "";
   position: absolute;
-  left: 0; bottom: 0;
-  width: 32px; height: 2px;
+  left: 50%; bottom: 0;
+  transform: translateX(-50%);
+  width: 44px; height: 2px;
   background: var(--gold);
 }
 
