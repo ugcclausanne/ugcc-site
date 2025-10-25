@@ -49,6 +49,10 @@
   font-size: clamp(1.6rem, 2.2vw + 0.6rem, 2.4rem);
 }
 
+/* Do not apply global heading underline to logo title */
+.header-title { display: block; position: static; padding-bottom: 0; }
+.header-title::after { content: none !important; }
+
 /* Make logo titles turn gold on hover/focus of the home link */
 .header-home-link:hover .header-title,
 .header-home-link:hover .header-title-small,
