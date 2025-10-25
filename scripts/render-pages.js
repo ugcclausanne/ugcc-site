@@ -43,7 +43,7 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
     return b;
   };
 	
-  const basePath = normalizeBase(process.env.BASE_PATH || globalConfig.base_path || '');
+  const basePath = normalizeBase(process.env.BASE_PATH);
   const siteUrl = (process.env.SITE_URL || globalConfig.site_url || '').replace(/\/$/, '');
   const collectedRoutes = new Set();
   const pageJsonFiles = glob.sync(pagesDir.replace(/\\/g, '/') + '/*/page.json');

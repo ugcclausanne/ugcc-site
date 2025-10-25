@@ -1,11 +1,9 @@
-/* Optional self-hosted fonts. Place .woff2 files in assets/fonts/.
-   Browser will try local() and self-hosted first; if unavailable, Google Fonts links in base.njk take over. */
+   /* Browser will try local() and self-hosted first; if unavailable, Google Fonts links in base.njk take over. */
 
 @font-face {
   font-family: 'Forum';
   src: local('Forum'),
-       url('../fonts/Forum/Forum-Regular.woff2') format('woff2'),
-       url('../fonts/Forum/Forum-Regular.ttf') format('truetype');
+       url('../fonts/Forum/Forum-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

@@ -3,7 +3,6 @@
   "site_url": "https://khpankiv.github.io/UGCC-Lausanne",
   "default_hero_image": "/assets/images/hero.jpg",
 	"logo_image": "/assets/images/logo.png",
-	"base_path": "/",
   "default_page_hero": true,
 
   "common": {
