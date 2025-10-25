@@ -5,7 +5,7 @@
 .footer {
   background: var(--burgundy);
   color: var(--white);
-  padding-block: var(--footer-block-padding);
+  padding-block: var(--space-sm);\n  font-size: 0.95rem;
   position: relative;
 }
 
@@ -21,15 +21,15 @@
 .footer-grid {
   display: grid;
   /* Three equal tracks that don’t collapse too narrow */
-  grid-template-columns: repeat(3, minmax(280px, 1fr));
-  gap: var(--space-md);
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: var(--space-sm);
   align-items: start; /* top-aligned */
 }
 
 /* Ensure each column stacks its content vertically with consistent rhythm */
 .footer .footer-col { 
 	display: grid; 
-\tgap: 10px; 
+\tgap: 8px; 
 	align-content: center; 
 	justify-items: center; 
 	text-align: center; }
@@ -43,11 +43,11 @@
 /* Headings: uppercase with gold underline accent */
 .footer h3 {
   color: var(--white);
-  font-size: 1em;
+  font-size: 0.95em;
   text-transform: uppercase;
   letter-spacing: .04em;
-  margin: 0 0 8px;
-  padding-bottom: 4px;
+  margin: 0 0 6px;
+  padding-bottom: 3px;
   position: relative;
 }
 
@@ -55,7 +55,7 @@
   content: "";
   position: absolute;
   left: 0; bottom: 0;
-  width: 36px; height: 2px;
+  width: 32px; height: 2px;
   background: var(--gold);
 }
 
@@ -66,10 +66,10 @@
 .footer .footer-links a.active::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); bottom: -6px; width: 44px; height: 2px; background: var(--gold); }
 /* Focus ring for footer links */
 .footer a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgb(150 105 42 / 35%); border-radius: 4px; }
-.footer .links, .footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.footer .links, .footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 
 /* Contact lines */
-.footer .contact-line { margin: 0; text-align: center; }
+.footer .contact-line { margin: 0; text-align: center; }\n.footer .contact-line a, .footer .links a, .footer .footer-links a, .footer .contact-line span { font-size: 0.95rem; }
 /* Keep the icon in its own column; text can wrap while the whole block stays centered */
 /* .footer .contact-line a { display: inline-grid; grid-auto-flow: column; grid-template-columns: auto 1fr; column-gap: 8px; align-items: center; color: var(--white); } */
 .footer .contact-line i { color: var(--white); line-height: 1; display: inline-block; padding-right: var(--space-xs); }
@@ -100,6 +100,6 @@
 .footer-copyright { text-align: right; opacity: .9; }
 
 /* Footer socials: match header spacing */
-.footer .socials { display: inline-flex; align-items: center; gap: var(--space-sm); font-size: var(--socials-font-size); }
+.footer .socials { display: inline-flex; align-items: center; gap: var(--space-sm); font-size: 1.1rem; }
 
-@media (width <= 900px){ .footer { padding-block: var(--space-sm); margin-top: var(--space-sm); } }
+@media (width <= 900px){ .footer { padding-block: var(--space-sm); margin-top: var(--space-sm); font-size: 0.9rem; } }
