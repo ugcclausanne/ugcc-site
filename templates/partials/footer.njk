@@ -3,7 +3,7 @@
     <div class="footer-grid">
       <!-- Contacts column -->
       <div class="footer-col ">
-        <h3>{{ footer.contacts_title }}</h3>
+        <h3 class="u-underline">{{ footer.contacts_title }}</h3>
         <p class="contact-line"><a class="address" href="{{ map_link }}" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i><span>{{ address }}</span></a></p>
         {% if phone %}
           <p class="contact-line"><a class="phone" href="tel:{{ phone }}"><i class="fa-solid fa-phone"></i><span>{{ phone }}</span></a></p>
@@ -15,7 +15,7 @@
 
       <!-- Friends -->
       <div class="footer-col">
-        <h3>{{ footer.partners_title }}</h3>
+        <h3 class="u-underline">{{ footer.partners_title }}</h3>
         <ul class="footer-links">
           {% if footer.partners and footer.partners.length %}
             {% for partner in footer.partners %}
@@ -27,7 +27,7 @@
 
 			<!-- Eparchy column-->
 			<div class="footer-col">
-        <h3>{{ footer.eparchy_title }}</h3>
+        <h3 class="u-underline">{{ footer.eparchy_title }}</h3>
         <ul class="footer-links">
           <li><a href="https://ugcc.fr/" target="_blank" rel="noopener">{{ footer.eparchy_site_label }}</a></li>
         </ul>

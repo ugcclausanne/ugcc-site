@@ -42,17 +42,8 @@
 .page-hero .hero-icon svg { width: 80px; height: 80px; color: currentcolor; stroke: currentcolor; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
 
 /* Title styling only (no inline icon layout) */
-.page-hero-title { display: inline-block; position: relative; padding-bottom: 6px; }
-
-.page-hero-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgb(230 184 0 / 90%), transparent);
-}
+/* Underline now provided via .u-underline utility */
+.page-hero-title { display: inline-block; }
 
 .page-hero p {
   font-family: var(--font-body);

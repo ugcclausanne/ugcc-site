@@ -266,14 +266,8 @@
   font-weight: 700;
 }
 
-/* Active menu item: subtle gold underline */
-.header-menu-row a.active { position: relative; }
-.header-menu-row a.active::after {
-  content: "";
-  position: absolute;
-  left: 16px; right: 16px; bottom: 6px;
-  height: 3px; background: var(--gold);
-}
+/* Active menu underline is handled via a span.u-underline inside the link */
+.header-menu-row a.active { position: static; }
 
 /* Keyboard focus visibility */
 .header-menu-row a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
@@ -283,7 +277,6 @@
   /* Keep gold background on hover/focus so текст не зникає */
   .header-menu-row li:hover,
   .header-menu-row li:focus-within { background: transparent; }
-  .header-menu-row a.active::after { left: 50%; right: auto; width: 44px; transform: translateX(-50%); bottom: 4px; height: 2px; }
   .header-menu-row a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgb(150 105 42 / 35%); border-radius: 4px; }
 }
 

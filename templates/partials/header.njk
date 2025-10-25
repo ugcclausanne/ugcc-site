@@ -68,7 +68,7 @@
         {% for item in header.menu %}
           {% if item.url != '/' and item.url != '/en/' and item.url != '/fr/' and ('/donate/' not in item.url) %}
             {% set isActive = (item.url == currentUrl) %}
-            <li><a href="{{ base }}{{ item.url }}" class="{% if item.cta %}cta {% endif %}{% if isActive %}active{% endif %}">{{ item.title }}</a></li>
+            <li><a href="{{ base }}{{ item.url }}" class="{% if item.cta %}cta {% endif %}{% if isActive %}active{% endif %}">{% if isActive %}<span class="u-underline">{{ item.title }}</span>{% else %}{{ item.title }}{% endif %}</a></li>
           {% endif %}
         {% endfor %}
       </ul>

@@ -40,24 +40,13 @@
 /* Add extra spacing before the Eparchy subsection in column 2 */
 .footer .footer-col h3.mt-md { margin-top: var(--space-md); }
 
-/* Headings: uppercase with gold underline accent */
+/* Headings in footer; underline is provided by utility .u-underline */
 .footer h3 {
   color: var(--white);
   font-size: 0.95em;
   text-transform: uppercase;
   letter-spacing: .04em;
   margin: 0 0 6px;
-  padding-bottom: 3px;
-  position: relative;
-}
-
-.footer h3::after {
-  content: "";
-  position: absolute;
-  left: 50%; bottom: 0;
-  transform: translateX(-50%);
-  width: 44px; height: 2px;
-  background: var(--gold);
 }
 
 /* Links and icons evenly spaced */
