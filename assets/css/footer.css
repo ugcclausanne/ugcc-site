@@ -97,9 +97,9 @@
 
 /* Divider and copyright */
 .footer-divider { height: 1px; background: rgb(255 255 255 / 20%); margin-block: var(--space-sm); }
-.footer-copyright { text-align: right; opacity: .9; }
+.footer-copyright { text-align: right; opacity: .85; font-size: 0.85rem; line-height: 1.2; margin-top: var(--space-sm); }
 
 /* Footer socials: match header spacing */
 .footer .socials { display: inline-flex; align-items: center; gap: var(--space-sm); font-size: 1.1rem; }
 
-@media (width <= 900px){ .footer { padding-block: var(--space-sm); margin-top: var(--space-sm); font-size: 0.9rem; } }
+@media (width <= 900px){ .footer { padding-block: var(--space-sm); margin-top: var(--space-sm); font-size: 0.9rem; } .footer-divider { margin-block: 8px; } .footer-copyright { text-align: center; font-size: 0.8rem; margin-top: 8px; } }
