@@ -34,8 +34,8 @@ jobs:
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
           SANITY_API_VERSION: ${{ secrets.SANITY_API_VERSION }}
           SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN }}
-          SITE_URL: ${{ secrets.SITE_URL }}
-          BASE_PATH: ${{ secrets.BASE_PATH }}
+          SITE_URL: ${{ secrets.SITE_URL || vars.SITE_URL || 'https://ugcclausanne.github.io/ugcc-site' }}
+          BASE_PATH: ${{ secrets.BASE_PATH || vars.BASE_PATH || '/ugcc-site' }}
           GENERATE_SITEMAP: true
           NODE_ENV: production
           OUT_DIR: dist
