@@ -6,14 +6,17 @@ const path = require('node:path')
 const client = require('./sanityClient')
 const fetch = global.fetch || ((...args) => import('node-fetch').then(({default: f}) => f(...args)))
 
-const ALL_LANGS = ['uk', 'en', 'fr']\n// Prefer existing local translations and preserve entries not present in CMS\nconst PREFER_LOCAL = String(process.env.PREFER_LOCAL ?? 'true').toLowerCase() !== 'false'\nconst SAFE_MERGE = String(process.env.SAFE_MERGE ?? 'true').toLowerCase() !== 'false'
+const ALL_LANGS = ['uk', 'en', 'fr']
+// Prefer existing local translations and preserve entries not present in CMS
+const PREFER_LOCAL = String(process.env.PREFER_LOCAL ?? 'true').toLowerCase() !== 'false'
+const SAFE_MERGE = String(process.env.SAFE_MERGE ?? 'true').toLowerCase() !== 'false'
 
 const PROVIDER = process.env.TRANSLATE_PROVIDER || '' // 'deepl' | 'google' | 'libre'
 const DEEPL_KEY = process.env.DEEPL_API_KEY || ''
 const GOOGLE_KEY = process.env.GOOGLE_API_KEY || ''
 const LIBRE_URL = process.env.LIBRE_TRANSLATE_URL || 'https://libretranslate.com'
 const LIBRE_FALLBACK_URL = process.env.LIBRE_TRANSLATE_FALLBACK_URL || 'https://libretranslate.de'
-const TRANSLATE_DELAY_MS = Number(process.env.TRANSLATE_DELAY_MS || 200)
+const TRANSLATE_DELAY_MS = Number(process.env.TRANSLATE_DELAY_MS || 600)
 // Map of prior _id -> slug read from existing data (filled later if files exist)
 const idToSlug = new Map()
 
@@ -74,6 +77,8 @@ async function translate(text, target, source) {
 
 const qArticles = `*[_type=="article"] | order(timestamp desc){
   _id,
+  _updatedAt,
+  _rev,
   "timestamp": coalesce(timestamp, ""),
   "email": coalesce(email, ""),
   "title": coalesce(title, ""),
@@ -89,6 +94,8 @@ const qArticles = `*[_type=="article"] | order(timestamp desc){
 
 const qSchedule = `*[_type=="schedule"] | order(timestamp desc){
   _id,
+  _updatedAt,
+  _rev,
   "timestamp": coalesce(timestamp, ""),
   "date": coalesce(date, ""),
   "time": coalesce(time, ""),
@@ -169,10 +176,30 @@ async function main() {
       return out
     }
 
+    // Merge with existing: keep newest by _updatedAt/_rev; also keep existing entries not returned by CMS if SAFE_MERGE
+    function mergeWithExisting(items, type){
+      const existingIdx = type === 'article' ? idxA : idxS
+      const res = new Map()
+      if (SAFE_MERGE) {
+        const arr = type === 'article' ? existingArticles : existingSchedule
+        for (const x of arr) res.set(key(x), x)
+      }
+      for (const it of items){
+        const k = key(it)
+        const prior = existingIdx.get(k)
+        if (!prior) { res.set(k, it); continue }
+        const a = String(prior._updatedAt||'')
+        const b = String(it._updatedAt||'')
+        const newer = (b && (!a || b > a)) || (it._rev && it._rev !== prior._rev)
+        res.set(k, newer ? it : prior)
+      }
+      return Array.from(res.values())
+    }
+
     const beforeA = articles.length
     const beforeS = schedule.length
-    articles = await ensureTranslations(articles, 'article')
-    schedule = await ensureTranslations(schedule, 'schedule')
+    articles = mergeWithExisting(await ensureTranslations(articles, 'article'), 'article')
+    schedule = mergeWithExisting(await ensureTranslations(schedule, 'schedule'), 'schedule')
     if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, {recursive: true})
     fs.writeFileSync(path.join(dataDir, 'articles.json'), JSON.stringify(articles, null, 2))
     fs.writeFileSync(path.join(dataDir, 'schedule.json'), JSON.stringify(schedule, null, 2))
