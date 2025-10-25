@@ -23,6 +23,9 @@ const languages = [
 ];
 
 //================= Paths ==============================
+// Root output directory: defaults to repo root; can be overridden via OUT_DIR
+const defaultRootOut = path.join(__dirname, '..');
+const rootOut = process.env.OUT_DIR ? path.resolve(process.env.OUT_DIR) : defaultRootOut;
 const pagesDir = path.join(__dirname, '../pages');
 const configPath = path.join(pagesDir, 'config.json');
 const headerPath = path.join(pagesDir, 'header.json');
@@ -52,6 +55,9 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
   );
   const collectedRoutes = new Set();
   const pageJsonFiles = glob.sync(pagesDir.replace(/\\/g, '/') + '/*/page.json');
+  if (rootOut !== defaultRootOut) {
+    fs.mkdirSync(rootOut, { recursive: true });
+  }
   console.log('Found pages:', pageJsonFiles.map(p => path.relative(path.join(__dirname, '..'), p)));
 
   // Load grouped data (articles + schedule) with multi-language schedule support
@@ -94,17 +100,17 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
 
       let outDir, outPath;
       if (pageName === 'index' && lang.dir === '.') {
-        outDir = '..';
-        outPath = path.join(__dirname, outDir, 'index.html');
+        outDir = '';
+        outPath = path.join(rootOut, 'index.html');
       } else if (pageName === 'index') {
-        outDir = path.join('..', lang.dir);
-        outPath = path.join(__dirname, outDir, 'index.html');
+        outDir = path.join(lang.dir);
+        outPath = path.join(rootOut, outDir, 'index.html');
       } else {
-        outDir = lang.dir === '.' ? path.join('..', pageName) : path.join('..', lang.dir, pageName);
-        outPath = path.join(__dirname, outDir, 'index.html');
+        outDir = lang.dir === '.' ? path.join(pageName) : path.join(lang.dir, pageName);
+        outPath = path.join(rootOut, outDir, 'index.html');
       }
 
-      fs.mkdirSync(path.join(__dirname, outDir), { recursive: true });
+      fs.mkdirSync(path.join(rootOut, outDir), { recursive: true });
 
       try {
         const html = nunjucks.render('base.njk', pageData);
@@ -145,9 +151,9 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
           category: cat,
           base: basePath
         };
-        const outDir = lang.dir === '.' ? path.join('..', cat, item.slug) : path.join('..', lang.dir, cat, item.slug);
-        const outPath = path.join(__dirname, outDir, 'index.html');
-        fs.mkdirSync(path.join(__dirname, outDir), { recursive: true });
+        const outDir = lang.dir === '.' ? path.join(cat, item.slug) : path.join(lang.dir, cat, item.slug);
+        const outPath = path.join(rootOut, outDir, 'index.html');
+        fs.mkdirSync(path.join(rootOut, outDir), { recursive: true });
         try {
           const html = nunjucks.render('base.njk', pageData);
           fs.writeFileSync(outPath, html, 'utf-8');
@@ -173,9 +179,9 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
         ...urls.map((u) => `  <url><loc>${fullBase}${u}</loc><lastmod>${now}</lastmod></url>`),
         '</urlset>'
       ].join('\n');
-      fs.writeFileSync(path.join(__dirname, '..', 'sitemap.xml'), xml, 'utf-8');
+      fs.writeFileSync(path.join(rootOut, 'sitemap.xml'), xml, 'utf-8');
       const robots = `User-agent: *\nAllow: /\nSitemap: ${fullBase}/sitemap.xml\n`;
-      fs.writeFileSync(path.join(__dirname, '..', 'robots.txt'), robots, 'utf-8');
+      fs.writeFileSync(path.join(rootOut, 'robots.txt'), robots, 'utf-8');
       console.log(`Generated sitemap.xml with ${urls.length} URLs and robots.txt`);
     } else {
       console.log('Skip sitemap/robots generation (SITE_URL missing or disabled by flag).');
@@ -186,3 +192,29 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
 
   console.log('Done rendering pages.');
 })();
+
+// If using an alternate output directory, ensure static assets are available there
+try {
+  if (rootOut !== defaultRootOut) {
+    const copyRecursive = (src, dest) => {
+      if (!fs.existsSync(src)) return;
+      const stat = fs.statSync(src);
+      if (stat.isDirectory()) {
+        fs.mkdirSync(dest, { recursive: true });
+        for (const entry of fs.readdirSync(src)) {
+          copyRecursive(path.join(src, entry), path.join(dest, entry));
+        }
+      } else {
+        fs.mkdirSync(path.dirname(dest), { recursive: true });
+        fs.copyFileSync(src, dest);
+      }
+    };
+    // Copy assets directory
+    copyRecursive(path.join(__dirname, '../assets'), path.join(rootOut, 'assets'));
+    // Copy favicon if present
+    const fav = path.join(__dirname, '../favicon.ico');
+    if (fs.existsSync(fav)) fs.copyFileSync(fav, path.join(rootOut, 'favicon.ico'));
+  }
+} catch (e) {
+  console.warn('Static copy step failed:', e.message);
+}

@@ -8,7 +8,9 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -32,7 +34,11 @@ jobs:
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
           SANITY_API_VERSION: ${{ secrets.SANITY_API_VERSION }}
           SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN }}
+          SITE_URL: ${{ secrets.SITE_URL }}
           BASE_PATH: ${{ secrets.BASE_PATH }}
+          GENERATE_SITEMAP: true
+          NODE_ENV: production
+          OUT_DIR: dist
           # Optional translation
           TRANSLATE_PROVIDER: ${{ secrets.TRANSLATE_PROVIDER }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
@@ -42,17 +48,10 @@ jobs:
           npm run sync:sanity
           npm run build
 
-      - name: Commit and push changes (skip CI)
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A
-            git commit -m "ci: sync from Sanity and build [skip ci]"
-            git push
-          else
-            echo "No changes to commit."
-          fi
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
       - name: Autopost latest items (optional)
         env:
@@ -70,3 +69,14 @@ jobs:
           WA_RECIPIENTS: ${{ secrets.WA_RECIPIENTS }}
         run: |
           npm run post:publish || echo "Autopost skipped or failed; continuing."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
