@@ -20,6 +20,15 @@
 .grid.cols-3,
 .cards-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(var(--layout-card-min-width), 1fr)); }
 
+/* When only one child, keep card width and center it */
+.grid.cols-2 > *:only-child,
+.grid.cols-3 > *:only-child,
+.cards-grid.cols-2 > *:only-child,
+.cards-grid.cols-3 > *:only-child {
+  max-width: 520px;
+  justify-self: center;
+}
+
 @media (width <= 700px) {
   .grid.cols-2,
   .grid.cols-3,
