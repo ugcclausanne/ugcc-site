@@ -28,7 +28,9 @@ h6 {
   font-family: var(--font-headline);
   color: var(--burgundy);
   /* margin-block: var(--space-sm); */
-  font-weight: 700;
+  font-weight: 400;
+	line-height: 1;
+  font-synthesis: none;
 }
 
 /* Uppercase main headings */
