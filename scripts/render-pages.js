@@ -128,7 +128,7 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
     }
   }
 
-  // After rendering static pages, render per-article detail pages
+  // After rendering static pages, render per-article detail pages (id-based URLs)
   const enriched = await loadSections();
   for (const lang of languages) {
     const langKey = lang.code || globalConfig.default_lang || 'uk';
@@ -151,17 +151,18 @@ const footerData = fs.existsSync(footerPath) ? readJson(footerPath) : {};
           category: cat,
           base: basePath
         };
-        const outDir = lang.dir === '.' ? path.join(cat, item.slug) : path.join(lang.dir, cat, item.slug);
+        const seg = String(item.id8 || (item._id||'').slice(0,8));
+        const outDir = lang.dir === '.' ? path.join(cat, seg) : path.join(lang.dir, cat, seg);
         const outPath = path.join(rootOut, outDir, 'index.html');
         fs.mkdirSync(path.join(rootOut, outDir), { recursive: true });
         try {
           const html = nunjucks.render('base.njk', pageData);
           fs.writeFileSync(outPath, html, 'utf-8');
           console.log(`Rendered article: ${outPath}`);
-          const route = lang.dir === '.' ? `/${cat}/${item.slug}/` : `/${lang.dir}/${cat}/${item.slug}/`;
+          const route = lang.dir === '.' ? `/${cat}/${seg}/` : `/${lang.dir}/${cat}/${seg}/`;
           collectedRoutes.add(route);
         } catch (e) {
-          console.error(`Render error for article ${item.slug} (${langKey}):`, e.message);
+          console.error(`Render error for article ${seg} (${langKey}):`, e.message);
         }
       }
     }

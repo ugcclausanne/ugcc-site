@@ -57,7 +57,8 @@ async function loadSections() {
   // Skeleton per-language bucket
   const defaultSections = { hero: [], news: [], spiritual: [], community: [], schedule: [] };
   const sections = {};
-  const slugCounters = {};
+  // helper: first 8 chars of _id
+  const id8 = (id) => String(id||'').slice(0,8);
 
   // Parse semicolon-separated images into array, pass-through arrays
   const splitImages = (val) =>
@@ -70,20 +71,10 @@ async function loadSections() {
             .filter(Boolean)
       : [];
 
-  // Build a slug base from title + date (YYYYMMDD-title)
-  const slugBase = (title, ts) => {
-    const t = typeof title === 'string' ? title.toLowerCase().trim() : '';
-    const ascii = encodeURIComponent(t)
-      .replace(/%[0-9A-Fa-f]{2}/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-    const d = ts ? new Date(String(ts).replace(' ', 'T')) : null;
-    const datePart = d && !isNaN(d) ? d.toISOString().slice(0, 10).replace(/-/g, '') : '';
-    return (datePart || 'post') + (ascii ? '-' + ascii : '');
-  };
+  // No slugs — use id8 for stable URLs
 
 
-  // Articles: enrich with images[], primary image, slug, url; group by language/category
+  // Articles: enrich with images[], primary image, id8, url; group by language/category
   for (const a of articles) {
     const lang = (a.language || 'uk').trim().toLowerCase();
     const cat = (a.category || '').trim();
@@ -92,15 +83,11 @@ async function loadSections() {
 
     const images = splitImages(a.image || a.images);
     const image = images[0] || a.image || '';
-    // Prefer incoming precomputed slug if provided; otherwise derive from title+date
-    const base = a.slug || slugBase(a.title, a.timestamp || a.date);
-    const key = `${lang}:${cat}:${base}`;
-    slugCounters[key] = (slugCounters[key] || 0) + 1;
-    const slug = slugCounters[key] > 1 ? `${base}-${slugCounters[key]}` : base;
+    const seg = id8(a._id);
     const langDir = lang === 'uk' ? '' : `/${lang}`;
-    const url = `${langDir}/${cat}/${slug}/`;
+    const url = `${langDir}/${cat}/${seg}/`;
 
-    sections[lang][cat].push({ ...a, images, image, slug, url });
+    sections[lang][cat].push({ ...a, images, image, id8: seg, url });
   }
 
   // Schedule: group by provided language, same logic as articles

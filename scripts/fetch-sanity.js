@@ -6,7 +6,7 @@ const path = require('node:path')
 const client = require('./sanityClient')
 const fetch = global.fetch || ((...args) => import('node-fetch').then(({default: f}) => f(...args)))
 
-const ALL_LANGS = ['uk', 'en', 'fr']
+const ALL_LANGS = ['uk', 'en', 'fr']\n// Prefer existing local translations and preserve entries not present in CMS\nconst PREFER_LOCAL = String(process.env.PREFER_LOCAL ?? 'true').toLowerCase() !== 'false'\nconst SAFE_MERGE = String(process.env.SAFE_MERGE ?? 'true').toLowerCase() !== 'false'
 
 const PROVIDER = process.env.TRANSLATE_PROVIDER || '' // 'deepl' | 'google' | 'libre'
 const DEEPL_KEY = process.env.DEEPL_API_KEY || ''
@@ -14,6 +14,8 @@ const GOOGLE_KEY = process.env.GOOGLE_API_KEY || ''
 const LIBRE_URL = process.env.LIBRE_TRANSLATE_URL || 'https://libretranslate.com'
 const LIBRE_FALLBACK_URL = process.env.LIBRE_TRANSLATE_FALLBACK_URL || 'https://libretranslate.de'
 const TRANSLATE_DELAY_MS = Number(process.env.TRANSLATE_DELAY_MS || 200)
+// Map of prior _id -> slug read from existing data (filled later if files exist)
+const idToSlug = new Map()
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
@@ -115,19 +117,7 @@ async function main() {
       client.fetch(qSchedule),
     ])
 
-    // Assign stable slug shared across languages, based on timestamp (fallback to _id)
-    const seenSlugs = new Map()
-    function slugFromTs(item) {
-      const ts = String(item.timestamp || '').replace(' ', 'T')
-      const d = new Date(ts)
-      const base = (!isNaN(d) ? `${d.getUTCFullYear()}${String(d.getUTCMonth()+1).padStart(2,'0')}${String(d.getUTCDate()).padStart(2,'0')}${String(d.getUTCHours()).padStart(2,'0')}${String(d.getUTCMinutes()).padStart(2,'0')}` : '') || (item._id ? String(item._id).slice(0,8) : 'item')
-      const groupKey = `${base}|${item.category||''}`
-      const count = (seenSlugs.get(groupKey) || 0) + 1
-      seenSlugs.set(groupKey, count)
-      return count > 1 ? `${base}-${count}` : base
-    }
-    for (const a of articles) a.slug = slugFromTs(a)
-    for (const s of schedule) s.slug = slugFromTs(s)
+    // No slugs — rely only on _id for identity and URL building
 
     // Load existing site data to reuse prior translations
     const dataDir = path.join(__dirname, '..', 'data')
@@ -135,29 +125,30 @@ async function main() {
     let existingSchedule = []
     try { const p = path.join(dataDir, 'articles.json'); if (fs.existsSync(p)) existingArticles = JSON.parse(fs.readFileSync(p, 'utf-8')) } catch {}
     try { const p = path.join(dataDir, 'schedule.json'); if (fs.existsSync(p)) existingSchedule = JSON.parse(fs.readFileSync(p, 'utf-8')) } catch {}
-    const idxA = new Map(existingArticles.map(x => [`${x.slug}|${(x.language||'uk').toLowerCase()}`, x]))
-    const idxS = new Map(existingSchedule.map(x => [`${x.slug}|${(x.language||'uk').toLowerCase()}`, x]))
+    const key = (o) => `${(o._id||'')}|${(o.language||'uk').toLowerCase()}`
+    const idxA = new Map(existingArticles.map(x => [key(x), x]))
+    const idxS = new Map(existingSchedule.map(x => [key(x), x]))
 
     // Auto-translate into missing languages (in-memory for site JSON)
     async function ensureTranslations(items, type) {
-      const out = [...items]
+      const out = [...items]; const present = new Set(out.map(key))
       // Ensure all target languages exist. First try existing data, then translate.
       for (const item of items) {
         const srcLang = (item.language || 'uk').toLowerCase()
         const targets = ALL_LANGS.filter((l) => l !== srcLang)
-        // Check by slug + language
+        // Check by _id + language
         for (const tgt of targets) {
-          const exists = out.find((x) => (x.slug||'') === (item.slug||'') && (x.language||'') === tgt)
+          const exists = out.find((x) => (x._id||'') === (item._id||'') && (x.language||'') === tgt)
           if (exists) continue
           // 1) Try existing site data first
           const idx = type === 'article' ? idxA : idxS
-          const prior = idx.get(`${item.slug}|${tgt}`)
+          const prior = idx.get(`${item._id||''}|${tgt}`)
           if (prior) { out.push(prior); continue }
           // 2) Else translate now
           const provider = (PROVIDER || '').toLowerCase()
           const canTranslate = (provider === 'deepl' && !!DEEPL_KEY) || (provider === 'google' && !!GOOGLE_KEY) || (provider === 'libre')
           if (canTranslate) {
-            const translated = { ...item, slug: item.slug, language: tgt, auto_translated: true }
+            const translated = { ...item, language: tgt, auto_translated: true }
             if (type === 'article') {
               translated.title = await translate(item.title, tgt, srcLang)
               await sleep(TRANSLATE_DELAY_MS)
@@ -171,7 +162,7 @@ async function main() {
               // optional location translation
               translated.location = item.location ? await translate(item.location, tgt, srcLang) : item.location
             }
-            out.push(translated)
+            out.push(translated); present.add(key(translated))
           }
         }
       }
