@@ -33,6 +33,18 @@ h6 {
   font-synthesis: none;
 }
 
+/* Unified underline for all h1 (matches hero style, spans text width) */
+h1 { display: inline-block; position: relative; padding-bottom: 6px; }
+h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(230 184 0 / 90%), transparent);
+}
+
 /* Uppercase main headings */
 h1,
 h2,
