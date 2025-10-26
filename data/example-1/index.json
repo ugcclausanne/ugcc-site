@@ -1,0 +1,5 @@
+[
+{ "language": "uk", "category": "news", "title": "Приклад статті", "date": "2025-01-01", "excerpt": "Коротко", "content": "Текст", "images": [] },
+{ "language": "en", "category": "news", "title": "Sample Article", "date": "2025-01-01", "excerpt": "Short", "content": "Text", "images": [] },
+{ "language": "fr", "category": "news", "title": "Article d’exemple", "date": "2025-01-01", "excerpt": "Court", "content": "Texte", "images": [] }
+]

@@ -4,11 +4,9 @@
   font-family: 'Forum';
   src: local('Forum'),
        url('../fonts/Forum/Forum-Regular.woff2') format('woff2');
-  font-weight: 400 700 900;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
-	line-height: 1;
-
 }
 
 @font-face {
@@ -18,6 +16,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Lora';
   src: local('Lora Italic'), url('../fonts/Lora/Lora-Italic-VariableFont_wght.ttf') format('truetype');

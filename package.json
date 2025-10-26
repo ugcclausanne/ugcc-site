@@ -4,9 +4,10 @@
   "description": "UGCC Lausanne Parish Website",
   "scripts": {
     "sync:sanity": "node scripts/fetch-sanity.js",
+    "translate": "node scripts/translate-local.js",
     "build": "node scripts/render-pages.js",
     "dev": "node scripts/render-pages.js --watch",
-    "update:now": "npm run sync:sanity && npm run build",
+    "update:now": "npm run translate && npm run build",
     "local": "npm run update:now && python -m http.server 8000",
     "lint": "eslint scripts --ext .js",
     "lint:fix": "eslint scripts --ext .js --fix",

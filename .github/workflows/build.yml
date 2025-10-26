@@ -1,4 +1,4 @@
-name: Sync, Build, and (Optional) Autopost
+name: Translate and Build (Validation Only)
 
 on:
   push:
@@ -9,11 +9,9 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,55 +26,15 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Sync from Sanity and build
+      - name: Translate missing languages (Libre)
         env:
-          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-          SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
-          SANITY_API_VERSION: ${{ secrets.SANITY_API_VERSION }}
-          SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN }}
-          SITE_URL: ${{ secrets.SITE_URL || vars.SITE_URL || 'https://ugcclausanne.github.io/ugcc-site' }}
-          BASE_PATH: ${{ secrets.BASE_PATH || vars.BASE_PATH || '/ugcc-site' }}
+          LIBRE_TRANSLATE_URL: ${{ secrets.LIBRE_TRANSLATE_URL || vars.LIBRE_TRANSLATE_URL }}
+        run: npm run translate
+
+      - name: Build site (root output)
+        env:
+          SITE_URL: ${{ secrets.SITE_URL || vars.SITE_URL }}
+          BASE_PATH: ${{ secrets.BASE_PATH || vars.BASE_PATH || '' }}
           GENERATE_SITEMAP: true
           NODE_ENV: production
-          OUT_DIR: dist
-          # Optional translation
-          TRANSLATE_PROVIDER: ${{ secrets.TRANSLATE_PROVIDER }}
-          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          LIBRE_TRANSLATE_URL: ${{ secrets.LIBRE_TRANSLATE_URL }}
-        run: |
-          npm run sync:sanity
-          npm run build
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      - name: Autopost latest items (optional)
-        env:
-          SITE_URL: ${{ secrets.SITE_URL }}
-          BASE_PATH: ${{ secrets.BASE_PATH }}
-          POST_TO_FACEBOOK: ${{ secrets.POST_TO_FACEBOOK }}
-          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
-          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
-          POST_TO_INSTAGRAM: ${{ secrets.POST_TO_INSTAGRAM }}
-          IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          POST_TO_WHATSAPP: ${{ secrets.POST_TO_WHATSAPP }}
-          WA_PHONE_NUMBER_ID: ${{ secrets.WA_PHONE_NUMBER_ID }}
-          WA_TOKEN: ${{ secrets.WA_TOKEN }}
-          WA_RECIPIENTS: ${{ secrets.WA_RECIPIENTS }}
-        run: |
-          npm run post:publish || echo "Autopost skipped or failed; continuing."
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        run: npm run build

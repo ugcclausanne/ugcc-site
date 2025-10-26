@@ -1,0 +1,42 @@
+name: Content Path Guard
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bypass for GitHub Actions bot
+        if: ${{ github.actor == 'github-actions[bot]' }}
+        run: echo "Bypass guard for build PRs from github-actions[bot]"
+
+      - name: Checkout
+        if: ${{ github.actor != 'github-actions[bot]' }}
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: List changed files
+        if: ${{ github.actor != 'github-actions[bot]' }}
+        id: diff
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          git diff --name-only "$BASE" "$HEAD" > changed.txt
+          echo "Changed files:" && cat changed.txt
+
+      - name: Enforce data-only changes
+        if: ${{ github.actor != 'github-actions[bot]' }}
+        run: |
+          # Allow only files under data/
+          if grep -E '^(?!data\/).+' changed.txt; then
+            echo "Found changes outside data/:" >&2
+            grep -E '^(?!data\/).+' changed.txt >&2
+            exit 1
+          fi
+          echo "OK: Only data/ was changed."

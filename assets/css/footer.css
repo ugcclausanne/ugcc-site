@@ -30,7 +30,7 @@
 /* Ensure each column stacks its content vertically with consistent rhythm */
 .footer .footer-col { 
 	display: grid; 
-\tgap: 8px; 
+	gap: 8px; 
 	align-content: center; 
 	justify-items: center; 
 	text-align: center; }
@@ -88,7 +88,7 @@
 
 /* Divider and copyright */
 .footer-divider { height: 1px; background: rgb(255 255 255 / 20%); margin-block: var(--space-sm); }
-.footer-copyright { text-align: right; opacity: .85; font-size: 0.85rem; line-height: 1.2; margin-top: var(--space-sm); }
+.footer-copyright { text-align: right; opacity: .85; font-size: 0.85rem; line-height: 1.2; }
 
 /* Footer socials: match header spacing */
 .footer .socials { display: inline-flex; align-items: center; gap: var(--space-sm); font-size: 1.1rem; }
