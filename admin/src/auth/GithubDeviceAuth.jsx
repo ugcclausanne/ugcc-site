@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
           setStatus({ message: 'Невірний або прострочений токен. Створіть новий PAT і введіть його знову.' })
           setUser(null)
         } else if (u && u.login) {
+          try { window.__admin_user_login = u.login } catch {}
           setUser(u)
           setStatus(null)
         }
