@@ -215,6 +215,8 @@ try {
     // Copy favicon if present
     const fav = path.join(__dirname, '../favicon.ico');
     if (fs.existsSync(fav)) fs.copyFileSync(fav, path.join(rootOut, 'favicon.ico'));
+    // Copy data directory (images referenced by content)
+    copyRecursive(path.join(__dirname, '../data'), path.join(rootOut, 'data'));
   }
 } catch (e) {
   console.warn('Static copy step failed:', e.message);
