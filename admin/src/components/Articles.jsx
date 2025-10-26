@@ -185,6 +185,7 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
       const pr = await createPR(owner, repo, `Content: article ${uid}`, branch, base, 'Edit via admin', token)
       await enableAutoMerge(owner, repo, pr.node_id, token).catch(()=>{})
       setStatus(`PR створено: #${pr.number}. Авто-мердж після перевірок.`)
+      window.dispatchEvent(new CustomEvent('admin:notice', { detail: 'Зміни збережено. Публікація відбудеться автоматично після перевірок.' }))
       onSaved?.()
     } finally {
       setBusy(false)
@@ -267,10 +268,17 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
               {(data.images||[]).map((n, idx) => (
                 <div key={n+idx} style={{ position:'relative' }}>
                   <img src={`/data/articles/${uid}/images/${n}`} alt="img" style={{ height: 80 }} />
-                  <button type="button" onClick={()=>{
+              <button type="button" onClick={()=>{
                     setRemoved((r)=> r.includes(n)? r : [...r, n])
                     st.setState((s)=> ({ ...s, langs: { ...s.langs, [lang]: { ...s.langs[lang], images: (s.langs[lang].images||[]).filter(x=>x!==n) } } }))
                   }} title="Видалити" style={{ position:'absolute', top:2, right:2, fontSize:11 }}>✕</button>
+                  <button type="button" onClick={()=>{
+                    // make this image first (hero) for current lang
+                    st.setState((s)=>{
+                      const imgs = (s.langs[lang].images||[]).filter(x=>x!==n)
+                      return { ...s, langs: { ...s.langs, [lang]: { ...s.langs[lang], images: [n, ...imgs] } } }
+                    })
+                  }} title="Зробити головним" style={{ position:'absolute', bottom:2, right:2, fontSize:11 }}>★</button>
                 </div>
               ))}
             </div>

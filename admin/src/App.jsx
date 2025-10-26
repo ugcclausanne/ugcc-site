@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AuthProvider, useAuth } from './auth/GithubDeviceAuth.jsx'
 import { Articles } from './components/Articles.jsx'
 import { Schedule } from './components/Schedule.jsx'
@@ -8,6 +8,13 @@ function Shell() {
   const [tab, setTab] = useState('articles')
   const [manualOpen, setManualOpen] = useState(false)
   const [manualToken, setManualToken] = useState('')
+  const [notice, setNotice] = useState('')
+
+  useEffect(() => {
+    const h = (e) => setNotice(e.detail || '')
+    window.addEventListener('admin:notice', h)
+    return () => window.removeEventListener('admin:notice', h)
+  }, [])
 
   if (!token) {
     return (
@@ -53,6 +60,12 @@ function Shell() {
 
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: 16 }}>
+      {notice && (
+        <div style={{ background:'#fff4d6', border:'1px solid #f0d589', padding:8, marginBottom:12, borderRadius:6 }}>
+          {notice}
+          <button style={{ float:'right' }} onClick={()=>setNotice('')}>✕</button>
+        </div>
+      )}
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>UGCC Admin</h1>
         <div>

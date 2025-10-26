@@ -10,11 +10,27 @@ export async function ghJSON(path, token) {
 }
 
 export async function listContentDir(owner, repo, dir, token) {
-  return ghJSON(`/repos/${owner}/${repo}/contents/${dir}`, token)
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${dir}`, {
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`
+    }
+  })
+  if (res.status === 404) return []
+  if (!res.ok) throw new Error(`GitHub ${res.status}`)
+  return res.json()
 }
 
 export async function getJsonFile(owner, repo, path, token) {
-  const data = await ghJSON(`/repos/${owner}/${repo}/contents/${path}`, token)
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`
+    }
+  })
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`GitHub ${res.status}`)
+  const data = await res.json()
   if (data && data.content) {
     const raw = atob(data.content.replace(/\n/g, ''))
     return JSON.parse(raw)
