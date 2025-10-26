@@ -1,3 +1,5 @@
+const REF = (import.meta && import.meta.env && import.meta.env.VITE_CONTENT_REF) || ''
+
 export async function ghJSON(path, token) {
   const res = await fetch(`https://api.github.com${path}`, {
     headers: {
@@ -10,7 +12,8 @@ export async function ghJSON(path, token) {
 }
 
 export async function listContentDir(owner, repo, dir, token) {
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${dir}`, {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${dir}${REF ? `?ref=${encodeURIComponent(REF)}` : ''}`
+  const res = await fetch(url, {
     headers: {
       Accept: 'application/vnd.github+json',
       Authorization: `Bearer ${token}`
@@ -22,7 +25,8 @@ export async function listContentDir(owner, repo, dir, token) {
 }
 
 export async function getJsonFile(owner, repo, path, token) {
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}${REF ? `?ref=${encodeURIComponent(REF)}` : ''}`
+  const res = await fetch(url, {
     headers: {
       Accept: 'application/vnd.github+json',
       Authorization: `Bearer ${token}`
