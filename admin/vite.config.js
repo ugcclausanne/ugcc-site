@@ -32,13 +32,17 @@ export default defineConfig({
       }
       server.middlewares.use((req, res, next) => {
         if (!req.url) return next()
-        if (req.url.startsWith('/assets/') || req.url.startsWith('/data/')) {
-          const abs = path.join(rootDir, req.url.replace(/^\//, ''))
-          fs.readFile(abs, (err, data) => {
-            if (err) return next()
+        const urlPath = req.url.split('?')[0]
+        if (urlPath === '/favicon.ico' || urlPath.startsWith('/assets/') || urlPath.startsWith('/data/')) {
+          const rel = decodeURIComponent(urlPath.replace(/^\/+/, ''))
+          const abs = path.resolve(rootDir, rel)
+          if (!abs.startsWith(rootDir)) return next() // safety
+          fs.stat(abs, (err, stat) => {
+            if (err || !stat || !stat.isFile()) return next()
             res.statusCode = 200
             res.setHeader('Content-Type', guess(abs))
-            res.end(data)
+            res.setHeader('Cache-Control', 'no-store')
+            fs.createReadStream(abs).pipe(res)
           })
           return
         }
