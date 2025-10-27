@@ -19,8 +19,8 @@ function Shell() {
   if (!token) {
     return (
       <div className="container">
-        <h1>Адмінпанель UGCC</h1>
-        <p>Для роботи увійдіть через GitHub.</p>
+        <h1>Адмінка UGCC</h1>
+        <p>Увійдіть через GitHub.</p>
         <button className="btn" onClick={startLogin}>Увійти через GitHub</button>
         {status && (
           <div className="badge" style={{ display: 'block', marginTop: 12 }}>
@@ -37,13 +37,13 @@ function Shell() {
         )}
         <div style={{ marginTop: 12 }}>
           <button className="btn" onClick={() => setManualOpen(v => !v)}>
-            {manualOpen ? 'Сховати введення токена вручну' : 'Або ввести токен вручну'}
+            {manualOpen ? 'Сховати ручне введення токена' : 'Ввести токен вручну'}
           </button>
           {manualOpen && (
             <div style={{ marginTop: 8 }}>
               <input type="password" placeholder="ghp_xxx" value={manualToken} onChange={e=>setManualToken(e.target.value)} />
               <div style={{ marginTop: 8 }}>
-                <button className="btn" onClick={() => setTokenDirect(manualToken)} disabled={!manualToken}>Зберегти токен</button>
+                <button className="btn" onClick={() => setTokenDirect(manualToken)} disabled={!manualToken}>Застосувати токен</button>
               </div>
             </div>
           )}
@@ -55,15 +55,15 @@ function Shell() {
   return (
     <div className="container">
       {notice && (
-        <div className="badge" style={{ display: 'block', marginTop: 12, marginBottom: 12 }}>
+        <div className="badge block mt-md mb-md">
           {notice}
-          <button className="btn" onClick={() => setNotice('')}>✕</button>
+          <button className="btn" onClick={() => setNotice('')}>Закрити</button>
         </div>
       )}
       <header className="admin-toolbar">
         <h1>UGCC Admin</h1>
         <div>
-          <span style={{ marginRight: 12 }}>{user?.login}</span>
+          <span className="mr-sm">{user?.login}</span>
           <button className="btn" onClick={logout}>Вийти</button>
         </div>
       </header>
@@ -83,4 +83,3 @@ export default function App() {
     </AuthProvider>
   )
 }
-

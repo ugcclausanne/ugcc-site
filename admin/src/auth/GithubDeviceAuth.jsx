@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
       .then((r) => r.json())
       .then((u) => {
         if (u && u.message && /bad credentials/i.test(u.message)) {
-          setStatus({ message: 'Невірний або прострочений токен. Створіть новий PAT і введіть його знову.' })
+          setStatus({ message: 'Недійсний або прострочений токен. Спробуйте ще раз або введіть PAT вручну.' })
           setUser(null)
         } else if (u && u.login) {
           try { window.__admin_user_login = u.login } catch {}
@@ -43,7 +43,7 @@ export function AuthProvider({ children }) {
   const startLogin = async () => {
     try {
       if (!CLIENT_ID) {
-        setStatus({ message: 'Не налаштовано VITE_GITHUB_CLIENT_ID у admin/.env' })
+        setStatus({ message: 'Не задано VITE_GITHUB_CLIENT_ID у admin/.env' })
         return
       }
       const dc = await fetchJSON('https://github.com/login/device/code', {
@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
         setStatus({ message: 'Не вдалося отримати device code від GitHub' })
         return
       }
-      setStatus({ message: 'Підтвердіть вхід на GitHub', ...dc })
+      setStatus({ message: 'Авторизація через GitHub', ...dc })
       const started = Date.now()
       const interval = setInterval(async () => {
         try {
@@ -77,15 +77,15 @@ export function AuthProvider({ children }) {
             setStatus({ message: `Помилка авторизації: ${t.error}` })
           }
         } catch (e) {
-          setStatus({ message: 'Помилка мережі під час входу' })
+          setStatus({ message: 'Помилка мережі під час OAuth авторизації' })
         }
         if (Date.now() - started > (dc.expires_in || 600) * 1000) {
           clearInterval(interval)
-          setStatus({ message: 'Код авторизації прострочено, спробуйте знову.' })
+          setStatus({ message: 'Час авторизації вичерпано, повторіть спробу.' })
         }
       }, (dc.interval || 5) * 1000)
     } catch (e) {
-      setStatus({ message: 'Помилка ініціації входу. Перевірте OAuth App (Device Flow).' })
+      setStatus({ message: 'Помилка налаштування OAuth App (Device Flow).' })
     }
   }
 
@@ -109,3 +109,4 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthCtx)
 }
+

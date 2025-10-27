@@ -17,7 +17,10 @@ export default defineConfig({
       const toPosix = (p) => p.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:')
       const fsRoot = toPosix(rootDir)
       server.middlewares.use((req, _res, next) => {
-        if (req.url && req.url.startsWith('/assets/')) {
+        if (!req.url) return next()
+        if (req.url.startsWith('/assets/')) {
+          req.url = `/@fs/${fsRoot}${req.url}`
+        } else if (req.url.startsWith('/data/')) {
           req.url = `/@fs/${fsRoot}${req.url}`
         }
         next()

@@ -3,9 +3,23 @@
 
 /* Toolbar above lists */
 .admin-toolbar { display: flex; gap: var(--space-sm); align-items: center; margin: var(--space-sm) 0; }
+.justify-between { justify-content: space-between; }
+
+/* Spacing utilities */
+.mt-xs { margin-top: 4px; }
+.mt-sm { margin-top: 8px; }
+.mt-md { margin-top: 12px; }
+.mb-xs { margin-bottom: 4px; }
+.mb-sm { margin-bottom: 8px; }
+.mb-md { margin-bottom: 12px; }
+.mr-xs { margin-right: 4px; }
+.mr-sm { margin-right: 8px; }
+.block { display: block; }
+.muted { opacity: .7; }
 
 /* Responsive grid for admin cards */
 .admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-sm); }
+.grid-2 { grid-template-columns: 1fr 1fr; }
 
 /* Simple modal overlay for editors */
 .admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 999; }
@@ -17,4 +31,11 @@
 .admin-thumb img { height: 80px; border-radius: 4px; }
 .admin-thumb .btn-remove { position: absolute; top: 2px; right: 2px; font-size: 11px; }
 .admin-thumb .btn-hero { position: absolute; bottom: 2px; right: 2px; font-size: 11px; }
+
+/* Preview hero image */
+.preview-hero { width: 100%; max-height: 240px; object-fit: cover; border-radius: 6px; }
+
+/* Status chip */
+.admin-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; background: #eef3ff; color: #1a3aa9; }
+.admin-status a { color: inherit; text-decoration: underline; }
 

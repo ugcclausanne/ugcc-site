@@ -2,11 +2,10 @@ import React from 'react'
 
 export function Tabs({ tabs, value, onChange }) {
   return (
-    <div style={{ display: 'flex', gap: 8, margin: '8px 0' }}>
+    <div className="admin-toolbar">
       {tabs.map((t) => (
-        <button key={t} onClick={() => onChange(t)} disabled={t === value}>{t.toUpperCase()}</button>
+        <button className="btn" key={t} onClick={() => onChange(t)} disabled={t === value}>{t.toUpperCase()}</button>
       ))}
     </div>
   )
 }
-
