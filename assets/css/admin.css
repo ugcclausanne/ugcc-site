@@ -2,7 +2,21 @@
    Used only by admin UI; does not affect public pages. */
 
 /* Toolbar above lists */
-.admin-toolbar { display: flex; gap: var(--space-sm); align-items: center; margin: var(--space-sm) 0; }
+.admin-toolbar { display: flex; gap: var(--space-sm); align-items: center; margin: var(--space-sm) 0; flex-wrap: wrap; }
+.admin-toolbar .btn { margin: 0; line-height: 1; }
+
+/* Page-level tweaks */
+.admin-page h1 { margin: var(--space-md) 0 var(--space-sm); }
+.admin-bar { justify-content: space-between; }
+
+/* Tabs/nav look */
+.admin-nav { gap: var(--space-sm); }
+.admin-nav .btn { background: transparent; color: var(--burgundy); border: 1px solid var(--border); padding: 8px 14px; }
+.admin-nav .btn:hover { background: var(--gold); color: var(--burgundy); border-color: var(--gold); }
+.admin-nav .btn[disabled] { background: var(--burgundy); color: var(--white); border-color: var(--burgundy); cursor: default; }
+
+/* Action toolbar stats on the right */
+.admin-toolbar .stats { margin-left: auto; color: var(--text-soft); }
 .justify-between { justify-content: space-between; }
 
 /* Spacing utilities */
@@ -38,4 +52,3 @@
 /* Status chip */
 .admin-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; background: #eef3ff; color: #1a3aa9; }
 .admin-status a { color: inherit; text-decoration: underline; }
-

@@ -53,21 +53,21 @@ function Shell() {
   }
 
   return (
-    <div className="container">
+    <div className="container admin-page">
       {notice && (
         <div className="badge block mt-md mb-md">
           {notice}
           <button className="btn" onClick={() => setNotice('')}>Закрити</button>
         </div>
       )}
-      <header className="admin-toolbar">
+      <header className="admin-toolbar admin-bar">
         <h1>UGCC Admin</h1>
         <div>
           <span className="mr-sm">{user?.login}</span>
           <button className="btn" onClick={logout}>Вийти</button>
         </div>
       </header>
-      <nav className="admin-toolbar">
+      <nav className="admin-toolbar admin-nav">
         <button className="btn" onClick={() => setTab('articles')} disabled={tab==='articles'}>Статті</button>
         <button className="btn" onClick={() => setTab('schedule')} disabled={tab==='schedule'}>Розклад</button>
       </nav>
