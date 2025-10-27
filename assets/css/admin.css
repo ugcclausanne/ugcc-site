@@ -7,13 +7,13 @@
 
 /* Page-level tweaks */
 .admin-page h1 { margin: var(--space-md) 0 var(--space-sm); }
-.admin-bar { justify-content: space-between; }
+.admin-bar { justify-content: space-between; align-items: baseline; flex-wrap: nowrap; }
 
 /* Top-level tabs (Статті/Розклад) */
-.admin-top-tabs { display: flex; gap: var(--space-xs); border-bottom: 1px solid var(--border); margin: var(--space-sm) 0; }
-.admin-top-tabs .tab { background: transparent; color: var(--burgundy); border: 0; padding: 10px 14px; border-bottom: 2px solid transparent; font-weight: 700; }
+.admin-top-tabs { display: flex; gap: var(--space-xs); border-bottom: 1px solid var(--border); margin: var(--space-sm) 0 var(--space-md); }
+.admin-top-tabs .tab { background: transparent; color: var(--burgundy); border: 0; padding: 10px 14px; border-bottom: 3px solid transparent; font-weight: 700; letter-spacing: .2px; }
 .admin-top-tabs .tab:hover { background: var(--bg-section); }
-.admin-top-tabs .tab.active { border-bottom-color: var(--gold); }
+.admin-top-tabs .tab.active { border-bottom-color: var(--gold); color: var(--burgundy); }
 
 /* Action toolbar stats on the right */
 .admin-toolbar .stats { margin-left: auto; color: var(--text-soft); }
@@ -73,8 +73,9 @@
 }
 
 /* Cards in lists align to site look */
-.card-article { background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow); padding: var(--space-sm); border-radius: 10px; }
+.card-article { background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 10px 12px; border-radius: 10px; }
 .card-article .meta { color: var(--text-soft); margin: 4px 0 var(--space-sm); }
+.admin-list .card-article:hover { box-shadow: var(--shadow-hover); }
 
 /* Link-like actions (burgundy text -> gold on hover) */
 .action-link { background: transparent; border: 0; color: var(--burgundy); padding: 4px 6px; cursor: pointer; }
@@ -84,6 +85,6 @@
 .admin-split { display: grid; grid-template-columns: 360px 1fr; gap: var(--space-md); align-items: start; }
 .admin-list { display: grid; gap: var(--space-sm); }
 .admin-detail .admin-panel { background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 10px; padding: var(--space-sm); }
-@media (width <= 1100px) {
+@media (width <= 980px) {
   .admin-split { grid-template-columns: 1fr; }
 }
