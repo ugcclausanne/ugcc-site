@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
 
+const rootDir = path.resolve(__dirname, '..')
+const toPosix = (p) => p.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:')
+const fsRoot = toPosix(rootDir)
+
 export default defineConfig({
   root: '.',
   plugins: [react()],
@@ -11,10 +15,27 @@ export default defineConfig({
       // allow loading CSS from project root (../assets)
       allow: [path.resolve(__dirname, '..')]
     },
-    // Dev helper: serve parent /assets/* via Vite's /@fs mapping
+    // Dev helper: map /assets and /data to the repo root via proxy bypass (runs early)
     middlewareMode: false,
+    proxy: {
+      '/assets': {
+        target: 'http://local-proxy',
+        bypass(req) {
+          if (!req.url) return false
+          req.url = `/@fs/${fsRoot}${req.url}`
+          return req.url
+        }
+      },
+      '/data': {
+        target: 'http://local-proxy',
+        bypass(req) {
+          if (!req.url) return false
+          req.url = `/@fs/${fsRoot}${req.url}`
+          return req.url
+        }
+      }
+    },
     configureServer(server) {
-      const rootDir = path.resolve(__dirname, '..')
       const guess = (p) => {
         const ext = p.toLowerCase().split('.').pop()
         switch (ext) {
