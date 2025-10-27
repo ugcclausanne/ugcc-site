@@ -2,9 +2,18 @@ import React from 'react'
 
 export function Tabs({ tabs, value, onChange }) {
   return (
-    <div className="admin-toolbar">
+    <div className="admin-tabs">
       {tabs.map((t) => (
-        <button className="btn" key={t} onClick={() => onChange(t)} disabled={t === value}>{t.toUpperCase()}</button>
+        <button
+          key={t}
+          type="button"
+          className={"tab" + (t === value ? ' active' : '')}
+          onClick={() => onChange(t)}
+          aria-selected={t === value}
+          role="tab"
+        >
+          {t.toUpperCase()}
+        </button>
       ))}
     </div>
   )

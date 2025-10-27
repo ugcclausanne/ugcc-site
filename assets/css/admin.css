@@ -52,3 +52,26 @@
 /* Status chip */
 .admin-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; background: #eef3ff; color: #1a3aa9; }
 .admin-status a { color: inherit; text-decoration: underline; }
+
+/* Tabs (language switch) */
+.admin-tabs { display: flex; gap: var(--space-xs); border-bottom: 1px solid var(--border); margin: var(--space-sm) 0 var(--space-md); }
+.admin-tabs .tab { background: transparent; color: var(--burgundy); border: 0; padding: 8px 12px; border-bottom: 2px solid transparent; }
+.admin-tabs .tab:hover { background: var(--bg-section); }
+.admin-tabs .tab.active { border-bottom-color: var(--gold); font-weight: 700; }
+
+/* Form grid */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); align-items: start; }
+.form-field { display: block; }
+.form-field .label { display: block; color: var(--text-soft); font-family: var(--font-detail); margin-bottom: 4px; }
+.form-field input,
+.form-field select,
+.form-field textarea { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-family: var(--font-body); font-size: var(--font-size-main); background: #fff; }
+.form-field textarea { min-height: 120px; }
+
+@media (width <= 900px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* Cards in lists align to site look */
+.card-article { background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow); padding: var(--space-sm); border-radius: 10px; }
+.card-article .meta { color: var(--text-soft); margin: 4px 0 var(--space-sm); }

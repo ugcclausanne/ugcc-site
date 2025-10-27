@@ -4,6 +4,7 @@ import { getJsonFile, listContentDir, putFile, getRepo, getBranchSha, createBran
 import { translateLibre } from '../services/translate.js'
 import { Tabs } from './Tabs.jsx'
 import { dataUrl } from '../services/paths.js'
+import { UA } from '../ui/strings.js'
 
 export function Schedule() {
   const { token, owner, repo } = useAuth()
@@ -38,7 +39,7 @@ export function Schedule() {
       }
       setItems(results)
     } catch (e) {
-      setError('Не вдалося завантажити список')
+      setError('Load error')
     } finally {
       setLoading(false)
     }
@@ -55,11 +56,9 @@ export function Schedule() {
   return (
     <div>
       <div className="admin-toolbar">
-        <button className="btn" onClick={load} disabled={loading}>Оновити</button>
-        <button className="btn" onClick={() => createNew(owner, repo, token, load)}>Додати подію</button>
-        <span>Всього: {counts.total}</span>
-        <span>Літургії: {counts.byCat['liturgy'] || 0}</span>
-        <span>Оголошення: {counts.byCat['announcement'] || 0}</span>
+        <button className="btn btn-outline" onClick={load} disabled={loading}>{UA.refresh}</button>
+        <button className="btn" onClick={() => createNew(owner, repo, token, load)}>{UA.addEvent}</button>
+        <span className="stats">{UA.total}: {counts.total} • {UA.liturgy}: {counts.byCat['liturgy'] || 0} • {UA.announcement}: {counts.byCat['announcement'] || 0}</span>
       </div>
 
       {error && <p className="badge block">{error}</p>}
@@ -68,11 +67,11 @@ export function Schedule() {
         {items.map((it) => (
           <article key={it.uid} className="card-article">
             <h3 className="card-title">{it.title || it.uid}</h3>
-            <div className="meta">{it.language} • {it.category} • {it.date} {it.time}</div>
+            <div className="meta">{it.language}{' \u2022 '}{it.category}{' \u2022 '}{it.date} {it.time}</div>
             <div className="admin-toolbar">
-              <button className="btn" title="Переглянути" onClick={() => setEditing({ uid: it.uid })}>👁️</button>
-              <button className="btn" title="Редагувати" onClick={() => setEditing({ uid: it.uid })}>✎</button>
-              <button className="btn" title="Видалити" onClick={() => delItem(owner, repo, token, it.uid, load)}>🗑</button>
+              <button className="btn btn-outline" title={UA.view} onClick={() => setEditing({ uid: it.uid })}>👁️</button>
+              <button className="btn btn-outline" title={UA.edit} onClick={() => setEditing({ uid: it.uid })}>✎</button>
+              <button className="btn btn-outline" title={UA.remove} onClick={() => delItem(owner, repo, token, it.uid, load)}>🗑</button>
             </div>
           </article>
         ))}
@@ -102,7 +101,7 @@ function useItem(owner, repo, token, uid) {
         const langs = { uk: emptyLang('uk'), en: emptyLang('en'), fr: emptyLang('fr') }
         if (Array.isArray(data)) { for (const it of data) langs[(it.language||'').toLowerCase()] = { ...langs[(it.language||'').toLowerCase()], ...it } }
         setState({ loading: false, langs, sha: undefined, error: '' })
-      } catch { setState((s)=>({ ...s, loading:false, error:'Не вдалося завантажити подію'})) }
+      } catch { setState((s)=>({ ...s, loading:false, error:'Load error'})) }
     })()
     return () => { ok = false }
   }, [owner, repo, token, uid])
@@ -113,7 +112,6 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
   const { token, owner, repo } = useAuth()
   const st = useItem(owner, repo, token, uid)
   const [busy, setBusy] = useState(false)
-  const [pending, setPending] = useState([])
   const [status, setStatus] = useState(null)
   const LIBRE = import.meta.env.VITE_LIBRE_TRANSLATE_URL || ''
   const [removed, setRemoved] = useState([])
@@ -138,7 +136,7 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
       updates.push(name)
     }
     st.setState((s) => ({ ...s, langs: { ...s.langs, [lang]: { ...s.langs[lang], images: [...(s.langs[lang].images||[]), ...updates] } } }))
-    setStatus({ text: 'Зображення завантажено (через PR)' })
+    setStatus({ text: 'Images uploaded (PR)' })
   }
 
   const translateMissing = async () => {
@@ -170,24 +168,24 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
         } catch {}
       }
 
-      setStatus({ text: 'Оновлення JSON…' })
+      setStatus({ text: 'Updating JSON…' })
       const arr = ['uk','en','fr'].map((k)=>{ const entry = { ...st.langs[k] }; if (removed.length && Array.isArray(entry.images)) entry.images = entry.images.filter((n)=>!removed.includes(n)); return entry })
       const json = JSON.stringify(arr, null, 2)
       const b64 = btoa(unescape(encodeURIComponent(json)))
       await putFile(owner, repo, st.path, b64, `save schedule ${uid}`, token, undefined, branch)
 
-      setStatus({ text: 'Створення PR…' })
+      setStatus({ text: 'Creating PR…' })
       const pr = await createPR(owner, repo, `Content: schedule ${uid}`, branch, base, 'Edit via admin', token)
       await enableAutoMerge(owner, repo, pr.node_id, token).catch(()=>{})
       const prUrl = `https://github.com/${owner}/${repo}/pull/${pr.number}`
       setStatus({ text: 'PR створено, публікація після мерджу.', prNumber: pr.number, prUrl })
-      window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR створено: #${pr.number}` }))
+      window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR #${pr.number}` }))
       onSaved?.()
     } finally { setBusy(false) }
   }
 
   const confirmDeleteImage = (n) => {
-    if (!confirm('Видалити це зображення з галереї?')) return
+    if (!confirm(UA.confirmDeleteImage)) return
     setRemoved((r)=> r.includes(n)? r : [...r, n])
     st.setState((s)=> ({ ...s, langs: { ...s.langs, [lang]: { ...s.langs[lang], images: (s.langs[lang].images||[]).filter(x=>x!==n) } } }))
   }
@@ -196,7 +194,7 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
     st.setState((s)=>{ const imgs=(s.langs[lang].images||[]).filter(x=>x!==n); return { ...s, langs:{ ...s.langs, [lang]: { ...s.langs[lang], images:[n, ...imgs] } } } })
   }
 
-  if (st.loading) return <div className="badge">Завантаження…</div>
+  if (st.loading) return <div className="badge">{UA.loading}</div>
 
   const data = st.langs[lang]
   const images = (data.images || []).map((n) => ({ name: n, url: dataUrl(`schedule/${uid}/images/${n}`) }))
@@ -205,29 +203,50 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
     <div className="admin-overlay">
       <div className="admin-modal">
         <div className="admin-toolbar justify-between">
-          <h2>Редагування події: {uid}</h2>
-          <button className="btn" onClick={onClose}>Закрити</button>
+          <h2>{UA.editingEvent}: {uid}</h2>
+          <button className="btn" onClick={onClose}>{UA.close}</button>
         </div>
         <Tabs tabs={['uk','en','fr']} value={lang} onChange={setLang} />
 
         <div className="admin-grid grid-2">
           <div>
-            <label>Мова<input value={data.language} readOnly /></label>
-            <label>Категорія
-              <select value={data.category||'liturgy'} onChange={(e)=>onChange('category', e.target.value)}>
-                <option value="liturgy">liturgy</option>
-                <option value="announcement">announcement</option>
-              </select>
-            </label>
-            <label>Заголовок<input value={data.title||''} onChange={(e)=>onChange('title', e.target.value)} /></label>
-            <label>Дата<input type="date" value={data.date||''} onChange={(e)=>onChange('date', e.target.value)} /></label>
-            <label>Час<input type="time" value={data.time||''} onChange={(e)=>onChange('time', e.target.value)} /></label>
-            <label>Місце<input value={data.location||''} onChange={(e)=>onChange('location', e.target.value)} /></label>
-            <label>Деталі<textarea rows={6} value={data.details||''} onChange={(e)=>onChange('details', e.target.value)} /></label>
+            <div className="form-grid">
+              <div className="form-field">
+                <span className="label">{UA.language}</span>
+                <input value={data.language} readOnly />
+              </div>
+              <div className="form-field">
+                <span className="label">{UA.category}</span>
+                <select value={data.category||'liturgy'} onChange={(e)=>onChange('category', e.target.value)}>
+                  <option value="liturgy">liturgy</option>
+                  <option value="announcement">announcement</option>
+                </select>
+              </div>
+              <div className="form-field">
+                <span className="label">{UA.title}</span>
+                <input value={data.title||''} onChange={(e)=>onChange('title', e.target.value)} />
+              </div>
+              <div className="form-field">
+                <span className="label">{UA.date}</span>
+                <input type="date" value={data.date||''} onChange={(e)=>onChange('date', e.target.value)} />
+              </div>
+              <div className="form-field">
+                <span className="label">{UA.time}</span>
+                <input type="time" value={data.time||''} onChange={(e)=>onChange('time', e.target.value)} />
+              </div>
+              <div className="form-field">
+                <span className="label">{UA.location}</span>
+                <input value={data.location||''} onChange={(e)=>onChange('location', e.target.value)} />
+              </div>
+              <div className="form-field" style={{ gridColumn: '1 / -1' }}>
+                <span className="label">{UA.text}</span>
+                <textarea rows={6} value={data.details||''} onChange={(e)=>onChange('details', e.target.value)} />
+              </div>
+            </div>
             <div className="admin-toolbar"><input type="file" multiple onChange={(e)=>onUpload(e.target.files)} /></div>
             <div className="admin-toolbar">
-              <button className="btn" onClick={save} disabled={busy}>Зберегти (PR)</button>
-              <button className="btn" onClick={translateMissing} disabled={busy}>Перекласти відсутні</button>
+              <button className="btn" onClick={save} disabled={busy}>{UA.savePR}</button>
+              <button className="btn btn-outline" onClick={translateMissing} disabled={busy}>{UA.translateMissing}</button>
               {status && (
                 <span className="admin-status">
                   {status.text}
@@ -237,21 +256,21 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
             </div>
           </div>
           <div>
-            <h4>Превʼю</h4>
+            <h4>{UA.preview}</h4>
             {images[0] ? (
               <img src={images[0].url} alt="hero" className="preview-hero" />
             ) : (
-              <div className="badge">(Немає зображень)</div>
+              <div className="badge">{UA.noImages}</div>
             )}
-            <h3 className="mt-md mb-xs">{data.title||'(без назви)'}</h3>
+            <h3 className="mt-md mb-xs">{data.title||UA.untitled}</h3>
             <div className="muted mb-sm">{data.date} {data.time} • {data.location}</div>
             <div dangerouslySetInnerHTML={{ __html: (data.details||'').replace(/\n/g,'<br/>') }} />
             <div className="admin-thumbs">
               {(data.images||[]).map((n, idx) => (
                 <div key={n+idx} className="admin-thumb">
                   <img src={dataUrl(`schedule/${uid}/images/${n}`)} alt="img" />
-                  <button type="button" className="btn btn-remove" onClick={()=>confirmDeleteImage(n)} title="Видалити">✕</button>
-                  <button type="button" className="btn btn-hero" onClick={()=>makeHero(n)} title="Зробити головним">★</button>
+                  <button type="button" className="btn btn-remove" onClick={()=>confirmDeleteImage(n)} title={UA.remove}>✕</button>
+                  <button type="button" className="btn btn-hero" onClick={()=>makeHero(n)} title={UA.makeHero}>★</button>
                 </div>
               ))}
             </div>
@@ -263,7 +282,7 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
 }
 
 async function createNew(owner, repo, token, after) {
-  const uid = prompt('UID нової події (латиниця, цифри, -):')
+  const uid = prompt('UID (latin, digits, -):')
   if (!uid) return
   const base = `data/schedule/${uid}`
   const path = `${base}/index.json`
@@ -281,24 +300,22 @@ async function createNew(owner, repo, token, after) {
   await putFile(owner, repo, path, b64, `create schedule ${uid}`, token, undefined, branch)
   const pr = await createPR(owner, repo, `Content: new schedule ${uid}`, branch, defaultBranch, 'Create via admin', token)
   await enableAutoMerge(owner, repo, pr.node_id, token).catch(()=>{})
-  window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR створено: #${pr.number}` }))
+  window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR #${pr.number}` }))
   after?.()
 }
 
 async function delItem(owner, repo, token, uid, after) {
-  if (!confirm('Видалити подію і всі зображення?')) return
+  if (!confirm('Delete event and images?')) return
   try {
     const repoInfo = await getRepo(owner, repo, token)
     const base = repoInfo.default_branch
     const baseSha = await getBranchSha(owner, repo, base, token)
     const branch = `content/schedule/${uid}/${Date.now()}`
     await createBranch(owner, repo, branch, baseSha, token).catch(()=>{})
-    // Delete index.json
     const dir = await listContentDir(owner, repo, `data/schedule/${uid}`, token)
     const map = new Map(dir.map((f)=>[f.name, f.sha]))
     const idxSha = map.get('index.json')
     if (idxSha) await deleteFile(owner, repo, `data/schedule/${uid}/index.json`, `delete schedule ${uid}`, token, idxSha, branch)
-    // Delete images if any
     try {
       const imgs = await listContentDir(owner, repo, `data/schedule/${uid}/images`, token)
       for (const im of imgs) {
@@ -307,8 +324,9 @@ async function delItem(owner, repo, token, uid, after) {
     } catch {}
     const pr = await createPR(owner, repo, `Content: delete schedule ${uid}`, branch, base, 'Delete via admin', token)
     await enableAutoMerge(owner, repo, pr.node_id, token).catch(()=>{})
-    window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR створено: #${pr.number} (видалення)` }))
+    window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR #${pr.number}` }))
   } finally {
     after?.()
   }
 }
+
