@@ -23,7 +23,15 @@ export function Articles() {
           const p = `data/articles/${entry.name}/index.json`
           try {
             const json = await getJsonFile(owner, repo, p, token)
-            if (json) results.push({ uid: entry.name, ...json })
+            if (json) {
+              let preview = json
+              if (Array.isArray(json)) {
+                const map = {}
+                for (const it of json) if (it && it.language) map[(it.language||'').toLowerCase()] = it
+                preview = map.uk || json[0]
+              }
+              results.push({ uid: entry.name, ...(preview||{}) })
+            }
           } catch {}
         }
       }

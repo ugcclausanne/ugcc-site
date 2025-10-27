@@ -36,8 +36,12 @@ export async function getJsonFile(owner, repo, path, token) {
   if (!res.ok) throw new Error(`GitHub ${res.status}`)
   const data = await res.json()
   if (data && data.content) {
-    const raw = atob(data.content.replace(/\n/g, ''))
-    return JSON.parse(raw)
+    // Decode base64 → Uint8Array → UTF‑8 string, strip BOM if present
+    const b64 = data.content.replace(/\n/g, '')
+    const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0))
+    const raw = new TextDecoder('utf-8').decode(bin)
+    const clean = raw.replace(/^\uFEFF/, '')
+    return JSON.parse(clean)
   }
   return null
 }
