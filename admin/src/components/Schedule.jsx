@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+﻿import React, { useEffect, useMemo, useState } from 'react'
 import { useAuth } from '../auth/GithubDeviceAuth.jsx'
 import { getJsonFile, listContentDir, putFile, getRepo, getBranchSha, createBranch, createPR, enableAutoMerge, deleteFile } from '../services/github.js'
 import { translateLibre } from '../services/translate.js'
@@ -58,7 +58,7 @@ export function Schedule() {
       <div className="admin-toolbar">
         <button className="action-link" onClick={load} disabled={loading}>{UA.refresh}</button>
         <button className="action-link" onClick={() => createNew(owner, repo, token, load)}>{UA.addEvent}</button>
-        <span className="stats">{UA.total}: {counts.total} • {UA.liturgy}: {counts.byCat['liturgy'] || 0} • {UA.announcement}: {counts.byCat['announcement'] || 0}</span>
+        <span className="stats">{UA.total}: {counts.total} вЂў {UA.liturgy}: {counts.byCat['liturgy'] || 0} вЂў {UA.announcement}: {counts.byCat['announcement'] || 0}</span>
       </div>
 
       {error && <p className="badge block">{error}</p>}
@@ -68,11 +68,11 @@ export function Schedule() {
           {items.map((it) => (
             <article key={it.uid} className="card-article" onClick={() => setEditing({ uid: it.uid })} style={{ cursor:'pointer' }}>
               <h3 className="card-title">{it.title || it.uid}</h3>
-              <div className="meta">{it.language}{' \u2022 '}{it.category}{' \u2022 '}{it.date} {it.time}</div>
+              <div className="meta">{[it.language, it.category, [it.date, it.time].filter(Boolean).join(" ")].filter(Boolean).join(" • ")}</div>
               <div className="admin-toolbar">
-                <button className="action-link" title={UA.view} onClick={(e)=>{e.stopPropagation(); setEditing({ uid: it.uid })}}>Переглянути</button>
-                <button className="action-link" title={UA.edit} onClick={(e)=>{e.stopPropagation(); setEditing({ uid: it.uid })}}>Редагувати</button>
-                <button className="action-link" title={UA.remove} onClick={(e)=>{e.stopPropagation(); delItem(owner, repo, token, it.uid, load)}}>Видалити</button>
+                <button className="action-link" title={UA.view} onClick={(e)=>{e.stopPropagation(); setEditing({ uid: it.uid })}}>РџРµСЂРµРіР»СЏРЅСѓС‚Рё</button>
+                <button className="action-link" title={UA.edit} onClick={(e)=>{e.stopPropagation(); setEditing({ uid: it.uid })}}>Р РµРґР°РіСѓРІР°С‚Рё</button>
+                <button className="action-link" title={UA.remove} onClick={(e)=>{e.stopPropagation(); delItem(owner, repo, token, it.uid, load)}}>Р’РёРґР°Р»РёС‚Рё</button>
               </div>
             </article>
           ))}
@@ -83,10 +83,9 @@ export function Schedule() {
               <Editor uid={editing.uid} lang={lang} setLang={setLang} onClose={() => setEditing(null)} onSaved={load} />
             </div>
           ) : (
-            <div className="admin-panel"><div className="muted">Оберіть подію для перегляду або редагування</div></div>
+            <div className="admin-panel"><div className="muted">РћР±РµСЂС–С‚СЊ РїРѕРґС–СЋ РґР»СЏ РїРµСЂРµРіР»СЏРґСѓ Р°Р±Рѕ СЂРµРґР°РіСѓРІР°РЅРЅСЏ</div></div>
           )}
         </div>
-      </div>
     </div>
   )
 }
@@ -175,17 +174,17 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
         } catch {}
       }
 
-      setStatus({ text: 'Updating JSON…' })
+      setStatus({ text: 'Updating JSONвЂ¦' })
       const arr = ['uk','en','fr'].map((k)=>{ const entry = { ...st.langs[k] }; if (removed.length && Array.isArray(entry.images)) entry.images = entry.images.filter((n)=>!removed.includes(n)); return entry })
       const json = JSON.stringify(arr, null, 2)
       const b64 = btoa(unescape(encodeURIComponent(json)))
       await putFile(owner, repo, st.path, b64, `save schedule ${uid}`, token, undefined, branch)
 
-      setStatus({ text: 'Creating PR…' })
+      setStatus({ text: 'Creating PRвЂ¦' })
       const pr = await createPR(owner, repo, `Content: schedule ${uid}`, branch, base, 'Edit via admin', token)
       await enableAutoMerge(owner, repo, pr.node_id, token).catch(()=>{})
       const prUrl = `https://github.com/${owner}/${repo}/pull/${pr.number}`
-      setStatus({ text: 'PR створено, публікація після мерджу.', prNumber: pr.number, prUrl })
+      setStatus({ text: 'PR СЃС‚РІРѕСЂРµРЅРѕ, РїСѓР±Р»С–РєР°С†С–СЏ РїС–СЃР»СЏ РјРµСЂРґР¶Сѓ.', prNumber: pr.number, prUrl })
       window.dispatchEvent(new CustomEvent('admin:notice', { detail: `PR #${pr.number}` }))
       onSaved?.()
     } finally { setBusy(false) }
@@ -269,14 +268,14 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
               <div className="badge">{UA.noImages}</div>
             )}
             <h3 className="mt-md mb-xs">{data.title||UA.untitled}</h3>
-            <div className="muted mb-sm">{data.date} {data.time} • {data.location}</div>
+            <div className="muted mb-sm">{data.date} {data.time} вЂў {data.location}</div>
             <div dangerouslySetInnerHTML={{ __html: (data.details||'').replace(/\n/g,'<br/>') }} />
             <div className="admin-thumbs">
               {(data.images||[]).map((n, idx) => (
                 <div key={n+idx} className="admin-thumb">
                   <img src={dataUrl(`schedule/${uid}/images/${n}`)} alt="img" />
-                  <button type="button" className="btn btn-remove" onClick={()=>confirmDeleteImage(n)} title={UA.remove}>✕</button>
-                  <button type="button" className="btn btn-hero" onClick={()=>makeHero(n)} title={UA.makeHero}>★</button>
+                  <button type="button" className="btn btn-remove" onClick={()=>confirmDeleteImage(n)} title={UA.remove}>вњ•</button>
+                  <button type="button" className="btn btn-hero" onClick={()=>makeHero(n)} title={UA.makeHero}>в…</button>
                 </div>
               ))}
             </div>
