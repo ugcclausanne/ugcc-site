@@ -1,5 +1,5 @@
 [
-  { "language": "uk", "category": "news", "title": "Текст", "date": "2025-01-01", "excerpt": "Короткий опис", "content": "Текст", "images": [] },
+  { "language": "uk", "category": "news", "title": "Р—СЂР°Р·РѕРє СЃС‚Р°С‚С‚С–", "date": "2025-01-01", "excerpt": "РљРѕСЂРѕС‚РєРёР№ РѕРїРёСЃ", "content": "РўРµРєСЃС‚", "images": [] },
   { "language": "en", "category": "news", "title": "Sample Article", "date": "2025-01-01", "excerpt": "Short", "content": "Text", "images": [] },
   { "language": "fr", "category": "news", "title": "Article d'exemple", "date": "2025-01-01", "excerpt": "Court", "content": "Texte", "images": [] }
 ]
