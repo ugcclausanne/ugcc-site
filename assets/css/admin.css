@@ -1,0 +1,20 @@
+/* Admin-specific helpers. Kept in assets/css to keep a single source of styles.
+   Used only by admin UI; does not affect public pages. */
+
+/* Toolbar above lists */
+.admin-toolbar { display: flex; gap: var(--space-sm); align-items: center; margin: var(--space-sm) 0; }
+
+/* Responsive grid for admin cards */
+.admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-sm); }
+
+/* Simple modal overlay for editors */
+.admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 999; }
+.admin-modal { background: #fff; max-width: 1100px; margin: 40px auto; padding: var(--space-sm); border-radius: 10px; box-shadow: var(--shadow); }
+
+/* Thumbnails row inside editor */
+.admin-thumbs { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xs); }
+.admin-thumb { position: relative; }
+.admin-thumb img { height: 80px; border-radius: 4px; }
+.admin-thumb .btn-remove { position: absolute; top: 2px; right: 2px; font-size: 11px; }
+.admin-thumb .btn-hero { position: absolute; bottom: 2px; right: 2px; font-size: 11px; }
+
