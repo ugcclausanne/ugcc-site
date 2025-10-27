@@ -14,9 +14,11 @@ export default defineConfig({
     middlewareMode: false,
     configureServer(server) {
       const rootDir = path.resolve(__dirname, '..')
+      const toPosix = (p) => p.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:')
+      const fsRoot = toPosix(rootDir)
       server.middlewares.use((req, _res, next) => {
         if (req.url && req.url.startsWith('/assets/')) {
-          req.url = `/@fs/${rootDir}${req.url}`
+          req.url = `/@fs/${fsRoot}${req.url}`
         }
         next()
       })
