@@ -10,6 +10,9 @@ const fsRoot = toPosix(rootDir)
 export default defineConfig({
   root: '.',
   plugins: [react()],
+  define: {
+    __FS_ROOT__: JSON.stringify(fsRoot)
+  },
   server: {
     fs: {
       // allow loading CSS from project root (../assets)

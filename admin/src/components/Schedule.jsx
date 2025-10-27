@@ -3,6 +3,7 @@ import { useAuth } from '../auth/GithubDeviceAuth.jsx'
 import { getJsonFile, listContentDir, putFile, getRepo, getBranchSha, createBranch, createPR, enableAutoMerge, deleteFile } from '../services/github.js'
 import { translateLibre } from '../services/translate.js'
 import { Tabs } from './Tabs.jsx'
+import { dataUrl } from '../services/paths.js'
 
 export function Schedule() {
   const { token, owner, repo } = useAuth()
@@ -198,7 +199,7 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
   if (st.loading) return <div className="badge">Завантаження…</div>
 
   const data = st.langs[lang]
-  const images = (data.images || []).map((n) => ({ name: n, url: `/data/schedule/${uid}/images/${n}` }))
+  const images = (data.images || []).map((n) => ({ name: n, url: dataUrl(`schedule/${uid}/images/${n}`) }))
 
   return (
     <div className="admin-overlay">
@@ -248,7 +249,7 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
             <div className="admin-thumbs">
               {(data.images||[]).map((n, idx) => (
                 <div key={n+idx} className="admin-thumb">
-                  <img src={`/data/schedule/${uid}/images/${n}`} alt="img" />
+                  <img src={dataUrl(`schedule/${uid}/images/${n}`)} alt="img" />
                   <button type="button" className="btn btn-remove" onClick={()=>confirmDeleteImage(n)} title="Видалити">✕</button>
                   <button type="button" className="btn btn-hero" onClick={()=>makeHero(n)} title="Зробити головним">★</button>
                 </div>
@@ -311,4 +312,3 @@ async function delItem(owner, repo, token, uid, after) {
     after?.()
   }
 }
-
