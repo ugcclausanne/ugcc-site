@@ -56,30 +56,37 @@ export function Articles() {
   return (
     <div>
       <div className="admin-toolbar">
-        <button className="btn btn-outline" onClick={load} disabled={loading}>{UA.refresh}</button>
-        <button className="btn" onClick={() => createNew(owner, repo, token, load)}>{UA.addArticle}</button>
+        <button className="action-link" onClick={load} disabled={loading}>{UA.refresh}</button>
+        <button className="action-link" onClick={() => createNew(owner, repo, token, load)}>{UA.addArticle}</button>
         <span className="stats">{UA.total}: {counts.total} • {UA.news}: {counts.byCat['news'] || 0} • {UA.spiritual}: {counts.byCat['spiritual'] || 0} • {UA.community}: {counts.byCat['community'] || 0}</span>
       </div>
 
       {error && <p className="badge block">{error}</p>}
 
-      <div className="admin-grid">
-        {items.map((it) => (
-          <article key={it.uid} className="card-article">
-            <h3 className="card-title">{it.title || it.uid}</h3>
-            <div className="meta">{it.language}{' \u2022 '}{it.category}</div>
-            <div className="admin-toolbar">
-              <button className="btn btn-outline" title={UA.view} onClick={() => setEditing({ uid: it.uid })}>👁️</button>
-              <button className="btn btn-outline" title={UA.edit} onClick={() => setEditing({ uid: it.uid })}>✎</button>
-              <button className="btn btn-outline" title={UA.remove} onClick={() => delItem(owner, repo, token, it.uid, load)}>🗑</button>
+      <div className="admin-split">
+        <div className="admin-list">
+          {items.map((it) => (
+            <article key={it.uid} className="card-article" onClick={() => setEditing({ uid: it.uid })} style={{ cursor:'pointer' }}>
+              <h3 className="card-title">{it.title || it.uid}</h3>
+              <div className="meta">{it.language}{' \u2022 '}{it.category}</div>
+              <div className="admin-toolbar">
+                <button className="action-link" title={UA.view} onClick={(e)=>{e.stopPropagation(); setEditing({ uid: it.uid })}}>Переглянути</button>
+                <button className="action-link" title={UA.edit} onClick={(e)=>{e.stopPropagation(); setEditing({ uid: it.uid })}}>Редагувати</button>
+                <button className="action-link" title={UA.remove} onClick={(e)=>{e.stopPropagation(); delItem(owner, repo, token, it.uid, load)}}>Видалити</button>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="admin-detail">
+          {editing ? (
+            <div className="admin-panel">
+              <Editor uid={editing.uid} lang={lang} setLang={setLang} onClose={() => setEditing(null)} onSaved={load} />
             </div>
-          </article>
-        ))}
+          ) : (
+            <div className="admin-panel"><div className="muted">Оберіть статтю для перегляду або редагування</div></div>
+          )}
+        </div>
       </div>
-
-      {editing && (
-        <Editor uid={editing.uid} lang={lang} setLang={setLang} onClose={() => setEditing(null)} onSaved={load} />
-      )}
     </div>
   )
 }
@@ -200,15 +207,14 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
   const images = (data.images || []).map((n) => ({ name: n, url: dataUrl(`articles/${uid}/images/${n}`) }))
 
   return (
-    <div className="admin-overlay">
-      <div className="admin-modal">
-        <div className="admin-toolbar justify-between">
-          <h2>{UA.editingArticle}: {uid}</h2>
-          <button className="btn" onClick={onClose}>{UA.close}</button>
-        </div>
-        <Tabs tabs={['uk','en','fr']} value={lang} onChange={setLang} />
+    <div>
+      <div className="admin-toolbar justify-between">
+        <h2>{UA.editingArticle}: {uid}</h2>
+        <button className="action-link" onClick={onClose}>{UA.close}</button>
+      </div>
+      <Tabs tabs={['uk','en','fr']} value={lang} onChange={setLang} />
 
-        <div className="admin-grid grid-2">
+      <div className="admin-grid grid-2">
           <div>
             <div className="form-grid">
               <div className="form-field">
@@ -272,7 +278,6 @@ function Editor({ uid, lang, setLang, onClose, onSaved }) {
               ))}
             </div>
           </div>
-        </div>
       </div>
     </div>
   )
@@ -326,4 +331,3 @@ async function delItem(owner, repo, token, uid, after) {
     after?.()
   }
 }
-

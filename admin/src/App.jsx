@@ -64,12 +64,12 @@ function Shell() {
         <h1>UGCC Admin</h1>
         <div>
           <span className="mr-sm">{user?.login}</span>
-          <button className="btn" onClick={logout}>Вийти</button>
+          <button className="action-link" onClick={logout}>Вийти</button>
         </div>
       </header>
-      <nav className="admin-toolbar admin-nav">
-        <button className="btn" onClick={() => setTab('articles')} disabled={tab==='articles'}>Статті</button>
-        <button className="btn" onClick={() => setTab('schedule')} disabled={tab==='schedule'}>Розклад</button>
+      <nav className="admin-top-tabs">
+        <button className={"tab" + (tab==='articles'?' active':'')} onClick={() => setTab('articles')}>Статті</button>
+        <button className={"tab" + (tab==='schedule'?' active':'')} onClick={() => setTab('schedule')}>Розклад</button>
       </nav>
       {tab === 'articles' ? <Articles /> : <Schedule />}
     </div>
