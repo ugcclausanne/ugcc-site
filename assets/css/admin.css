@@ -82,9 +82,9 @@
 .action-link:hover { color: var(--gold); }
 
 /* Split view: left list, right editor */
-.admin-split { display: flex; gap: var(--space-md); align-items: flex-start; }
-.admin-list { display: grid; gap: var(--space-sm); flex: 0 0 340px; min-width: 0; }
-.admin-detail { flex: 1 1 auto; min-width: 0; }
+.admin-split { display: flex; flex-wrap: nowrap; gap: var(--space-md); align-items: flex-start; }
+.admin-split > .admin-list { display: grid; gap: var(--space-sm); flex: 0 0 340px; max-width: 340px; min-width: 0; }
+.admin-split > .admin-detail { flex: 1 1 auto; min-width: 0; }
 .admin-detail .admin-panel { width: 100%; }
 .admin-list .card-article { width: 100%; }
 .admin-detail .admin-panel { background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 10px; padding: var(--space-sm); }
